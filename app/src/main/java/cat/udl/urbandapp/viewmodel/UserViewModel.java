@@ -15,6 +15,7 @@ import cat.udl.urbandapp.services.UserServiceImpl;
 
 public class UserViewModel extends AndroidViewModel {
     private UserServiceI repository;
+
     public UserViewModel(@NonNull Application application) {
         super(application);
         repository = new UserServiceImpl();

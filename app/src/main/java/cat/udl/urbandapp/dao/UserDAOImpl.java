@@ -32,6 +32,7 @@ public class UserDAOImpl implements IUserDAO {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("UserDAO","responseNOTOK?");
+                Log.d("UserDAO",t.getMessage());
             }
         });
         return call;
