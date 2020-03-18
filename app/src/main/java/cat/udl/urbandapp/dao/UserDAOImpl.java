@@ -6,7 +6,9 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
+
 import java.io.IOException;
+
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import cat.udl.urbandapp.services.UserServiceI;
 import retrofit2.Call;
@@ -26,7 +28,8 @@ public class UserDAOImpl implements IUserDAO {
             public void onResponse(Call<Void> call, Response<Void> response) {
 
                 Log.d("UserDAO","responseOK?");
-                Log.d("UserDAO","" +response.code());
+                Log.d("UserDao", "" + response.code());
+
             }
 
             @Override

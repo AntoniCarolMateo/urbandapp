@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserServiceI {
 
 
     @Override
-    public void registerUser(JSONObject userJson) {
+    public void registerUser(JsonObject userJson) {
         userDAO.registerUser(userJson);
     }
 }
