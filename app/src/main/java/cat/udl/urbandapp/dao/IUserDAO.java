@@ -6,9 +6,10 @@ import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface IUserDAO {
     @POST("users/register")
-    Call<Void> registerUser(@Body JSONObject userJson);
+    Call<Void> registerUser(@Body JsonObject userJson);
 }
