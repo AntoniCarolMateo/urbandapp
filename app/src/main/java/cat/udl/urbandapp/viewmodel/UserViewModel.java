@@ -1,6 +1,7 @@
 package cat.udl.urbandapp.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -23,14 +24,12 @@ public class UserViewModel extends AndroidViewModel {
 
 
     }
-    public void registerUser(String username, String password){
-        JSONObject user = new JSONObject();
-        try {
-            user.put("username", "+34" + username);
-            user.put("password",   password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void registerUser(String password, String username){
+        JsonObject user = new JsonObject();
+
+        Log.d("UserViewModel",password + " "+ username);
+        user.addProperty("username", "+34" + username);
+        user.addProperty("password",   password);
         this.repository.registerUser(user);
 
     }

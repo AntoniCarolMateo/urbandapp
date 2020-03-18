@@ -7,6 +7,8 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import cat.udl.urbandapp.services.UserServiceI;
 import retrofit2.Call;
@@ -18,7 +20,7 @@ public class UserDAOImpl implements IUserDAO {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
 
     @Override
-    public Call<Void> registerUser(JSONObject userJson) {
+    public Call<Void> registerUser(JsonObject userJson) {
         Call<Void> call = retrofit.create(IUserDAO.class).registerUser(userJson);
         call.enqueue(new Callback<Void>() {
 
@@ -26,6 +28,7 @@ public class UserDAOImpl implements IUserDAO {
             public void onResponse(Call<Void> call, Response<Void> response) {
 
                 Log.d("UserDAO","responseOK?");
+                Log.d("UserDao", "" + response.code());
 
             }
 
