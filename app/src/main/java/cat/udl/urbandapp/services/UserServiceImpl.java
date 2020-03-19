@@ -16,4 +16,9 @@ public class UserServiceImpl implements UserServiceI {
     public void registerUser(JsonObject userJson) {
         userDAO.registerUser(userJson);
     }
+
+    @Override
+    public String createTokenUser(String Auth){
+        return userDAO.createTokenUser(Auth);
+    }
 }
