@@ -2,9 +2,14 @@ package cat.udl.urbandapp.dao;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
+
 import cat.udl.urbandapp.network.RetrofitClientInstance;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,24 +20,10 @@ public class UserDAOImpl implements IUserDAO {
 
 
     @Override
-    public Call<Void> createTokenUser(String auth){
-        Call<Void> call = retrofit.create(IUserDAO.class).createTokenUser(auth);
-        call.enqueue(new Callback<Void>() {
+    public Call<ResponseBody> createTokenUser(String auth){
 
-            @Override
-            public void onResponse(Call<Void> call, Response<String> response) {
+        return  retrofit.create(IUserDAO.class).createTokenUser(auth);
 
-                Log.d("UserDAO","responseOK createTokenUser");
-                Log.d("UserDAO", "" + response.code());
-                //Como devolvemos esto?
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Log.d("UserDAO","responseNOTOK createTokenUser?");
-                Log.d("UserDAO",t.getMessage());
-            }
-        });
     }
     @Override
     public Call<Void> registerUser(JsonObject userJson) {
