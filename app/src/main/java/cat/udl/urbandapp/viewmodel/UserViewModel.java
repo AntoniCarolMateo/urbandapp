@@ -1,6 +1,7 @@
 package cat.udl.urbandapp.viewmodel;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -18,6 +19,8 @@ import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
 
+import cat.udl.urbandapp.models.User;
+import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.services.UserServiceI;
 import cat.udl.urbandapp.services.UserServiceImpl;
 import cat.udl.urbandapp.utils.Utils;
@@ -25,13 +28,15 @@ import cat.udl.urbandapp.utils.Utils;
 public class UserViewModel extends AndroidViewModel {
     private UserServiceI repository;
     private MutableLiveData<String> responseLiveDataToken;
-
+    private MutableLiveData<User> responseLiveUser;
+    private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
         repository = new UserServiceImpl();
 
         responseLiveDataToken = repository.getLiveDataToken();
-
+        responseLiveUser = repository.getLiveDataUser();
+        this.mPreferences = PreferencesProvider.providePreferences();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void registerUser(String username, String password){
@@ -57,8 +62,22 @@ public class UserViewModel extends AndroidViewModel {
 
     }
 
+    public void getProfileUser(){
+       // String header = "34" + user + ":" + password;
+        String header = this.mPreferences.getString("token","");
+        /*
+        byte[] data = header.getBytes(StandardCharsets.UTF_8);
+        header = Base64.encodeToString(data, Base64.DEFAULT);
+        */
+        repository.getProfileUser(header);
+
+    }
+
     public LiveData<String> getResponseLiveDataToken() {
         return this.responseLiveDataToken;
+    }
+    public LiveData<User> getResponseLiveDataUser() {
+        return this.responseLiveUser;
     }
 
 }

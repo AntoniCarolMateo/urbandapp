@@ -25,7 +25,15 @@ public class UserDAOImpl implements IUserDAO {
         return  retrofit.create(IUserDAO.class).createTokenUser(auth);
 
     }
+
     @Override
+    public Call<ResponseBody> getProfileUser(String auth){
+
+        return  retrofit.create(IUserDAO.class).getProfileUser(auth);
+
+    }
+
+        @Override
     public Call<Void> registerUser(JsonObject userJson) {
         Call<Void> call = retrofit.create(IUserDAO.class).registerUser(userJson);
         call.enqueue(new Callback<Void>() {
