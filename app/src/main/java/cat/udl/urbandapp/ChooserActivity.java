@@ -16,13 +16,14 @@ public class ChooserActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
     private SharedPreferences mPreferences;
+    private String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooser);
         this.mPreferences = PreferencesProvider.providePreferences();
-        //comprovarToken();
+        comprovarToken();
         registerButton = findViewById(R.id.buttonRegister);
         loginButton = findViewById(R.id.buttonLogin);
 

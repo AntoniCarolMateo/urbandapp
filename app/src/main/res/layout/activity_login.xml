@@ -6,51 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/loginUsername"
+    <TextView
+        android:id="@+id/text_view_pho2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nova_square"
+        android:text="@string/iniciar_sesi_n"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textColorHighlight="@color/design_default_color_primary_variant"
+        android:textColorHint="@color/design_default_color_secondary"
+        android:textColorLink="@color/design_default_color_secondary"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/urband_logo" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
-        android:text="telefono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="383dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="26dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="149dp" />
+
+    <ImageView
+        android:id="@+id/urband_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137"
+        app:srcCompat="@drawable/logo_urband"
+        android:contentDescription="logo_app" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/text_view_pho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="password"
-        app:layout_constraintStart_toStartOf="@+id/loginUsername"
+        android:fontFamily="@font/nova_oval"
+        android:text="@string/tel_fono"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textColorHighlight="@color/design_default_color_primary_variant"
+        android:textColorHint="@color/design_default_color_secondary"
+        android:textColorLink="@color/design_default_color_secondary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_pho2" />
+
+    <TextView
+        android:id="@+id/tes_view_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/nova_oval"
+        android:text="@string/contrase_a"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textColorHighlight="@color/design_default_color_primary_variant"
+        android:textColorHint="@color/design_default_color_secondary"
+        android:textColorLink="@color/design_default_color_secondary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
 
     <EditText
-        android:id="@+id/loginPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:id="@+id/loginUsername"
+        android:layout_width="258dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.252"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_pho" />
+
+    <EditText
+        android:id="@+id/loginPassword"
+        android:layout_width="258dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:fontFamily="@font/nova_script"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/tes_view_pass" />
 
     <Button
-        android:id="@+id/Loginbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/loginPassword"
+        android:id="@+id/LoginButton"
+        android:layout_width="172dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="52dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:fontFamily="@font/nova_cut"
+        android:text="Login"
+        android:textColor="@color/design_default_color_background"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
