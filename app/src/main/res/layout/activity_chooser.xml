@@ -7,7 +7,7 @@
     tools:context=".ChooserActivity">
 
     <Button
-        android:id="@+id/butotnLogin"
+        android:id="@+id/buttonLogin"
         android:layout_width="172dp"
         android:layout_height="51dp"
         android:layout_marginTop="116dp"
