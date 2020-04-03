@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cat.udl.urbandapp.dialogs.Dialog_Set_Profile_Step1;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -21,6 +22,7 @@ public class DefaultActivity extends AppCompatActivity {
     private String TAG = this.getClass().getSimpleName();
     private UserViewModel userViewModel;
     private TextView mbienvenida;
+    private Button test_set_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class DefaultActivity extends AppCompatActivity {
         this.mPreferences = PreferencesProvider.providePreferences();
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
+
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override
@@ -53,6 +56,15 @@ public class DefaultActivity extends AppCompatActivity {
                 Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
                 startActivity(chooser);
 
+            }
+        });
+
+        test_set_profile = findViewById(R.id.perfil);
+        test_set_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
+               startActivity(profile);
             }
         });
     }

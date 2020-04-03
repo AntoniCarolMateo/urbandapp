@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 
@@ -30,7 +29,7 @@ public class ChooserActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent register = new Intent(ChooserActivity.this,MainActivity.class);
+                Intent register = new Intent(ChooserActivity.this, RegisterActivity.class);
                 startActivity(register);
 
             }

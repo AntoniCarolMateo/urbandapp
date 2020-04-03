@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
     Button registerButton;
@@ -23,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
 
         registerButton = findViewById(R.id.register);
         username = findViewById(R.id.usertel);
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     userViewModel.registerUser(_username,_password);
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "rellena los cmapos de registro!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "rellena los cmapos de registro!", Toast.LENGTH_SHORT).show();
 
                 }
             }
