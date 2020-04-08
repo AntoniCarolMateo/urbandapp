@@ -1,6 +1,7 @@
 package cat.udl.urbandapp.dao;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -8,6 +9,7 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
+import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -33,7 +35,29 @@ public class UserDAOImpl implements IUserDAO {
 
     }
 
-        @Override
+    @Override
+    public Call<Void> setTableUserInstrument(Instrument instrument) {
+        Call<Void> call = retrofit.create(IUserDAO.class).setTableUserInstrument(instrument);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+        return call;
+    }
+
+    @Override
+    public Call<Void> getTableUserInstrument(String auth) {
+        return null;
+    }
+
+    @Override
     public Call<Void> registerUser(JsonObject userJson) {
         Call<Void> call = retrofit.create(IUserDAO.class).registerUser(userJson);
         call.enqueue(new Callback<Void>() {
@@ -54,4 +78,6 @@ public class UserDAOImpl implements IUserDAO {
         });
         return call;
     }
+
+
 }

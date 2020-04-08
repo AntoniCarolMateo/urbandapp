@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import cat.udl.urbandapp.dao.IUserDAO;
 import cat.udl.urbandapp.dao.UserDAOImpl;
+import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -28,11 +29,13 @@ public class UserServiceImpl implements UserServiceI {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<String> mResponseToken;
     public final MutableLiveData<User> mUser;
+    public final MutableLiveData<Instrument> mInstrument;
 
     public UserServiceImpl() {
         userDAO = new UserDAOImpl();
         mResponseToken = new MutableLiveData<>();
         mUser = new MutableLiveData<>();
+        mInstrument = new MutableLiveData<>();
     }
     public MutableLiveData<String> getLiveDataToken(){
         return mResponseToken;
@@ -87,7 +90,23 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-   // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
+    @Override
+    public void getTableUserInstrument(String Auth) {
+            userDAO.getTableUserInstrument(Auth).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    //Si tot va be, voldrem retornar la taula user-intrument
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+
+                }
+            });
+    }
+
+
+    // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
    @Override
    public void registerUser(JsonObject userJson) {
        userDAO.registerUser(userJson);
@@ -129,6 +148,11 @@ public class UserServiceImpl implements UserServiceI {
                 mResponseToken.setValue(t.getMessage().toString());
             }
         });
+    }
+
+    @Override
+    public void setTableUserInstrument(Instrument instrument) {
+        userDAO.setTableUserInstrument(instrument);
     }
 
 

@@ -1,7 +1,6 @@
     package cat.udl.urbandapp.dialogs;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -15,14 +14,14 @@ import android.widget.Button;
 
 import cat.udl.urbandapp.R;
 
-    public class Dialog_Set_Profile_Step3 extends DialogFragment {
+    public class DialogSetProfileStep3 extends DialogFragment {
 
         public View rootView;
         private FragmentActivity activity;
         private Button nextStep;
 
-        public static Dialog_Set_Profile_Step3 newInstance(FragmentActivity activity) {
-            Dialog_Set_Profile_Step3 dialog = new Dialog_Set_Profile_Step3();
+        public static DialogSetProfileStep3 newInstance(FragmentActivity activity) {
+            DialogSetProfileStep3 dialog = new DialogSetProfileStep3();
             dialog.activity = activity;
             return dialog;
         }
@@ -40,7 +39,7 @@ import cat.udl.urbandapp.R;
             builder.setNegativeButton("Prevous Step", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Dialog_Set_Profile_Step2 dialog2 = Dialog_Set_Profile_Step2.newInstance(getActivity());
+                    DialogSetProfileStep2 dialog2 = DialogSetProfileStep2.newInstance(getActivity());
                     dialog2.show(getParentFragmentManager(),"probando");
                 }
             });

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".dialogs.Dialog_Set_Profile_Step1">
+    tools:context=".dialogs.DialogSetProfileStep1">
 
     <TextView
         android:id="@+id/textView_title_step1"

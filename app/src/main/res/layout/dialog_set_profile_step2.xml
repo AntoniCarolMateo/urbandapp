@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".dialogs.Dialog_Set_Profile_Step1">
+    tools:context=".dialogs.DialogSetProfileStep1">
 
     <TextView
         android:id="@+id/textView_title_step1"
@@ -32,7 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_weight="1"
-            android:text="Necesitamos saber tus hablidades, indicalas a continuación, en las diferentes tablas" />
+            android:text="Indica tus habliidades con instrumentos músicales en la sguiente tabla"
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_on_secondary" />
 
     </LinearLayout>
 
@@ -42,30 +44,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="111dp"
-        android:orientation="vertical">
+        android:layout_height="77dp">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="29dp" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="196dp"
-                android:layout_height="wrap_content"
-                android:text="Generos musicales" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Instrumentos" />
-        </TableRow>
-
+        <Button
+            android:id="@+id/addInstrument"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tabla Instumentos musicales" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:text="Indica tus preferéncias en géneros músicales"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tabla géneros musicales" />
 
 </LinearLayout>

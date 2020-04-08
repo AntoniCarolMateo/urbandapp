@@ -3,6 +3,9 @@ package cat.udl.urbandapp.models;
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 
 public class User {
     @SerializedName("created_at")
@@ -24,6 +27,10 @@ public class User {
     @SerializedName("photo")
     private String photo;
 
+    //TABLAS USUARIO
+    @SerializedName("instruments")
+    private TableInstruments instruments;
+
 
     public User() {
     }
@@ -37,6 +44,7 @@ public class User {
         this.surname = surname;
         this.birthday = birthday;
         this.genere = genere;
+        this.instruments = new TableInstruments(new ArrayList<Instrument>());
     }
 
     public String getCreated_at() {
@@ -99,5 +107,12 @@ public class User {
     @Override
     public String toString(){
         return this.name + " " + this.surname;
+    }
+
+    public TableInstruments getInstruments() {
+        return instruments;
+    }
+    public void setInstruments(){
+        this.instruments = instruments;
     }
 }

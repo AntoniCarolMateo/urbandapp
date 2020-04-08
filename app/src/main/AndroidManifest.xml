@@ -4,6 +4,7 @@
     <!-- Internet Permission -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="andorid.permission.CAMERA" />
 
     <application
         android:name=".App"
@@ -14,10 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserProfileActivity"></activity>
-        <activity android:name=".dialogs.Dialog_Set_Profile_Step3" />
-        <activity android:name=".dialogs.Dialog_Set_Profile_Step2" />
-        <activity android:name=".dialogs.Dialog_Set_Profile_Step1" />
+        <activity android:name=".dialogs.DialogAddInstrument"></activity>
+        <activity android:name=".dialogs.DialogFirstTimeLogged" />
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".dialogs.DialogSetProfileStep3" />
+        <activity android:name=".dialogs.DialogSetProfileStep2" />
+        <activity android:name=".dialogs.DialogSetProfileStep1" />
         <activity android:name=".DefaultActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

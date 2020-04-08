@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import cat.udl.urbandapp.dialogs.Dialog_Set_Profile_Step1;
+import cat.udl.urbandapp.dialogs.DialogSetProfileStep1;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -13,9 +13,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        //TODO: Comprobar que es la primera vez que se logea, mediante boleano añadido a la api
-
-        Dialog_Set_Profile_Step1 dialog = Dialog_Set_Profile_Step1.newInstance(UserProfileActivity.this);
+        DialogSetProfileStep1 dialog = DialogSetProfileStep1.newInstance(UserProfileActivity.this);
         dialog.show(getSupportFragmentManager(),"Probando dialogs");
     }
 }

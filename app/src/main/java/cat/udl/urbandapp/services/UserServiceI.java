@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
 
+import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -21,6 +22,12 @@ public interface UserServiceI {
 
     @POST("account/profile")
     void getProfileUser(@Header("Authorization") String auth);
+
+    @POST("account/profile/table_instruments")
+    void getTableUserInstrument(@Header("Authorization") String Auth);
+
+    @POST("account/profile/table_instruments")
+    void setTableUserInstrument(@Body Instrument instrument);
 
     MutableLiveData<String> getLiveDataToken();
 

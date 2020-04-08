@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".dialogs.DialogAddInstrument">
+
+    <Space
+        android:id="@+id/TAULA"
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="AFEGIR"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:text="Selecciona la familia a la cual pertence el instrumento que quieres añadir"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Familia de Instruments"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="69dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:id="@+id/spinner_instruments_families"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="69dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="14dp"
+            android:layout_height="67dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="224dp"
+            android:layout_height="wrap_content"
+            android:background="@color/design_default_color_background"
+            android:orientation="vertical"
+            android:textAlignment="center">
+
+            <TextView
+                android:layout_width="291dp"
+                android:layout_height="wrap_content"
+                android:background="@color/design_default_color_primary_dark"
+                android:text="Instrumento"
+                android:textAlignment="gravity"
+                android:textColor="@color/design_default_color_on_primary" />
+
+            <Spinner
+                android:id="@+id/spinner_instruments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="14dp"
+            android:layout_height="81dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:text="Indica tu experiéncia con el instrumento"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_on_secondary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="14dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <RatingBar
+            android:id="@+id/ratingBar_exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+             />
+
+        <Space
+            android:layout_width="14dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="24dp" />
+
+    <Button
+        android:id="@+id/button_add_instrument"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD INSTRUMENT" />
+
+</LinearLayout>

@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import cat.udl.urbandapp.dialogs.Dialog_Set_Profile_Step1;
+
+import cat.udl.urbandapp.dialogs.DialogFirstTimeLogged;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -32,6 +34,10 @@ public class DefaultActivity extends AppCompatActivity {
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
 
+        //TODO: Comprobar que es la primera vez que se logea, mediante boleano añadido a la api
+        //if()
+        DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+        first.show(getSupportFragmentManager(),"first set up profile");
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override
