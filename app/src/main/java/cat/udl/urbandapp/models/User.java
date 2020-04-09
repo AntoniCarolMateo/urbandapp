@@ -28,8 +28,7 @@ public class User {
     private String photo;
 
     //TABLAS USUARIO
-    @SerializedName("instruments")
-    private TableInstruments instruments;
+
 
 
     public User() {
@@ -44,7 +43,7 @@ public class User {
         this.surname = surname;
         this.birthday = birthday;
         this.genere = genere;
-        this.instruments = new TableInstruments(new ArrayList<Instrument>());
+
     }
 
     public String getCreated_at() {
@@ -109,10 +108,5 @@ public class User {
         return this.name + " " + this.surname;
     }
 
-    public TableInstruments getInstruments() {
-        return instruments;
-    }
-    public void setInstruments(){
-        this.instruments = instruments;
-    }
+
 }

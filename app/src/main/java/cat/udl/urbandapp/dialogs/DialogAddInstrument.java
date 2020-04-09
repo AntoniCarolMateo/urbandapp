@@ -1,7 +1,12 @@
 package cat.udl.urbandapp.dialogs;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,11 +21,16 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 
+import java.util.List;
+
 import cat.udl.urbandapp.R;
+import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
+import cat.udl.urbandapp.utils.InstrumentsAdapter;
+import cat.udl.urbandapp.utils.InstrumentsDiffCallBack;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
-public class DialogAddInstrument extends DialogFragment {
+public class DialogAddInstrument extends DialogFragment implements LifecycleOwner {
 
     public View rootView;
     private FragmentActivity activity;
@@ -31,6 +41,7 @@ public class DialogAddInstrument extends DialogFragment {
     private Spinner choice_instrument;
     private Button addInstrument;
     private RatingBar experienceBar;
+    private RecyclerView listaIntrumentos;
 
 
     public static DialogAddInstrument newInstance(FragmentActivity activity) {
@@ -94,8 +105,6 @@ public class DialogAddInstrument extends DialogFragment {
         });
 
 
-
-
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +113,7 @@ public class DialogAddInstrument extends DialogFragment {
                 viewModel.addInstrument(_instrument, _expirience);
             }
         });
+
 
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
@@ -126,8 +136,25 @@ public class DialogAddInstrument extends DialogFragment {
         experienceBar = rootView.findViewById(R.id.ratingBar_exp);
         addInstrument = rootView.findViewById(R.id.button_add_instrument);
 
+//        listaIntrumentos = rootView.findViewById(R.id.recyclerView);
+//        listaIntrumentos.setLayoutManager(new LinearLayoutManager(getContext()));
+//        listaIntrumentos.setHasFixedSize(true);
+//        final InstrumentsAdapter adapter = new InstrumentsAdapter(new InstrumentsDiffCallBack());
+//        listaIntrumentos.setAdapter(adapter);
+//
+//        viewModel.getInstruments().observe(this, new Observer<List<Instrument>>() {
+//            @Override
+//            public void onChanged(List<Instrument> instruments) {
+//                //Cuando el valor de la lista se actualize, llamará esta función.
+//                adapter.submitList(instruments);
+//            }
+//        });
+
+
 
     }
+
+
 
 
 }

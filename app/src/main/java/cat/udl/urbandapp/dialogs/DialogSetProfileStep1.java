@@ -14,16 +14,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import cat.udl.urbandapp.DefaultActivity;
 import cat.udl.urbandapp.R;
+import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogSetProfileStep1 extends DialogFragment {
 
     public final int REQUEST_CODE_CAMERA = 1;
     public View rootView;
     private Activity activity;
+    private UserViewModel viewModel;
+    private EditText name;
+    private EditText surname;
+    private RatingBar generalExp;
     private Button editProfilePicture;
 
     public static DialogSetProfileStep1 newInstance(DefaultActivity activity) {
@@ -42,12 +49,22 @@ public class DialogSetProfileStep1 extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initView();
+        viewModel = new UserViewModel(getActivity().getApplication());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                DialogSetProfileStep2 dialog2 = DialogSetProfileStep2.newInstance(getActivity());
-                dialog2.show(getParentFragmentManager(), "probando");
-            }
+                    String _name = name.getText().toString();
+                    String _surname = surname.getText().toString();
+                    int _exp = (int) generalExp.getRating();
+                Toast.makeText(getContext(), _name +"  "+ _surname+"  "+_exp, Toast.LENGTH_SHORT).show();
+                    //Acutalitzem els valors en la api
+                    viewModel.setProfileName(_name);
+                    viewModel.setProfileSurname(_surname);
+                    viewModel.setProfileGenExp(_exp);
+                    DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
+                    step2.show(getParentFragmentManager(), "probando");
+                }
+
         });
 
 
@@ -75,11 +92,11 @@ public class DialogSetProfileStep1 extends DialogFragment {
         rootView = LayoutInflater.from
                 (getContext()).inflate(R.layout.dialog_set_profile_step1, null, false);
         editProfilePicture = rootView.findViewById(R.id.button_edit_picture);
+        generalExp = rootView.findViewById(R.id.ratingBar_gen_exp);
+        name = rootView.findViewById(R.id.editText_name);
+        surname = rootView.findViewById(R.id.editText_surname);
 
 
     }
 
-    public Activity getActivityInDialog(){
-        return this.activity;
-    }
 }

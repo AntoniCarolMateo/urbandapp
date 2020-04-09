@@ -72,13 +72,23 @@ public class UserViewModel extends AndroidViewModel {
         repository.getProfileUser(header);
 
     }
-
-
     public LiveData<String> getResponseLiveDataToken() {
         return this.responseLiveDataToken;
     }
     public LiveData<User> getResponseLiveDataUser() {
         return this.responseLiveUser;
     }
+
+    /*public void setProfileName(String _name){
+        repository.setName(_name);
+    }
+
+    public void setProfileSurname(String _surname){
+        repository.setSurname(_surname);
+    }
+    public void setProfileGenExp(int _exp){
+        repository.setGenExp(_exp);
+    }*/
+
 
 }

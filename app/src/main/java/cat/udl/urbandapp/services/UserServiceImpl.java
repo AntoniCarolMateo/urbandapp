@@ -44,9 +44,6 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
 
-
-
-
     @Override
     public void getProfileUser(final String Auth){
 
@@ -91,19 +88,20 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void getTableUserInstrument(String Auth) {
-            userDAO.getTableUserInstrument(Auth).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    //Si tot va be, voldrem retornar la taula user-intrument
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-
-                }
-            });
+    public void setName(String name) {
+        userDAO.setUserName(name);
     }
+
+    @Override
+    public void setSurname(String _surname) {
+        userDAO.setUserSurname(_surname);
+    }
+
+    @Override
+    public void setGenExp(int exp) {
+        userDAO.setUserGenExp(exp);
+    }
+
 
 
     // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
@@ -150,10 +148,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
-    public void setTableUserInstrument(Instrument instrument) {
-        userDAO.setTableUserInstrument(instrument);
-    }
 
 
 }

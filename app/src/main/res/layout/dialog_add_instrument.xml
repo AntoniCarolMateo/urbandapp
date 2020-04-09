@@ -20,6 +20,12 @@
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_secondary" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="81dp" />
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"

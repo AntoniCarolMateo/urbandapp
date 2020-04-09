@@ -35,9 +35,10 @@ public class DefaultActivity extends AppCompatActivity {
         mbienvenida = findViewById(R.id.bienvenidaText);
 
         //TODO: Comprobar que es la primera vez que se logea, mediante boleano añadido a la api
-        //if()
-        DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
-        first.show(getSupportFragmentManager(),"first set up profile");
+        //if
+            DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+            first.show(getSupportFragmentManager(),"first set up profile");
+
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override

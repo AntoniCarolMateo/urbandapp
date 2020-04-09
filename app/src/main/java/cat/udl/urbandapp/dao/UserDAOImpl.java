@@ -36,8 +36,8 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<Void> setTableUserInstrument(Instrument instrument) {
-        Call<Void> call = retrofit.create(IUserDAO.class).setTableUserInstrument(instrument);
+    public Call<Void> setUserName(String name) {
+        Call<Void> call = retrofit.create(IUserDAO.class).setUserName(name);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -53,9 +53,39 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<Void> getTableUserInstrument(String auth) {
-        return null;
+    public Call<Void> setUserSurname(String surname) {
+        Call<Void> call = retrofit.create(IUserDAO.class).setUserSurname(surname);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+        return call;
     }
+
+    @Override
+    public Call<Void> setUserGenExp(int exp) {
+        Call<Void> call = retrofit.create(IUserDAO.class).setUserGenExp(exp);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+        return call;
+    }
+
 
     @Override
     public Call<Void> registerUser(JsonObject userJson) {

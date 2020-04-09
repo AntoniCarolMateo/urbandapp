@@ -23,11 +23,14 @@ public interface UserServiceI {
     @POST("account/profile")
     void getProfileUser(@Header("Authorization") String auth);
 
-    @POST("account/profile/table_instruments")
-    void getTableUserInstrument(@Header("Authorization") String Auth);
+    @POST("account/profile/setName")
+    void setName(@Body String name);
 
-    @POST("account/profile/table_instruments")
-    void setTableUserInstrument(@Body Instrument instrument);
+    @POST("account/profile/setSurname")
+    void setSurname(@Header("Authorization") String auth);
+
+    @POST("account/profule/setGenExp")
+    void setGenExp(@Body int exp);
 
     MutableLiveData<String> getLiveDataToken();
 

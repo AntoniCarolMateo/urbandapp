@@ -19,17 +19,20 @@ public interface IUserDAO {
     @POST("users/register")
     Call<Void> registerUser(@Body JsonObject userJson);
 
-
-
     @POST("account/create_token")
     Call<ResponseBody> createTokenUser(@Header("Authorization") String auth);
 
     @GET("account/profile")
     Call<ResponseBody> getProfileUser(@Header("Authorization") String auth);
 
-    @POST("account/profile/set_table_instruments")
-    Call<Void> setTableUserInstrument(@Body Instrument instruments);
+    @POST("account/profile/setName")
+    Call<Void> setUserName(@Body String name);
 
-    @GET ("account/profile/get_table_instruments")
-    Call<Void> getTableUserInstrument(@Header("Authorization") String auth);
+    @POST("account/profile/setUsername")
+    Call<Void> setUserSurname(@Body String name);
+    @POST("account/profile/setGenExp")
+    Call<Void> setUserGenExp(@Body int exp);
+
+
+
 }
