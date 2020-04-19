@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
@@ -29,6 +30,8 @@ public class UserViewModel extends AndroidViewModel {
     private UserServiceI repository;
     private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<User> responseLiveUser;
+
+    private MutableLiveData<List<User>> responseAllUsers;
     private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -36,6 +39,7 @@ public class UserViewModel extends AndroidViewModel {
 
         responseLiveDataToken = repository.getLiveDataToken();
         responseLiveUser = repository.getLiveDataUser();
+        responseAllUsers = repository.getLiveDataAllUsers();
         this.mPreferences = PreferencesProvider.providePreferences();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -73,11 +77,19 @@ public class UserViewModel extends AndroidViewModel {
 
     }
 
+    public void getAllUsers(){
+        repository.getAllUsers();
+    }
+
+
     public LiveData<String> getResponseLiveDataToken() {
         return this.responseLiveDataToken;
     }
     public LiveData<User> getResponseLiveDataUser() {
         return this.responseLiveUser;
+    }
+    public LiveData<List<User>> getResponseLiveDataAllUsers() {
+        return this.getResponseLiveDataAllUsers();
     }
 
 }
