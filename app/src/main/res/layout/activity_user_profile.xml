@@ -93,7 +93,11 @@
     </LinearLayout>
 
     <RatingBar
+<<<<<<< Updated upstream
         android:id="@+id/ratingBar_gen_exp"
+=======
+        android:id="@+id/ratingBar_exp_ins"
+>>>>>>> Stashed changes
         style="@android:style/Widget.Holo.RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

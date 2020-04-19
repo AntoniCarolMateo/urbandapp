@@ -36,6 +36,7 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
+
     public Call<Void> setUserName(String name) {
         Call<Void> call = retrofit.create(IUserDAO.class).setUserName(name);
         call.enqueue(new Callback<Void>() {
@@ -85,6 +86,12 @@ public class UserDAOImpl implements IUserDAO {
         });
         return call;
     }
+
+    public Call<ResponseBody> firstTimeLogged(String auth) {
+        return retrofit.create(IUserDAO.class).firstTimeLogged(auth);
+    }
+
+
 
 
     @Override

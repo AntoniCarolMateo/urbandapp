@@ -38,13 +38,18 @@
 
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_instruments"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="19dp" />
+        android:layout_height="87dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="77dp">
+        android:layout_height="76dp">
 
         <Button
             android:id="@+id/addInstrument"
@@ -53,19 +58,5 @@
             android:layout_weight="1"
             android:text="Tabla Instumentos musicales" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:text="Indica tus preferéncias en géneros músicales"
-        android:textAlignment="center"
-        android:textColor="@color/design_default_color_on_secondary" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tabla géneros musicales" />
 
 </LinearLayout>

@@ -8,7 +8,8 @@ import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
 import org.bouncycastle.crypto.params.KeyParameter;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import android.util.Base64;
+
 import java.util.Locale;
 public class Utils {
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -16,7 +17,7 @@ public class Utils {
         PKCS5S2ParametersGenerator gen = new PKCS5S2ParametersGenerator(new SHA256Digest());
         gen.init(password.getBytes(StandardCharsets.UTF_8), salt.getBytes(), iterations);
         byte[] dk = ((KeyParameter) gen.generateDerivedParameters(256)).getKey();
-        byte[] hashBase64 = Base64.getEncoder().encode(dk);
+        byte[] hashBase64 = Base64.encode(dk, Base64.DEFAULT);
         return new String(hashBase64);
     }
 
@@ -27,7 +28,7 @@ public class Utils {
         hash = hash.substring(0,hash.length()-1);
         hash =  hash.replaceAll("\\+",".");
 
-        String salt_hash = Base64.getEncoder().encodeToString(salt.getBytes());
+        String salt_hash = Base64.encodeToString(salt.getBytes(), Base64.DEFAULT);
         salt_hash = salt_hash.substring(0,salt_hash.length()-1);
         salt_hash = salt_hash.replaceAll("\\+",".");
 

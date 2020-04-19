@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
 
+
     @Override
     public void getProfileUser(final String Auth){
 
@@ -88,18 +89,20 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void setName(String name) {
-        userDAO.setUserName(name);
-    }
 
-    @Override
-    public void setSurname(String _surname) {
-        userDAO.setUserSurname(_surname);
-    }
+    public void firstTimeLogged(String auth) {
+        userDAO.firstTimeLogged(auth).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-    @Override
-    public void setGenExp(int exp) {
-        userDAO.setUserGenExp(exp);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
     }
 
 
@@ -147,7 +150,6 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
-
 
 
 }

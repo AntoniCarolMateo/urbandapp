@@ -59,7 +59,7 @@ public class DefaultActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPreferences.edit().putString("token","").apply();
+                mPreferences.edit().remove("token");
                 Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
                 startActivity(chooser);
 

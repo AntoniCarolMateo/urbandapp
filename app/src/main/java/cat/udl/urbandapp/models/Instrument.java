@@ -1,40 +1,56 @@
 package cat.udl.urbandapp.models;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 public class Instrument {
 
-        @SerializedName("nameInstrument")
-        private String nameInstrument;
+    @SerializedName("id_instrument")
+    private int idInstrument;
 
-        @SerializedName("expirience")
-        private int expirience;
 
-        public Instrument(String n, int e) {
-            this.nameInstrument = n;
-            this.expirience = e;
-        }
+    @SerializedName("nameInstrument")
+    private String nameInstrument;
 
-        public String getNameInstrument() {
-            return nameInstrument;
-        }
+    @SerializedName("expirience")
+    private int expirience;
 
-        public void setNameInstrument(String nameInstrument) {
-            this.nameInstrument = nameInstrument;
-        }
-
-        public int getExpierence() {
-            return expirience;
-        }
-
-        public void setExpierence(int expierence) {
-            this.expirience = expierence;
-        }
-
-        public String toString(){
-            return "Intrumento: " + this.nameInstrument + ", Exp : " + this.expirience;
-        }
+    public Instrument(String nameInstrument, int expirience) {
+        this.nameInstrument = nameInstrument;
+        this.expirience = expirience;
     }
+
+    public String getNameInstrument() {
+        return nameInstrument;
+    }
+
+    public void setNameInstrument(String nameInstrument) {
+        this.nameInstrument = nameInstrument;
+    }
+
+    public int getExpirience() {
+        return expirience;
+    }
+
+    public void setExpirience(int expirience) {
+        this.expirience = expirience;
+    }
+
+    public int getIdInstrument() {
+        return idInstrument;
+    }
+
+    public void setIdInstrument(int idInstrument) {
+        this.idInstrument = idInstrument;
+    }
+
+    public JsonObject toJson() {
+        JsonObject json = new JsonObject();
+        json.addProperty("nameInstrument", this.nameInstrument);
+        json.addProperty("expirience", this.expirience);
+        return json;
+    }
+}
 
 
 

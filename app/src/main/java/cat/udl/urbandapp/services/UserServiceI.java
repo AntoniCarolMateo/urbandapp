@@ -23,14 +23,10 @@ public interface UserServiceI {
     @POST("account/profile")
     void getProfileUser(@Header("Authorization") String auth);
 
-    @POST("account/profile/setName")
-    void setName(@Body String name);
 
-    @POST("account/profile/setSurname")
-    void setSurname(@Header("Authorization") String auth);
 
-    @POST("account/profule/setGenExp")
-    void setGenExp(@Body int exp);
+    @POST("account/firstTimeLogged")
+    void firstTimeLogged(@Header("Authorization") String auth);
 
     MutableLiveData<String> getLiveDataToken();
 

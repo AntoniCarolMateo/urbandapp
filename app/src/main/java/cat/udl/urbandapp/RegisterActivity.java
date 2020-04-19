@@ -3,6 +3,7 @@ package cat.udl.urbandapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if(_username != "" && _password != ""){
 
                     userViewModel.registerUser(_username,_password);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(RegisterActivity.this, "rellena los cmapos de registro!", Toast.LENGTH_SHORT).show();

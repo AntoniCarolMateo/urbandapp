@@ -53,6 +53,7 @@ public class UserViewModel extends AndroidViewModel {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void  createTokenUser(String user, String password){
         String header = "34" + user + ":" + password;
         byte[] data = header.getBytes(StandardCharsets.UTF_8);

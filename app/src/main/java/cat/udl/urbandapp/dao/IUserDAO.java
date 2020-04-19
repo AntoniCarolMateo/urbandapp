@@ -25,6 +25,7 @@ public interface IUserDAO {
     @GET("account/profile")
     Call<ResponseBody> getProfileUser(@Header("Authorization") String auth);
 
+<<<<<<< Updated upstream
     @POST("account/profile/setName")
     Call<Void> setUserName(@Body String name);
 
@@ -33,6 +34,10 @@ public interface IUserDAO {
     @POST("account/profile/setGenExp")
     Call<Void> setUserGenExp(@Body int exp);
 
+=======
+    @POST("account/firstTimeLogged")
+    Call<ResponseBody> firstTimeLogged(@Header("Authorization") String auth);
+>>>>>>> Stashed changes
 
 
 }
