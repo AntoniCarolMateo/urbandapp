@@ -30,6 +30,7 @@ public class UserViewModel extends AndroidViewModel {
     private UserServiceI repository;
     private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<User> responseLiveUser;
+    private MutableLiveData<Boolean> responseLiveRegister;
 
     private MutableLiveData<List<User>> responseAllUsers;
     private SharedPreferences mPreferences;
@@ -40,10 +41,12 @@ public class UserViewModel extends AndroidViewModel {
         responseLiveDataToken = repository.getLiveDataToken();
         responseLiveUser = repository.getLiveDataUser();
         responseAllUsers = repository.getLiveDataAllUsers();
+        responseLiveRegister = repository.getLiveDataRegister();
+
         this.mPreferences = PreferencesProvider.providePreferences();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void registerUser(String username, String password){
+    public void registerUser(String username, String password,String gps){
         JsonObject user = new JsonObject();
 
         Log.d("UserViewModel", "user:" + username + " pass:"+ password);
@@ -53,6 +56,8 @@ public class UserViewModel extends AndroidViewModel {
         String salt = "16";
         String encode_hash = Utils.encode(password,salt,29000);
         user.addProperty("password",   encode_hash);
+        user.addProperty("gps",gps);
+        Log.d("UserRegister", "viewmodel");
         this.repository.registerUser(user);
 
     }
@@ -67,14 +72,8 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void getProfileUser(){
-       // String header = "34" + user + ":" + password;
         String header = this.mPreferences.getString("token","");
-        /*
-        byte[] data = header.getBytes(StandardCharsets.UTF_8);
-        header = Base64.encodeToString(data, Base64.DEFAULT);
-        */
         repository.getProfileUser(header);
-
     }
 
     public void getAllUsers(){
@@ -89,7 +88,10 @@ public class UserViewModel extends AndroidViewModel {
         return this.responseLiveUser;
     }
     public LiveData<List<User>> getResponseLiveDataAllUsers() {
-        return this.getResponseLiveDataAllUsers();
+        return this.responseAllUsers;
+    }
+    public LiveData<Boolean> getResponseLiveDataRegister() {
+        return this.responseLiveRegister;
     }
 
 }

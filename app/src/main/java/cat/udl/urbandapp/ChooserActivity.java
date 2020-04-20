@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class ChooserActivity extends AppCompatActivity {
         comprovarToken();
         registerButton = findViewById(R.id.ButtonRegister);
         loginButton = findViewById(R.id.buttonLogin);
+        Log.d("UserRegister", "chooser");
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
