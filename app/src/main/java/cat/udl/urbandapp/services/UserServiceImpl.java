@@ -7,10 +7,13 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import cat.udl.urbandapp.dao.IUserDAO;
 import cat.udl.urbandapp.dao.UserDAOImpl;
@@ -28,11 +31,12 @@ public class UserServiceImpl implements UserServiceI {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<String> mResponseToken;
     public final MutableLiveData<User> mUser;
-
+    public final MutableLiveData<List<User>> mAllUsers;
     public UserServiceImpl() {
         userDAO = new UserDAOImpl();
         mResponseToken = new MutableLiveData<>();
         mUser = new MutableLiveData<>();
+        mAllUsers = new MutableLiveData<>();
     }
     public MutableLiveData<String> getLiveDataToken(){
         return mResponseToken;
@@ -41,7 +45,9 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
 
-
+    public MutableLiveData<List<User>> getLiveDataAllUsers(){
+        return mAllUsers;
+    }
 
 
     @Override
@@ -83,6 +89,54 @@ public class UserServiceImpl implements UserServiceI {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("getUser", t.getMessage().toString());
                 mUser.setValue(new User());
+            }
+        });
+    }
+
+
+    @Override
+    public void getAllUsers(){
+
+        userDAO.getAllUsers().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200 ){
+                    try {
+
+                        String respuestaBody = response.body().string();
+                        Log.d("getAllUsers", "Ok getAllUser");
+                        Log.d("getAllUsers", respuestaBody);
+                        JSONArray mUsers = new JSONArray(respuestaBody);
+                        List<User> mList = new ArrayList<>();
+                        for (int i = 0; i < mUsers.length(); i++) {
+                            JSONObject mUserjson =  mUsers.getJSONObject(i);
+                            User u = new User();
+
+                            u.setUsername(mUserjson.getString("username"));
+                            u.setCreated_at(mUserjson.getString("created_at"));
+                            String latlong = mUserjson.getString("gps");
+                            String[] parts = latlong.split(",");
+                            float latitude = Float.parseFloat(parts[0]);
+                            float longitude = Float.parseFloat(parts[1]);
+                            u.setLatitude(latitude);
+                            u.setLongitude(longitude);
+                            mList.add(u);
+                        }
+                        mAllUsers.setValue(mList);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    mUser.setValue(new User());
+                    Log.d("getAllUsers", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("getAllUser", t.getMessage().toString());
             }
         });
     }

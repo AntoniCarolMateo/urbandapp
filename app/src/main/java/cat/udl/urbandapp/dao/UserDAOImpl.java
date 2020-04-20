@@ -33,6 +33,14 @@ public class UserDAOImpl implements IUserDAO {
 
     }
 
+
+    @Override
+    public Call<ResponseBody> getAllUsers(){
+
+        return  retrofit.create(IUserDAO.class).getAllUsers();
+
+    }
+
         @Override
     public Call<Void> registerUser(JsonObject userJson) {
         Call<Void> call = retrofit.create(IUserDAO.class).registerUser(userJson);

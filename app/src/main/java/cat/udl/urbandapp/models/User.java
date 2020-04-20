@@ -24,6 +24,11 @@ public class User {
     @SerializedName("photo")
     private String photo;
 
+    @SerializedName("latitude")
+    private float latitude;
+
+    @SerializedName("longitude")
+    private float longitude;
 
     public User() {
     }
@@ -37,6 +42,50 @@ public class User {
         this.surname = surname;
         this.birthday = birthday;
         this.genere = genere;
+    }
+
+    public User(String created_at, String username, String email, String name, String surname, String birthday, String genere, float latitude, float longitude) {
+        this.created_at = created_at;
+        this.username = username;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.genere = genere;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public String getCreated_at() {

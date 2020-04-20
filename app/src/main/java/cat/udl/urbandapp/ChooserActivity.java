@@ -24,7 +24,7 @@ public class ChooserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chooser);
         this.mPreferences = PreferencesProvider.providePreferences();
         comprovarToken();
-        registerButton = findViewById(R.id.buttonRegister);
+        registerButton = findViewById(R.id.ButtonRegister);
         loginButton = findViewById(R.id.buttonLogin);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
