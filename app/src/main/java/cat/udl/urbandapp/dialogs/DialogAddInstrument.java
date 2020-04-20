@@ -26,8 +26,7 @@ import java.util.List;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
-import cat.udl.urbandapp.utils.InstrumentsAdapter;
-import cat.udl.urbandapp.utils.InstrumentsDiffCallBack;
+
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
 public class DialogAddInstrument extends DialogFragment implements LifecycleOwner {

@@ -1,6 +1,6 @@
 package cat.udl.urbandapp.services;
 
-<<<<<<< Updated upstream
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -10,7 +10,7 @@ import cat.udl.urbandapp.dao.TablesDAOImpl;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
-=======
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -36,7 +36,7 @@ import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
->>>>>>> Stashed changes
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,30 +45,8 @@ import retrofit2.Retrofit;
 public class TablesServiceImpl implements TablesServiceI {
 
     private TablesDAOImpl tablesDAO;
-<<<<<<< Updated upstream
+
     public MutableLiveData<List<Instrument>> allInsruments;
-    Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
-
-    public TablesServiceImpl(){
-        tablesDAO = new TablesDAOImpl();
-
-    }
-
-    public void getTableUserInstrument(String Auth) {
-        //tablesDAO.getInstrumentsTable(Auth).enqueue()
-
-    }
-
-    @Override
-    public void setTableUserInstrument(Instrument instrument) {
-
-    }
-
-    @Override
-    public MutableLiveData<List<Instrument>> getInstrumentsList() {
-        return allInsruments;
-    }
-=======
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<User> mUser;
     public final MutableLiveData<List<Instrument>> mlistInstruent;
@@ -90,7 +68,6 @@ public class TablesServiceImpl implements TablesServiceI {
     public LiveData<List<Instrument>> getTableInstruments() {
         return mlistInstruent;
     }
-
 
     @Override
     public void getTableUserInstrument(final String Auth) {
@@ -143,5 +120,5 @@ public class TablesServiceImpl implements TablesServiceI {
     }
 
 
->>>>>>> Stashed changes
+
 }

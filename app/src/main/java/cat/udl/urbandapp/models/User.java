@@ -27,12 +27,12 @@ public class User {
     @SerializedName("photo")
     private String photo;
 
-<<<<<<< Updated upstream
+
     //TABLAS USUARIO
 
-=======
+
     private ArrayList<Instrument> userInstruments;
->>>>>>> Stashed changes
+
 
     public ArrayList<Instrument> getUserInstruments() {
         return userInstruments;
@@ -119,8 +119,5 @@ public class User {
         return this.name + " " + this.surname;
     }
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 }

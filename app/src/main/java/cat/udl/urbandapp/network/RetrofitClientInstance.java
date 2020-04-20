@@ -15,7 +15,7 @@ public class RetrofitClientInstance {
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-            Log.d("Retrofit","keloke");
+
         }
         return retrofit;
     }

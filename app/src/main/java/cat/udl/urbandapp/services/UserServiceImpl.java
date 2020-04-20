@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
 
+    @Override
+    public void setProfileInfo(final String Auth, JsonObject json) {
+        userDAO.setProfileInfo(Auth,json);
+    }
+
 
     @Override
     public void getProfileUser(final String Auth){

@@ -32,4 +32,6 @@ public interface UserServiceI {
 
     MutableLiveData<User> getLiveDataUser();
 
+    @POST("account/firstTimeLogged")
+    void setProfileInfo(String header, JsonObject json);
 }

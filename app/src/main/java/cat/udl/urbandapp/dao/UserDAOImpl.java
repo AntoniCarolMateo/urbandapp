@@ -35,63 +35,27 @@ public class UserDAOImpl implements IUserDAO {
 
     }
 
-    @Override
-
-    public Call<Void> setUserName(String name) {
-        Call<Void> call = retrofit.create(IUserDAO.class).setUserName(name);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-            }
-        });
-        return call;
-    }
-
-    @Override
-    public Call<Void> setUserSurname(String surname) {
-        Call<Void> call = retrofit.create(IUserDAO.class).setUserSurname(surname);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-            }
-        });
-        return call;
-    }
-
-    @Override
-    public Call<Void> setUserGenExp(int exp) {
-        Call<Void> call = retrofit.create(IUserDAO.class).setUserGenExp(exp);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-
-            }
-        });
-        return call;
-    }
 
     public Call<ResponseBody> firstTimeLogged(String auth) {
         return retrofit.create(IUserDAO.class).firstTimeLogged(auth);
     }
 
+    @Override
+    public Call<Void> setProfileInfo(String Auth, JsonObject json) {
+        Call<Void> call = retrofit.create(IUserDAO.class).setProfileInfo(Auth, json);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+        return call;
+    }
 
 
     @Override

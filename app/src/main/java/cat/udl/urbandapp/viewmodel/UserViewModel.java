@@ -80,16 +80,18 @@ public class UserViewModel extends AndroidViewModel {
         return this.responseLiveUser;
     }
 
-    /*public void setProfileName(String _name){
-        repository.setName(_name);
+    public void setProfileInfo(String name, String surname, int exp, String birth, String gender) {
+        String header = this.mPreferences.getString("token","");
+        JsonObject json = new JsonObject();
+        json.addProperty("name", name);
+        json.addProperty("surname", surname);
+        json.addProperty("expirience", exp);
+        json.addProperty("birthdate", birth);
+        json.addProperty("gender", gender);
+
+        repository.setProfileInfo(header, json);
     }
 
-    public void setProfileSurname(String _surname){
-        repository.setSurname(_surname);
-    }
-    public void setProfileGenExp(int _exp){
-        repository.setGenExp(_exp);
-    }*/
 
 
 }

@@ -84,7 +84,7 @@ public class DialogSetProfileStep2 extends DialogFragment {
         instrumentAdapter.submitList(list);
         recyclerInstruments.setAdapter(instrumentAdapter);
 
-        tablesViewModel.getUserListInstruments();
+        tablesViewModel.getInstruments();
 
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
