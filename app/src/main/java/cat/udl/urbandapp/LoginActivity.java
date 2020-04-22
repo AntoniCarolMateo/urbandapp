@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import cat.udl.urbandapp.preferences.PreferencesProvider;
@@ -21,6 +22,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     EditText username;
     EditText password;
+    RadioButton btn_usuari;
+    RadioButton btn_patrocinador;
+    RadioButton btn_banda;
+
     private SharedPreferences mPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(String s) {
                 mPreferences.edit().putString("token",s).apply();
                 Log.d("Login","Tenim token " + s);
-                Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
-                startActivity(da);
+                if (btn_usuari.isChecked()){
+                    Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
+                    startActivity(da);
+
+                }
+                if(btn_banda.isChecked()) {
+                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                    startActivity(da);
+                }
+                if(btn_patrocinador.isChecked()){
+                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                    startActivity(da);
+                }
                 //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
             }
         });

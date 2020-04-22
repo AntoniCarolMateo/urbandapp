@@ -10,7 +10,7 @@
         android:id="@+id/text_view_pho2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/nova_square"
         android:text="@string/iniciar_sesi_n"
         android:textColor="@color/design_default_color_primary_dark"
@@ -19,7 +19,7 @@
         android:textColorLink="@color/design_default_color_secondary"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/urband_logo" />
 
@@ -48,20 +48,20 @@
         android:id="@+id/urband_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="logo_app"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137"
-        app:srcCompat="@drawable/logo_urband"
-        android:contentDescription="logo_app" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/logo_urband" />
 
     <TextView
         android:id="@+id/text_view_pho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/nova_oval"
         android:text="@string/tel_fono"
         android:textColor="@color/design_default_color_primary_dark"
@@ -70,7 +70,7 @@
         android:textColorLink="@color/design_default_color_secondary"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/text_view_pho2" />
 
@@ -91,12 +91,28 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
 
+    <TextView
+        android:id="@+id/tes_view_rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:fontFamily="@font/nova_oval"
+        android:text="@string/rol"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textColorHighlight="@color/design_default_color_primary_variant"
+        android:textColorHint="@color/design_default_color_secondary"
+        android:textColorLink="@color/design_default_color_secondary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
+
     <EditText
         android:id="@+id/loginUsername"
         android:layout_width="258dp"
         android:layout_height="46dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +124,6 @@
         android:id="@+id/loginPassword"
         android:layout_width="258dp"
         android:layout_height="46dp"
-        android:layout_marginTop="28dp"
         android:ems="10"
         android:fontFamily="@font/nova_script"
         android:inputType="textPersonName"
@@ -121,14 +136,51 @@
         android:id="@+id/LoginButton"
         android:layout_width="172dp"
         android:layout_height="51dp"
-        android:layout_marginTop="52dp"
         android:background="@color/design_default_color_primary_dark"
         android:fontFamily="@font/nova_cut"
         android:text="Login"
         android:textColor="@color/design_default_color_background"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
+
+    <RadioButton
+        android:id="@+id/btn_Usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Patrocinador"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <RadioButton
+        android:id="@+id/btn_Banda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="Banda"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <RadioButton
+        android:id="@+id/btn_Patrocinador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="44dp"
+        android:text="Patrocinador"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Banda"
+        app:layout_constraintStart_toEndOf="@+id/btn_Usuario"
+        app:layout_constraintTop_toTopOf="@+id/urband_logo"
+        app:layout_constraintVertical_bias="0.822" />
 </androidx.constraintlayout.widget.ConstraintLayout>
