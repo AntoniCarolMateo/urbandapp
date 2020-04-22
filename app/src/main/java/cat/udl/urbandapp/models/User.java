@@ -26,6 +26,8 @@ public class User {
     @SerializedName("photo")
     private String photo;
 
+
+
     @SerializedName("latitude")
     private float latitude;
 

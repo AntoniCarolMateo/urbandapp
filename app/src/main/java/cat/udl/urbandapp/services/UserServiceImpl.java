@@ -151,9 +151,9 @@ public class UserServiceImpl implements UserServiceI {
     }
     @Override
     public void setProfileInfo(String header, JsonObject json) {
-        userDAO.setProfileInfo(header,json).enqueue(new Callback<Void>() {
+        userDAO.setProfileInfo(header,json).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
 
                     mSetProfileStep1.setValue(true);
@@ -162,7 +162,7 @@ public class UserServiceImpl implements UserServiceI {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("Register", "error else");
                 mSetProfileStep1.setValue(false);
             }

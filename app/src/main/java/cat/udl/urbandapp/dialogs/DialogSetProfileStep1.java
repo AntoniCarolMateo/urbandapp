@@ -104,8 +104,6 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
                     }
 
                     viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender, _description);
-
-
                     Toast.makeText(getContext(), _name +"  "+ _surname+"  "+_exp+"  "+_birth + "  " + _gender, Toast.LENGTH_SHORT).show();
 
 

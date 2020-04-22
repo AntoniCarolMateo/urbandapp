@@ -19,12 +19,12 @@ import retrofit2.http.POST;
 
 public interface ITablesDAO {
     @POST("users/profile/addInstrument")
-    Call<Void> addInstrument(@Header("Authorization") String auth, @Body JsonObject instruments);
+    Call<ResponseBody> addInstrument(@Header("Authorization") String auth, @Body JsonObject instruments);
 
     @GET("users/profile/getInstrumentsList")
     Call<ResponseBody> getTableUserInstrument(@Header("Authorization") String auth);
 
     @POST("users/profile/deleteInstrument")
-    Call<Void> removeInstrument(@Header("Authorization") String auth, @Body JsonObject instrument);
+    Call<ResponseBody> removeInstrument(@Header("Authorization") String auth, @Body JsonObject instrument);
 
 }

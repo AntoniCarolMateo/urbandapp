@@ -127,9 +127,9 @@ public class TablesServiceImpl implements TablesServiceI {
 
     @Override
     public void addInstrument(String Auth, JsonObject instrument) {
-        tablesDAO.addInstrument(Auth, instrument).enqueue(new Callback<Void>() {
+        tablesDAO.addInstrument(Auth, instrument).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200){
                     mInstrumentAdded.setValue(true);
                     Log.d("Add Instrument", "Added succesfully");
@@ -140,7 +140,7 @@ public class TablesServiceImpl implements TablesServiceI {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
         });
@@ -148,9 +148,9 @@ public class TablesServiceImpl implements TablesServiceI {
 
     @Override
     public void removeInstrument(String Auth, JsonObject instrument) {
-        tablesDAO.removeInstrument(Auth, instrument).enqueue(new Callback<Void>() {
+        tablesDAO.removeInstrument(Auth, instrument).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200){
                     mRemovedInstrument.setValue(true);
                     Log.d("Remove Instrument", "Removed succesfully");
@@ -161,7 +161,7 @@ public class TablesServiceImpl implements TablesServiceI {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
         });

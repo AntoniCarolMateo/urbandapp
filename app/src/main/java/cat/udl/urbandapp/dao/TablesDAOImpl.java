@@ -20,43 +20,15 @@ public class TablesDAOImpl implements ITablesDAO {
         return retrofit.create(ITablesDAO.class).getTableUserInstrument(auth);
     }
 
-    public Call<Void> addInstrument (String auth, JsonObject instruments){
-            Call<Void> call = retrofit.create(ITablesDAO.class).addInstrument(auth, instruments);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-
-                }
-            });
-            return call;
-        }
-
-        @Override
-        public Call<Void> removeInstrument (String auth, JsonObject instrument){
-            Call<Void> call = retrofit.create(ITablesDAO.class).removeInstrument(auth, instrument);
-
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-
-                }
-
-            });
-            return call;
-        }
-
-
+    public Call<ResponseBody> addInstrument (String auth, JsonObject instruments) {
+        return retrofit.create(ITablesDAO.class).addInstrument(auth, instruments);
     }
+
+    @Override
+    public Call<ResponseBody> removeInstrument (String auth, JsonObject instrument) {
+        return retrofit.create(ITablesDAO.class).removeInstrument(auth, instrument);
+    }
+}
 
 
 

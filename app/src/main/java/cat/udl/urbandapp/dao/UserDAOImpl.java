@@ -42,7 +42,7 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<Void> setProfileInfo(String Auth, JsonObject json) {
+    public Call<ResponseBody> setProfileInfo(String Auth, JsonObject json) {
        return retrofit.create(IUserDAO.class).setProfileInfo(Auth, json);
     }
 
