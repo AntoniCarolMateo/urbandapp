@@ -30,4 +30,7 @@ public interface IUserDAO {
 
     @GET("users/all")
     Call<ResponseBody> getAllUsers();
+
+    @POST("account/profile/setProfileStep1")
+    Call<Void> setProfileInfo(@Header("Authorization") String Auth,@Body JsonObject json);
 }

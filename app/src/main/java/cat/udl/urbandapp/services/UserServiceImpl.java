@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserServiceI {
     public final MutableLiveData<User> mUser;
     public final MutableLiveData<List<User>> mAllUsers;
     public final MutableLiveData<Boolean> mRegister;
+    public final MutableLiveData<Boolean> mSetProfileStep1;
 
     public UserServiceImpl() {
         userDAO = new UserDAOImpl();
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserServiceI {
         mUser = new MutableLiveData<>();
         mAllUsers = new MutableLiveData<>();
         mRegister = new MutableLiveData<>();
+        mSetProfileStep1 = new MutableLiveData<>();
     }
     public MutableLiveData<String> getLiveDataToken(){
         return mResponseToken;
@@ -48,6 +50,9 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
     public MutableLiveData<Boolean> getLiveDataRegister(){return  mRegister;}
+
+    public MutableLiveData<Boolean> getLiveDataProfileStep1() { return mSetProfileStep1; }
+
 
     public MutableLiveData<List<User>> getLiveDataAllUsers(){
         return mAllUsers;
@@ -144,8 +149,27 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
+    @Override
+    public void setProfileInfo(String header, JsonObject json) {
+        userDAO.setProfileInfo(header,json).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
 
-   // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
+                    mSetProfileStep1.setValue(true);
+                    Log.d("Login", "ok");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("Register", "error else");
+                mSetProfileStep1.setValue(false);
+            }
+        });
+    }
+
+    // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
    @Override
    public void registerUser(JsonObject userJson) {
 

@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import cat.udl.urbandapp.dialogs.DialogFirstTimeLogged;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -30,6 +31,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private String TAG = this.getClass().getSimpleName();
     private UserViewModel userViewModel;
     private TextView mbienvenida;
+    private Button profile;
 
 
     @Override
@@ -74,6 +76,12 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         this.mPreferences = PreferencesProvider.providePreferences();
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
+        profile = findViewById(R.id.button_profile);
+
+        // TODO: implementar chec first time
+        //if (userViewModel.checkFirstTime)
+        DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+        first.show(getSupportFragmentManager(), "first set up profile");
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override

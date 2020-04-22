@@ -31,6 +31,7 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<User> responseLiveUser;
     private MutableLiveData<Boolean> responseLiveRegister;
+    private MutableLiveData<Boolean> responseLiveStep1;
 
     private MutableLiveData<List<User>> responseAllUsers;
     private SharedPreferences mPreferences;
@@ -42,6 +43,7 @@ public class UserViewModel extends AndroidViewModel {
         responseLiveUser = repository.getLiveDataUser();
         responseAllUsers = repository.getLiveDataAllUsers();
         responseLiveRegister = repository.getLiveDataRegister();
+        responseLiveStep1 = repository.getLiveDataProfileStep1();
 
         this.mPreferences = PreferencesProvider.providePreferences();
     }
@@ -80,6 +82,19 @@ public class UserViewModel extends AndroidViewModel {
         repository.getAllUsers();
     }
 
+    public void setProfileInfo(String name, String surname, int exp, String birth, String gender) {
+        String header = this.mPreferences.getString("token","");
+        JsonObject json = new JsonObject();
+        json.addProperty("name", name);
+        json.addProperty("surname", surname);
+        json.addProperty("expirience", exp);
+        json.addProperty("birthdate", birth);
+        json.addProperty("gender", gender);
+
+        repository.setProfileInfo(header, json);
+    }
+
+
 
     public LiveData<String> getResponseLiveDataToken() {
         return this.responseLiveDataToken;
@@ -93,5 +108,7 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<Boolean> getResponseLiveDataRegister() {
         return this.responseLiveRegister;
     }
-
+    public LiveData<Boolean> getResponseLiveDataProfileStep1() {
+        return this.responseLiveStep1;
+    }
 }

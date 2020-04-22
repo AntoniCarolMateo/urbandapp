@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name ="spinnerFamilies">
+    <item> Viento</item>
+    <item> Percusión</item>
+    <item> Cuerda</item>
+    <item> Otros</item>
+    </string-array>
+
+
+    <string-array name ="spinnerWindInstruments">
+    <item> Saxofono</item>
+    <item> Trompeta</item>
+    <item> Clarinete</item>
+    <item> Trombón</item>
+        <item> Tuba</item>
+        <item>Oboé</item>
+        <item>Fagot</item>
+
+    </string-array>
+
+    <string-array name ="spinnerStringInstruments">
+        <item>Guitarra Clássica</item>
+        <item> Violín</item>
+        <item> Bajo</item>
+        <item> Violonchelo</item>
+        <item> Ukelele</item>
+        <item> Guitarra Eléctrica</item>
+        <item> Piano Clásico</item>
+        <item> Piano Eléctronico/Teclado</item>
+        <item></item>
+    </string-array>
+
+    <string-array name ="spinnerPercusionInstruments">
+        <item> Tambor</item>
+        <item> Batería</item>
+        <item> Cajón</item>
+    </string-array>
+    <string-array name ="spinnerOthers">
+        <item> Voz </item>
+        <item> Producción musical</item>
+        <item> Beatmaker</item>
+    </string-array>
+
+    <string-array name ="spinnerExpirience">
+        <item> 1</item>
+        <item> 2</item>
+        <item> 3</item>
+        <item> 4</item>
+        <item> 5</item>
+        <item></item>
+
+
+    </string-array>
+
+</resources>

@@ -36,6 +36,9 @@ public interface UserServiceI {
     @GET("users/all")
     void getAllUsers();
 
+    @POST("account/update_profile")
+    void setProfileInfo(String header, JsonObject json);
+
     MutableLiveData<String> getLiveDataToken();
 
     MutableLiveData<User> getLiveDataUser();
@@ -43,4 +46,6 @@ public interface UserServiceI {
     MutableLiveData<List<User>> getLiveDataAllUsers();
 
     MutableLiveData<Boolean> getLiveDataRegister();
+
+    MutableLiveData<Boolean> getLiveDataProfileStep1();
 }
