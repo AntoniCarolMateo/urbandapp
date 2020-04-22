@@ -61,6 +61,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     private EditText name;
     private EditText calendar;
     private EditText surname;
+    private EditText description;
     private RatingBar generalExp;
     private Button editProfilePicture;
     private RadioGroup radio_group_genere;
@@ -94,13 +95,14 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
                     int _exp = (int) generalExp.getRating();
                     String _birth  = calendar.getText().toString();
                     String _gender = "";
-                    String _desc = "";
+                    String _description = description.getText().toString();
                     if(radio_female.isChecked()){
                         _gender = "FEMALE";
                     }else if (radio_male.isChecked()){
                         _gender = "MALE";
                     }
-                    viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender);
+                    viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender, _description);
+
 
                     Toast.makeText(getContext(), _name +"  "+ _surname+"  "+_exp+"  "+_birth + "  " + _gender, Toast.LENGTH_SHORT).show();
 
@@ -159,6 +161,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
         radio_male = rootView.findViewById(R.id.radioButton_male);
         radio_group_genere = rootView.findViewById(R.id.radio_group_genere);
         profile_photo = rootView.findViewById(R.id.imageView_profile);
+        description = rootView.findViewById(R.id.editText_desc);
 
         calendar = rootView.findViewById(R.id.editText_date);
         calendar.setOnClickListener(this);

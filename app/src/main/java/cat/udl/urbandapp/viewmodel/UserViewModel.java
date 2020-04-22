@@ -82,7 +82,7 @@ public class UserViewModel extends AndroidViewModel {
         repository.getAllUsers();
     }
 
-    public void setProfileInfo(String name, String surname, int exp, String birth, String gender) {
+    public void setProfileInfo(String name, String surname, int exp, String birth, String gender, String desc) {
         String header = this.mPreferences.getString("token","");
         JsonObject json = new JsonObject();
         json.addProperty("name", name);
@@ -90,6 +90,8 @@ public class UserViewModel extends AndroidViewModel {
         json.addProperty("expirience", exp);
         json.addProperty("birthdate", birth);
         json.addProperty("gender", gender);
+        json.addProperty("description", desc);
+
 
         repository.setProfileInfo(header, json);
     }

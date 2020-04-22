@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -99,8 +102,6 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
 
 
-
-
         userViewModel.getProfileUser();
 
 
@@ -115,4 +116,32 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                this.mPreferences.edit().remove("token").commit();
+                Intent intent = new Intent(DefaultActivity.this, ChooserActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
+
+
 }
