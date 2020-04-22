@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -101,6 +102,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
                     }else if (radio_male.isChecked()){
                         _gender = "MALE";
                     }
+
                     viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender, _description);
 
 
@@ -138,6 +140,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
+                    Log.d("step1","vamos al step2 con boolean: " + aBoolean);
                     DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
                     step2.show(getParentFragmentManager(), "step 2");
                 }

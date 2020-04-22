@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserServiceI {
 
            @Override
            public void onFailure(Call<ResponseBody> call, Throwable t) {
-               Log.d("Register", "error onFailure");
+               Log.d("Register", "error onFailure ");
                mRegister.setValue(false);
            }
 

@@ -40,23 +40,29 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.loginUsername);
         password = findViewById(R.id.loginPassword);
         userViewModel = new UserViewModel(getApplication());
-
-
+        btn_usuari = findViewById(R.id.btn_Usuario);
+        btn_patrocinador = findViewById(R.id.btn_Patrocinador);
+        btn_banda = findViewById(R.id.btn_Banda);
         userViewModel.getResponseLiveDataToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 mPreferences.edit().putString("token",s).apply();
                 Log.d("Login","Tenim token " + s);
+
                 if (btn_usuari.isChecked()){
                     Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
                     startActivity(da);
 
                 }
-                if(btn_banda.isChecked()) {
+                else if(btn_banda.isChecked()) {
                     Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
                     startActivity(da);
                 }
-                if(btn_patrocinador.isChecked()){
+                else if(btn_patrocinador.isChecked()){
+                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                    startActivity(da);
+                }
+                else{
                     Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
                     startActivity(da);
                 }
