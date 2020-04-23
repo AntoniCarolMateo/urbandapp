@@ -18,9 +18,12 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface UserServiceI {
+    /*
     @POST("users/register")
     void registerUser(@Body JsonObject userJson);
-
+    */
+    @POST("users/register")
+    void registerUser(@Body JsonObject userJson);
 
 
     @POST("account/create_token")
@@ -33,10 +36,16 @@ public interface UserServiceI {
     @GET("users/all")
     void getAllUsers();
 
+    @POST("account/update_profile")
+    void setProfileInfo(String header, JsonObject json);
+
     MutableLiveData<String> getLiveDataToken();
 
     MutableLiveData<User> getLiveDataUser();
 
     MutableLiveData<List<User>> getLiveDataAllUsers();
 
+    MutableLiveData<Boolean> getLiveDataRegister();
+
+    MutableLiveData<Boolean> getLiveDataProfileStep1();
 }

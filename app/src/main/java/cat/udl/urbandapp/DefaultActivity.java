@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
+import cat.udl.urbandapp.dialogs.DialogFirstTimeLogged;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -30,6 +34,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private String TAG = this.getClass().getSimpleName();
     private UserViewModel userViewModel;
     private TextView mbienvenida;
+    private Button profile;
 
 
     @Override
@@ -74,6 +79,12 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         this.mPreferences = PreferencesProvider.providePreferences();
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
+        profile = findViewById(R.id.button_profile);
+
+        // TODO: implementar chec first time
+        //if (userViewModel.checkFirstTime)
+        DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+        first.show(getSupportFragmentManager(), "first set up profile");
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override
@@ -91,8 +102,6 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
 
 
-
-
         userViewModel.getProfileUser();
 
 
@@ -107,4 +116,32 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                this.mPreferences.edit().remove("token").commit();
+                Intent intent = new Intent(DefaultActivity.this, ChooserActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
+
+
 }

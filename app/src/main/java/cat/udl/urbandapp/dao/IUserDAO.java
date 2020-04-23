@@ -15,8 +15,12 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface IUserDAO {
+    /*
     @POST("users/register")
     Call<Void> registerUser(@Body JsonObject userJson);
+    */
+    @POST("users/register")
+    Call<ResponseBody> registerUser(@Body JsonObject userJson);
 
     @POST("account/create_token")
     Call<ResponseBody> createTokenUser(@Header("Authorization") String auth);
@@ -26,4 +30,7 @@ public interface IUserDAO {
 
     @GET("users/all")
     Call<ResponseBody> getAllUsers();
+
+    @POST("account/profile/update_profile")
+    Call<ResponseBody> setProfileInfo(@Header("Authorization") String Auth,@Body JsonObject json);
 }

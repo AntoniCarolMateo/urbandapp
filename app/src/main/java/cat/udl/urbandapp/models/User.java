@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class User {
     @SerializedName("created_at")
     private String created_at;
@@ -24,11 +26,15 @@ public class User {
     @SerializedName("photo")
     private String photo;
 
+
+
     @SerializedName("latitude")
     private float latitude;
 
     @SerializedName("longitude")
     private float longitude;
+
+    ArrayList<Instrument> userInstruments;
 
     public User() {
     }
@@ -54,6 +60,14 @@ public class User {
         this.genere = genere;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public ArrayList<Instrument> getUserInstruments() {
+        return userInstruments;
+    }
+
+    public void setUserInstruments(ArrayList<Instrument> listInstruments) {
+        this.userInstruments = listInstruments;
     }
 
     public String getPhone() {

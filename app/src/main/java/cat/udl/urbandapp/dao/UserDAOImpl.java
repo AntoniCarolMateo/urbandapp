@@ -41,8 +41,18 @@ public class UserDAOImpl implements IUserDAO {
 
     }
 
-        @Override
-    public Call<Void> registerUser(JsonObject userJson) {
+    @Override
+    public Call<ResponseBody> setProfileInfo(String Auth, JsonObject json) {
+       return retrofit.create(IUserDAO.class).setProfileInfo(Auth, json);
+    }
+
+    @Override
+        //public Call<Void> registerUser(JsonObject userJson) {
+        public Call<ResponseBody> registerUser(JsonObject userJson) {
+            return retrofit.create(IUserDAO.class).registerUser(userJson);
+
+       /*
+        Log.d("UserRegister", "userDAO");
         Call<Void> call = retrofit.create(IUserDAO.class).registerUser(userJson);
         call.enqueue(new Callback<Void>() {
 
@@ -61,5 +71,7 @@ public class UserDAOImpl implements IUserDAO {
             }
         });
         return call;
+
+        */
     }
 }

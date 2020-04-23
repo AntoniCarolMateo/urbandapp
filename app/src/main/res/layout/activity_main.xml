@@ -43,7 +43,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/nova_oval"
         android:text="@string/tel_fono"
         android:textColor="@color/design_default_color_primary_dark"
@@ -52,7 +52,7 @@
         android:textColorLink="@color/design_default_color_secondary"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/text_view_pho3" />
 
@@ -75,7 +75,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/nova_oval"
         android:text="@string/contrase_a"
         android:textColor="@color/design_default_color_primary_dark"
@@ -84,7 +84,7 @@
         android:textColorLink="@color/design_default_color_secondary"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/usertel" />
 
@@ -92,11 +92,12 @@
         android:id="@+id/userpassword"
         android:layout_width="258dp"
         android:layout_height="46dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:fontFamily="@font/nova_script"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -123,15 +124,15 @@
 
     <ImageView
         android:id="@+id/urband_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="245dp"
+        android:layout_height="152dp"
+        android:contentDescription="@string/logo_app"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.137"
-        app:srcCompat="@drawable/logo_urband"
-        android:contentDescription="@string/logo_app"/>
+        app:srcCompat="@drawable/logo_urband" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
