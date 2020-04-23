@@ -157,13 +157,17 @@ public class UserServiceImpl implements UserServiceI {
                 if (response.code() == 200) {
 
                     mSetProfileStep1.setValue(true);
-                    Log.d("Login", "ok");
+                    Log.d("SetProfileStep1", "ok");
+
+                } else {
+                    Log.d("SetProfileStep1", "error else");
+                    mSetProfileStep1.setValue(false);
                 }
-            }
+                }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Register", "error else");
+                Log.d("SetProfileStep1", t.getMessage().toString());
                 mSetProfileStep1.setValue(false);
             }
         });

@@ -12,15 +12,15 @@ import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 
 import android.util.Log;
-import android.widget.Toast;
+
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,23 +92,26 @@ public class TablesServiceImpl implements TablesServiceI {
                 if (response.code() == 200) {
                     try {
                         //TODO: MIRAR COMO COGER LA LISTA CORRECTAMENTE
-                        Gson gson = new Gson();
-                        Type tableType = new TypeToken<Instrument>() {}.getType();
-                        ArrayList<Instrument> user_instruments = gson.fromJson(response.body().string(), tableType);
-                        User user = new User();
-                        user.setUserInstruments(user_instruments);
-                        List<Instrument> aux_list = user_instruments;
+                        String respuestaBody = response.body().string();
+                        JSONArray mIstruments = new JSONArray(respuestaBody);
+                        List<Instrument> mList = new ArrayList<>();
+                        for (int i = 0; i < mIstruments.length(); i++) {
+                            JSONObject mInstrumentJson =  mIstruments.getJSONObject(i);
+                            Instrument ins = new Instrument();
 
-                        mUser.setValue(user);
-                        mlistInstruent.setValue(aux_list);
-                        Log.d("getTable", "----------Todo ok" + aux_list.toString());
+                            ins.setNameInstrument(mInstrumentJson.getString("name"));
+                            ins.setExpirience(mInstrumentJson.getInt("expirience"));
+                            mList.add(ins);
+                        }
+                        mlistInstruent.setValue(mList);
 
-                    } catch (IOException e) {
+
+                    } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
 
                 } else {
-                    mUser.setValue(new User());
+                    mlistInstruent.setValue(new ArrayList<Instrument>());
                     Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
                     Log.d("getUser", "header es: " + Auth);
 
@@ -119,7 +122,7 @@ public class TablesServiceImpl implements TablesServiceI {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("getInstrumentUserList", t.getMessage().toString());
             }
         });
     }
@@ -141,6 +144,7 @@ public class TablesServiceImpl implements TablesServiceI {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Add Instrument", t.getMessage().toString());
 
             }
         });
@@ -162,7 +166,7 @@ public class TablesServiceImpl implements TablesServiceI {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.d("removeInstrument", t.getMessage().toString());
             }
         });
     }

@@ -15,6 +15,9 @@ public class Instrument {
     @SerializedName("expirience")
     private int expirience;
 
+    public Instrument(){
+
+    }
     public Instrument(String nameInstrument, int expirience) {
         this.nameInstrument = nameInstrument;
         this.expirience = expirience;
