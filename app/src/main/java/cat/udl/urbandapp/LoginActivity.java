@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import cat.udl.urbandapp.preferences.PreferencesProvider;
@@ -22,9 +23,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     EditText username;
     EditText password;
-    RadioButton btn_usuari;
-    RadioButton btn_patrocinador;
-    RadioButton btn_banda;
+    private RadioGroup rol;
+    private RadioButton rol_Button;
+    private Button btnDisplay;
+
 
     private SharedPreferences mPreferences;
     @Override
@@ -40,27 +42,18 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.loginUsername);
         password = findViewById(R.id.loginPassword);
         userViewModel = new UserViewModel(getApplication());
-
+        addListenerOnButton();
 
         userViewModel.getResponseLiveDataToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mPreferences.edit().putString("token",s).apply();
-                Log.d("Login","Tenim token " + s);
-                if (btn_usuari.isChecked()){
-                    Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
-                    startActivity(da);
 
-                }
-                if(btn_banda.isChecked()) {
-                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
-                    startActivity(da);
-                }
-                if(btn_patrocinador.isChecked()){
-                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
-                    startActivity(da);
-                }
-                //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+                mPreferences.edit().putString("token", s).apply();
+                Log.d("Login", "Tenim token " + s);
+
+                Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                startActivity(da);
+
             }
         });
 
@@ -73,10 +66,35 @@ public class LoginActivity extends AppCompatActivity {
                 userViewModel.createTokenUser(_username, _password);
 
 
+
             }
         });
 
 
     }
 
+    public void addListenerOnButton() {
+
+        rol = (RadioGroup) findViewById(R.id.rol);
+        btnDisplay = (Button) findViewById(R.id.btnDisplay);
+
+        btnDisplay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // get selected radio button from radioGroup
+                int selectedId = rol.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                rol_Button = (RadioButton) findViewById(selectedId);
+
+                Toast.makeText(LoginActivity.this,
+                        rol_Button.getText(), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+    }
 }
