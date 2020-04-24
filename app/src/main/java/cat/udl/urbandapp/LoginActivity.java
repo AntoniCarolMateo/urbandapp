@@ -25,14 +25,12 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     private RadioGroup rol;
     private RadioButton rol_Button;
-    private Button btnDisplay;
 
 
     private SharedPreferences mPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
 
 
         super.onCreate(savedInstanceState);
@@ -41,7 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.LoginButton);
         username = findViewById(R.id.loginUsername);
         password = findViewById(R.id.loginPassword);
+
+
         userViewModel = new UserViewModel(getApplication());
+
         addListenerOnButton();
 
         userViewModel.getResponseLiveDataToken().observe(this, new Observer<String>() {
@@ -50,12 +51,27 @@ public class LoginActivity extends AppCompatActivity {
 
                 mPreferences.edit().putString("token", s).apply();
                 Log.d("Login", "Tenim token " + s);
-
-                Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
-                startActivity(da);
+                if (rol_Button.getText() == "usuari") {
+                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                    startActivity(da);
+                    Toast.makeText(LoginActivity.this, rol_Button.getText(), Toast.LENGTH_SHORT).show();
+                } else if (rol_Button.getText() == "banda") {
+                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                    startActivity(da);
+                    Toast.makeText(LoginActivity.this, rol_Button.getText(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                    startActivity(da);
+                    Toast.makeText(LoginActivity.this, rol_Button.getText(), Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
+    }
+
+    public void addListenerOnButton() {
+
+        rol = (RadioGroup) findViewById(R.id.rol);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,37 +80,21 @@ public class LoginActivity extends AppCompatActivity {
                 String _username = username.getText().toString();
                 String _password = password.getText().toString();
                 userViewModel.createTokenUser(_username, _password);
-
-
-
-            }
-        });
-
-
-    }
-
-    public void addListenerOnButton() {
-
-        rol = (RadioGroup) findViewById(R.id.rol);
-        btnDisplay = (Button) findViewById(R.id.btnDisplay);
-
-        btnDisplay.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                // get selected radio button from radioGroup
                 int selectedId = rol.getCheckedRadioButtonId();
-
-                // find the radiobutton by returned id
                 rol_Button = (RadioButton) findViewById(selectedId);
 
-                Toast.makeText(LoginActivity.this,
-                        rol_Button.getText(), Toast.LENGTH_SHORT).show();
+
 
             }
+        }
+        );
 
-        });
 
     }
+
 }
+
+
+
+
+

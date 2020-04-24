@@ -152,9 +152,10 @@
         android:id="@+id/rol"
         android:layout_width="272dp"
         android:layout_height="159dp"
+        android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
 
@@ -163,10 +164,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Usuari"
+            android:text="usuari"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <RadioButton
 
@@ -174,7 +176,7 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="184dp"
-            android:text="Banda"
+            android:text="banda"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -183,16 +185,11 @@
             android:id="@+id/patrocinador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Patrocinador"
+            android:text="patrocinador"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnDisplay"
-            android:layout_width="84dp"
-            android:layout_height="30dp"
-            android:text="btn_display" />
 
     </RadioGroup>
 
