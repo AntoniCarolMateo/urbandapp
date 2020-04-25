@@ -44,6 +44,7 @@ public class Instrument {
         this.idInstrument = idInstrument;
     }
 
+    // TODO: Esto no hace falta el retrfoit te lo hace!
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json.addProperty("nameInstrument", this.nameInstrument);
