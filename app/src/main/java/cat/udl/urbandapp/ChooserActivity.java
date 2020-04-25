@@ -47,6 +47,9 @@ public class ChooserActivity extends AppCompatActivity {
             }
         });
     }
+
+    //TODO: Esta función la deberia realizar el viewModel
+    // y notificar a la vista de si hay token o no! Es una parida, no tiene más importancia
     protected void comprovarToken(){
         String token = this.mPreferences.getString("token","");
         if(token != null && !token.equals("")){
