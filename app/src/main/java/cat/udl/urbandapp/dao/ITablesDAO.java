@@ -23,25 +23,25 @@ import retrofit2.http.Query;
 
 public interface ITablesDAO {
     //----------------------------------------------------------INSTRUMENTS
-    @POST("users/profile/addInstrument")
+    @POST("users/profile/instruments/add")
     Call<ResponseBody> addInstrument(@Header("Authorization") String auth, @Body JsonObject instruments);
 
-    @GET("users/profile/getInstrumentsList")
+    @GET("users/profile/instruments/list")
     Call<ResponseBody> getTableUserInstrument(@Header("Authorization") String auth);
 
-    @POST("users/profile/deleteInstrument/{name}")
+    @POST("users/profile/instruments/delete/{name}")
     Call<ResponseBody> removeInstrument(@Header("Authorization") String auth, @Path("name") String nameInstrument);
 
     //----------------------------------------------------------GENERES
-    @POST("users/profile/addGenere/{name}")
+    @POST("users/profile/muscial_genres/add/{name}")
     Call<ResponseBody> addGenere (@Header("Authorization") String auth, @Path("name") String nameGenere);
 
-    @POST("users/profile/addMultipleGeneres")
+    @POST("users/profile/musical_genres/add")
     Call<ResponseBody> addMultipleGeneres(@Header("Authorization") String auth, @Body List<String> list_generes);
 
-    @POST("users/profile/deleteGenere/{name}")
+    @POST("users/profile/musical_genres/delete/{name}")
     Call<ResponseBody> removeGenere(@Header("Authorization") String auth, @Path("name") String nameGenere);
 
-    @GET("users/profile/getGeneresList")
+    @GET("users/profile/musical_genres/list")
     Call<ResponseBody> getTableUserGenere(@Header("Authorization") String auth);
 }
