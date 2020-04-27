@@ -22,9 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     EditText username;
     EditText password;
-    RadioButton btn_usuari;
-    RadioButton btn_patrocinador;
-    RadioButton btn_banda;
+//    RadioButton btn_usuari;
+//    RadioButton btn_patrocinador;
+//    RadioButton btn_banda;
 
     private SharedPreferences mPreferences;
     @Override
@@ -40,16 +40,20 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.loginUsername);
         password = findViewById(R.id.loginPassword);
         userViewModel = new UserViewModel(getApplication());
-        btn_usuari = findViewById(R.id.btn_Usuario);
+       /* btn_usuari = findViewById(R.id.btn_Usuario);
         btn_patrocinador = findViewById(R.id.btn_Patrocinador);
-        btn_banda = findViewById(R.id.btn_Banda);
+        btn_banda = findViewById(R.id.btn_Banda);*/
         userViewModel.getResponseLiveDataToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mPreferences.edit().putString("token",s).apply();
-                Log.d("Login","Tenim token " + s);
+                mPreferences.edit().putString("token", s).apply();
+                Log.d("Login", "Tenim token " + s);
+                Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+                Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                startActivity(da);
 
-                if (btn_usuari.isChecked()){
+
+                /*if (btn_usuari.isChecked()){
                     Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
                     startActivity(da);
 
@@ -66,7 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                     Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
                     startActivity(da);
                 }
-                //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+
+            }*/
             }
         });
 

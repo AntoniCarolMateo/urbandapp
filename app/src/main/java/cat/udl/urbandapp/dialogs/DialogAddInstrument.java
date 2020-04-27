@@ -117,6 +117,17 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
             }
         });
 
+       /* viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean){
+                    Toast.makeText(getContext(), "Instrumento añadido correctamente", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Error añadiendo el isntrumento", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
+
 
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
@@ -138,26 +149,6 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
 
         experienceBar = rootView.findViewById(R.id.ratingBar_exp);
         addInstrument = rootView.findViewById(R.id.button_add_instrument);
-
-        listaIntrumentos = rootView.findViewById(R.id.recyclerView);
-        listaIntrumentos.setLayoutManager(new LinearLayoutManager(getContext()));
-        listaIntrumentos.setHasFixedSize(true);
-        final InstrumentAdapter adapter = new InstrumentAdapter(new InstrumentDiffCallback(), viewModel);
-        listaIntrumentos.setAdapter(adapter);
-
-        viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean){
-                    Toast.makeText(getContext(), "Instrumento añadido correctamente", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Error añadiendo el isntrumento", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-
 
     }
 

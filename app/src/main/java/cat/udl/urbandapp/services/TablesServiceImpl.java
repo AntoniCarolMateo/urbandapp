@@ -112,7 +112,7 @@ public class TablesServiceImpl implements TablesServiceI {
 
                 } else {
                     mlistInstruent.setValue(new ArrayList<Instrument>());
-                    Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getUser", "Error " + response.code() + " message:" + response.message());
                     Log.d("getUser", "header es: " + Auth);
 
                 }
@@ -151,7 +151,7 @@ public class TablesServiceImpl implements TablesServiceI {
     }
 
     @Override
-    public void removeInstrument(String Auth, JsonObject instrument) {
+    public void removeInstrument(String Auth, String instrument) {
         tablesDAO.removeInstrument(Auth, instrument).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -171,6 +171,25 @@ public class TablesServiceImpl implements TablesServiceI {
         });
     }
 
+    @Override
+    public void addGenere(String auth, String nameGenere) {
+
+    }
+
+    @Override
+    public void removeMultipleGeneres(String auth, List<String> list_generes) {
+
+    }
+
+    @Override
+    public void removeGenere(String auth, String nameGenere) {
+
+    }
+
+    @Override
+    public void getTableUserGenere(String auth) {
+
+    }
 
 
 }

@@ -50,10 +50,7 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
     public MutableLiveData<Boolean> getLiveDataRegister(){return  mRegister;}
-
     public MutableLiveData<Boolean> getLiveDataProfileStep1() { return mSetProfileStep1; }
-
-
     public MutableLiveData<List<User>> getLiveDataAllUsers(){
         return mAllUsers;
     }
@@ -158,6 +155,7 @@ public class UserServiceImpl implements UserServiceI {
 
                     mSetProfileStep1.setValue(true);
                     Log.d("SetProfileStep1", "ok");
+                    Log.d("SetProfileStep1","Tenim boolean " + mSetProfileStep1.getValue());
 
                 } else {
                     Log.d("SetProfileStep1", "error else");
@@ -167,7 +165,7 @@ public class UserServiceImpl implements UserServiceI {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("SetProfileStep1", t.getMessage().toString());
+                Log.d("SetProfileStep1", t.toString());
                 mSetProfileStep1.setValue(false);
             }
         });
@@ -196,7 +194,8 @@ public class UserServiceImpl implements UserServiceI {
 
            @Override
            public void onFailure(Call<ResponseBody> call, Throwable t) {
-               Log.d("Register", "error onFailure ");
+
+               Log.d("Register", t.toString());
                mRegister.setValue(false);
            }
 

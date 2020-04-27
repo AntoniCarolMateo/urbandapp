@@ -3,6 +3,8 @@ package cat.udl.urbandapp.dao;
 
 import com.google.gson.JsonObject;
 
+import java.util.List;
+
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -25,8 +27,30 @@ public class TablesDAOImpl implements ITablesDAO {
     }
 
     @Override
-    public Call<ResponseBody> removeInstrument (String auth, JsonObject instrument) {
-        return retrofit.create(ITablesDAO.class).removeInstrument(auth, instrument);
+    public Call<ResponseBody> removeInstrument (String auth, String nameInstrument) {
+        return retrofit.create(ITablesDAO.class).removeInstrument(auth, nameInstrument);
+    }
+
+
+    //----------------------------------------------------------GENERES
+    @Override
+    public Call<ResponseBody> addGenere(String auth, String nameGenere) {
+        return retrofit.create(ITablesDAO.class).addGenere(auth, nameGenere);
+    }
+
+    @Override
+    public Call<ResponseBody> addMultipleGeneres(String auth, List<String> list_generes) {
+        return retrofit.create(ITablesDAO.class).addMultipleGeneres(auth, list_generes);
+    }
+
+    @Override
+    public Call<ResponseBody> removeGenere(String auth, String nameGenere) {
+        return retrofit.create(ITablesDAO.class).addGenere(auth, nameGenere);
+    }
+
+    @Override
+    public Call<ResponseBody> getTableUserGenere(String auth) {
+        return retrofit.create(ITablesDAO.class).getTableUserGenere(auth);
     }
 }
 

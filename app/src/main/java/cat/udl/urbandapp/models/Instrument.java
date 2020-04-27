@@ -9,8 +9,8 @@ public class Instrument {
     private int idInstrument;
 
 
-    @SerializedName("nameInstrument")
-    private String nameInstrument;
+    @SerializedName("name")
+    private String name;
 
     @SerializedName("expirience")
     private int expirience;
@@ -19,16 +19,16 @@ public class Instrument {
 
     }
     public Instrument(String nameInstrument, int expirience) {
-        this.nameInstrument = nameInstrument;
+        this.name = nameInstrument;
         this.expirience = expirience;
     }
 
     public String getNameInstrument() {
-        return nameInstrument;
+        return name;
     }
 
     public void setNameInstrument(String nameInstrument) {
-        this.nameInstrument = nameInstrument;
+        this.name = nameInstrument;
     }
 
     public int getExpirience() {
@@ -49,7 +49,7 @@ public class Instrument {
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
-        json.addProperty("nameInstrument", this.nameInstrument);
+        json.addProperty("name", this.name);
         json.addProperty("expirience", this.expirience);
         return json;
     }

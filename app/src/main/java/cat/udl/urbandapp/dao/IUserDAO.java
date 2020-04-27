@@ -31,6 +31,6 @@ public interface IUserDAO {
     @GET("users/all")
     Call<ResponseBody> getAllUsers();
 
-    @POST("account/profile/update_profile")
-    Call<ResponseBody> setProfileInfo(@Header("Authorization") String Auth,@Body JsonObject json);
+    @POST("account/update_profile")
+    Call<ResponseBody> setProfileInfo(@Header("Authorization") String Auth, @Body JsonObject json);
 }

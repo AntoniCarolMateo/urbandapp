@@ -46,8 +46,8 @@
 
     <ImageView
         android:id="@+id/urband_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="135dp"
         android:contentDescription="logo_app"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -148,39 +148,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.939" />
 
-    <RadioButton
-        android:id="@+id/btn_Usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Usuario"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_Patrocinador"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
 
-    <RadioButton
-        android:id="@+id/btn_Banda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:text="Banda"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
-
-    <RadioButton
-        android:id="@+id/btn_Patrocinador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="44dp"
-        android:text="Patrocinador"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_Banda"
-        app:layout_constraintStart_toEndOf="@+id/btn_Usuario"
-        app:layout_constraintTop_toTopOf="@+id/urband_logo"
-        app:layout_constraintVertical_bias="0.822" />
 </androidx.constraintlayout.widget.ConstraintLayout>
