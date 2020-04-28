@@ -64,6 +64,7 @@ public class TablesViewModel extends AndroidViewModel {
 
     }
 
+    //------------------------------------------------------------------------Instruments
     public void addInstrumentToList(String nameInstrument, int exp){
         Instrument ins = new Instrument(nameInstrument, exp);
         Toast.makeText(getApplication(), nameInstrument +"  "+ exp, Toast.LENGTH_SHORT).show();
@@ -95,7 +96,22 @@ public class TablesViewModel extends AndroidViewModel {
 
     public void getListInstruments() {
         String header = this.mPreferences.getString("token","");
+        tablesRepository.getTableUserInstrument(header);
+    }
 
+    //-------------------------------------------------------------------------GENERES
+    public void addGenere(String name){
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.addGenere(header, name);
+    }
+
+    public void removeGenere(String name){
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.removeGenere(header,name);
+    }
+    public void getListGeneresString(){
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.getTableUserInstrument(header);
     }
 
     public List<Instrument> getAddedInstruments() {
