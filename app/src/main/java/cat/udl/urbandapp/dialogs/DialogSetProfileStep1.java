@@ -2,6 +2,7 @@ package cat.udl.urbandapp.dialogs;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
@@ -30,6 +31,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -56,11 +58,15 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
 
     public final int REQUES_ID_MULTIPLE_PERMISIONS = 3;
     public View rootView;
+
+    Context setProfileStep1;
+
     private Activity activity;
     private UserViewModel viewModel;
     private EditText name;
     private EditText calendar;
     private EditText surname;
+    private EditText description;
     private RatingBar generalExp;
     private Button editProfilePicture;
     private RadioGroup radio_group_genere;
@@ -85,30 +91,45 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initView();
         viewModel = new UserViewModel(getActivity().getApplication());
+        setProfileStep1 = this.getContext();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             public void onClick(DialogInterface dialog, int id) {
-                    String _name = name.getText().toString();
-                    String _surname = surname.getText().toString();
-                    int _exp = (int) generalExp.getRating();
-                    String _birth  = calendar.getText().toString();
-                    String _gender = "";
-                    String _desc = "";
-                    if(radio_female.isChecked()){
-                        _gender = "FEMALE";
-                    }else if (radio_male.isChecked()){
-                        _gender = "MALE";
-                    }
-                    viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender);
-
-                    Toast.makeText(getContext(), _name +"  "+ _surname+"  "+_exp+"  "+_birth + "  " + _gender, Toast.LENGTH_SHORT).show();
-
-
+                String _name = name.getText().toString();
+                String _surname = surname.getText().toString();
+                int _exp = (int) generalExp.getRating();
+                String _birth  = calendar.getText().toString();
+                String _gender = "";
+                String _description = description.getText().toString();
+                if(radio_female.isChecked()){
+                    _gender = "FEMALE";
+                }else if (radio_male.isChecked()){
+                    _gender = "MALE";
                 }
 
+                viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender, _description);
+                DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
+                step2.show(getParentFragmentManager(), "step 2");
+            }
         });
-
+        /*viewModel.getResponseLiveDataProfileStep1().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Log.d("Register","Tenim boolean " + aBoolean);
+                if (aBoolean) {
+                    Log.d("step1","vamos al step2 con boolean: " + aBoolean);
+                    DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
+                    step2.show(getParentFragmentManager(), "step 2");
+                }
+                else{
+                    Log.d("step1","vamos al step2 con boolean: " + aBoolean);
+                }
+            }
+        });
+*/
 
         // Set other dialog properties
 
@@ -131,16 +152,6 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
 
             }
         });
-
-        viewModel.getResponseLiveDataProfileStep1().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
-                    step2.show(getParentFragmentManager(), "step 2");
-                }
-            }
-        });
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
     }
@@ -159,6 +170,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
         radio_male = rootView.findViewById(R.id.radioButton_male);
         radio_group_genere = rootView.findViewById(R.id.radio_group_genere);
         profile_photo = rootView.findViewById(R.id.imageView_profile);
+        description = rootView.findViewById(R.id.editText_desc);
 
         calendar = rootView.findViewById(R.id.editText_date);
         calendar.setOnClickListener(this);
@@ -255,7 +267,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener(){
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                final String selectedDate = day + " / " + month + " / " + year;
+                final String selectedDate = year + "-" +month + "-"+ day;
                 calendar.setText(selectedDate);
             }
         });

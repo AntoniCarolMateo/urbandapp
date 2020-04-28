@@ -62,9 +62,10 @@
             android:id="@+id/editText_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autoText="false"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Juan" />
 
         <EditText
             android:id="@+id/editText_surname"
@@ -72,13 +73,14 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Apellidos" />
+            android:text="González" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pulsa para seleccionar tu fecha de nacimiento"
             android:textAlignment="center"
+            android:textColor="@color/primaryColor"
             android:textStyle="italic" />
 
         <EditText
@@ -96,6 +98,7 @@
             android:layout_height="wrap_content"
             android:text="Selecciona tu género"
             android:textAlignment="center"
+            android:textColor="@color/primaryColor"
             android:textStyle="italic" />
 
         <RadioGroup
@@ -120,15 +123,30 @@
         </RadioGroup>
 
         <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Introdueix la descripció" />
+
+        <EditText
+            android:id="@+id/editText_desc"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <TextView
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Indica tu expériencia general con la música"
-            android:textColor="@color/design_default_color_on_secondary" />
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="150dp"
             android:orientation="horizontal">
 
             <Space

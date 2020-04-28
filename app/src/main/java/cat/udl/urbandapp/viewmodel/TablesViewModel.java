@@ -66,11 +66,11 @@ public class TablesViewModel extends AndroidViewModel {
     }
 
     public  void removeInstrument(Instrument instrument){
-        JsonObject json = new JsonObject();
-        json.addProperty("nameInstrument", instrument.getNameInstrument());
-        Toast.makeText(getApplication(), json.toString(), Toast.LENGTH_SHORT).show();
+        String nameInstrument = instrument.getNameInstrument();
+        Toast.makeText(getApplication(), nameInstrument, Toast.LENGTH_SHORT).show();
         String header = this.mPreferences.getString("token","");
-        //tablesRepository.removeInstrument(header, json);
+        tablesRepository.removeInstrument(header, nameInstrument);
+        Toast.makeText(getApplication(), nameInstrument + " Removed ", Toast.LENGTH_SHORT).show();
     }
 
     public LiveData<User> getResponseLiveDataUser() {
@@ -82,4 +82,9 @@ public class TablesViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<Boolean> getResponseAddedInstrument() { return responseAddedInstrument;}
+
+    public void getListInstruments() {
+        String header = this.mPreferences.getString("token","");
+         tablesRepository.getTableUserInstrument(header);
+    }
 }

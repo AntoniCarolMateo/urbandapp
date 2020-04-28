@@ -18,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import cat.udl.urbandapp.models.User;
@@ -32,8 +34,8 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<User> responseLiveUser;
     private MutableLiveData<Boolean> responseLiveRegister;
     private MutableLiveData<Boolean> responseLiveStep1;
-
     private MutableLiveData<List<User>> responseAllUsers;
+
     private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -47,6 +49,7 @@ public class UserViewModel extends AndroidViewModel {
 
         this.mPreferences = PreferencesProvider.providePreferences();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void registerUser(String username, String password,String gps){
         JsonObject user = new JsonObject();
@@ -82,7 +85,8 @@ public class UserViewModel extends AndroidViewModel {
         repository.getAllUsers();
     }
 
-    public void setProfileInfo(String name, String surname, int exp, String birth, String gender) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setProfileInfo(String name, String surname, int exp, String birth, String gender, String desc) {
         String header = this.mPreferences.getString("token","");
         JsonObject json = new JsonObject();
         json.addProperty("name", name);
@@ -90,8 +94,9 @@ public class UserViewModel extends AndroidViewModel {
         json.addProperty("expirience", exp);
         json.addProperty("birthdate", birth);
         json.addProperty("gender", gender);
+        json.addProperty("description", desc);
 
-        repository.setProfileInfo(header, json);
+        this.repository.setProfileInfo(header, json);
     }
 
 

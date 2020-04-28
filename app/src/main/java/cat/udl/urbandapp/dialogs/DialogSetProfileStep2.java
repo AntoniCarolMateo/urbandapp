@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class DialogSetProfileStep2 extends DialogFragment {
 
     public View rootView;
     private FragmentActivity activity;
-    private Button addInstrument;
+    private ImageView addInstrument;
     private SharedPreferences mPreferences;
     private TablesViewModel tablesViewModel;
     private RecyclerView recyclerInstruments;
@@ -75,10 +76,22 @@ public class DialogSetProfileStep2 extends DialogFragment {
 
         recyclerInstruments.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerInstruments.setHasFixedSize(true);
-        final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel);
+        final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
 
-        tablesViewModel.getInstruments();
+        Instrument ins = new Instrument("Trompeta",5);
+        List<Instrument> list = new ArrayList<Instrument>();
+        list.add(ins);
+        ins = new Instrument("Guitarra",5);
+        list.add(ins);
+        ins = new Instrument("Caja", 3);
+        list.add(ins);
+        ins = new Instrument("Piano", 10);
+        list.add(ins);
+        instrumentAdapter.submitList(list);
+
+
+        //tablesViewModel.getListInstruments();
 
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,17 +121,7 @@ public class DialogSetProfileStep2 extends DialogFragment {
         recyclerInstruments = rootView.findViewById(R.id.recyclerView_instruments);
     }
 
-    public void verificarYPedirPermisosDeCamara() {
-        int estadoDePermiso = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);
-        if (estadoDePermiso != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "El permiso para la cámara está concedido", Toast.LENGTH_SHORT).show();
-            requestPermissions(new String[]{(Manifest.permission.CAMERA)}, 1);
-            // En caso de que haya dado permisos ponemos la bandera en true
-            // y llamar al método
 
-
-        }
-    }
 
 }
 

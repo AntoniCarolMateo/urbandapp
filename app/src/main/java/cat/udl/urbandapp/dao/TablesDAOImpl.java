@@ -3,6 +3,8 @@ package cat.udl.urbandapp.dao;
 
 import com.google.gson.JsonObject;
 
+import java.util.List;
+
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -20,43 +22,37 @@ public class TablesDAOImpl implements ITablesDAO {
         return retrofit.create(ITablesDAO.class).getTableUserInstrument(auth);
     }
 
-    public Call<Void> addInstrument (String auth, JsonObject instruments){
-            Call<Void> call = retrofit.create(ITablesDAO.class).addInstrument(auth, instruments);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-
-                }
-            });
-            return call;
-        }
-
-        @Override
-        public Call<Void> removeInstrument (String auth, JsonObject instrument){
-            Call<Void> call = retrofit.create(ITablesDAO.class).removeInstrument(auth, instrument);
-
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-
-                }
-
-            });
-            return call;
-        }
-
-
+    public Call<ResponseBody> addInstrument (String auth, JsonObject instruments) {
+        return retrofit.create(ITablesDAO.class).addInstrument(auth, instruments);
     }
+
+    @Override
+    public Call<ResponseBody> removeInstrument (String auth, String nameInstrument) {
+        return retrofit.create(ITablesDAO.class).removeInstrument(auth, nameInstrument);
+    }
+
+
+    //----------------------------------------------------------GENERES
+    @Override
+    public Call<ResponseBody> addGenere(String auth, String nameGenere) {
+        return retrofit.create(ITablesDAO.class).addGenere(auth, nameGenere);
+    }
+
+    @Override
+    public Call<ResponseBody> addMultipleGeneres(String auth, List<String> list_generes) {
+        return retrofit.create(ITablesDAO.class).addMultipleGeneres(auth, list_generes);
+    }
+
+    @Override
+    public Call<ResponseBody> removeGenere(String auth, String nameGenere) {
+        return retrofit.create(ITablesDAO.class).addGenere(auth, nameGenere);
+    }
+
+    @Override
+    public Call<ResponseBody> getTableUserGenere(String auth) {
+        return retrofit.create(ITablesDAO.class).getTableUserGenere(auth);
+    }
+}
 
 
 

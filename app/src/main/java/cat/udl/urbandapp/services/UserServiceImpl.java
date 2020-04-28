@@ -50,10 +50,7 @@ public class UserServiceImpl implements UserServiceI {
         return mUser;
     }
     public MutableLiveData<Boolean> getLiveDataRegister(){return  mRegister;}
-
     public MutableLiveData<Boolean> getLiveDataProfileStep1() { return mSetProfileStep1; }
-
-
     public MutableLiveData<List<User>> getLiveDataAllUsers(){
         return mAllUsers;
     }
@@ -151,19 +148,24 @@ public class UserServiceImpl implements UserServiceI {
     }
     @Override
     public void setProfileInfo(String header, JsonObject json) {
-        userDAO.setProfileInfo(header,json).enqueue(new Callback<Void>() {
+        userDAO.setProfileInfo(header,json).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
 
                     mSetProfileStep1.setValue(true);
-                    Log.d("Login", "ok");
+                    Log.d("SetProfileStep1", "ok");
+                    Log.d("SetProfileStep1","Tenim boolean " + mSetProfileStep1.getValue());
+
+                } else {
+                    Log.d("SetProfileStep1", "error else");
+                    mSetProfileStep1.setValue(false);
                 }
-            }
+                }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("Register", "error else");
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("SetProfileStep1", t.toString());
                 mSetProfileStep1.setValue(false);
             }
         });
@@ -192,7 +194,8 @@ public class UserServiceImpl implements UserServiceI {
 
            @Override
            public void onFailure(Call<ResponseBody> call, Throwable t) {
-               Log.d("Register", "error onFailure");
+
+               Log.d("Register", t.toString());
                mRegister.setValue(false);
            }
 
