@@ -43,26 +43,35 @@ public class UserServiceImpl implements UserServiceI {
         mRegister = new MutableLiveData<>();
         mSetProfileStep1 = new MutableLiveData<>();
     }
-    public MutableLiveData<String> getLiveDataToken(){
+
+    public MutableLiveData<String> getLiveDataToken() {
         return mResponseToken;
     }
-    public MutableLiveData<User> getLiveDataUser(){
+
+    public MutableLiveData<User> getLiveDataUser() {
         return mUser;
     }
-    public MutableLiveData<Boolean> getLiveDataRegister(){return  mRegister;}
-    public MutableLiveData<Boolean> getLiveDataProfileStep1() { return mSetProfileStep1; }
-    public MutableLiveData<List<User>> getLiveDataAllUsers(){
+
+    public MutableLiveData<Boolean> getLiveDataRegister() {
+        return mRegister;
+    }
+
+    public MutableLiveData<Boolean> getLiveDataProfileStep1() {
+        return mSetProfileStep1;
+    }
+
+    public MutableLiveData<List<User>> getLiveDataAllUsers() {
         return mAllUsers;
     }
 
 
     @Override
-    public void getProfileUser(final String Auth){
+    public void getProfileUser(final String Auth) {
 
         userDAO.getProfileUser(Auth).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200 ){
+                if (response.code() == 200) {
                     try {
 
                         String respuestaBody = response.body().string();
@@ -83,10 +92,9 @@ public class UserServiceImpl implements UserServiceI {
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     mUser.setValue(new User());
-                    Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message());
                     Log.d("getUser", "header es: " + Auth);
                 }
             }
@@ -101,12 +109,12 @@ public class UserServiceImpl implements UserServiceI {
 
 
     @Override
-    public void getAllUsers(){
+    public void getAllUsers() {
 
         userDAO.getAllUsers().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200 ){
+                if (response.code() == 200) {
                     try {
 
                         String respuestaBody = response.body().string();
@@ -115,7 +123,7 @@ public class UserServiceImpl implements UserServiceI {
                         JSONArray mUsers = new JSONArray(respuestaBody);
                         List<User> mList = new ArrayList<>();
                         for (int i = 0; i < mUsers.length(); i++) {
-                            JSONObject mUserjson =  mUsers.getJSONObject(i);
+                            JSONObject mUserjson = mUsers.getJSONObject(i);
                             User u = new User();
 
                             u.setUsername(mUserjson.getString("username"));
@@ -133,10 +141,9 @@ public class UserServiceImpl implements UserServiceI {
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     mUser.setValue(new User());
-                    Log.d("getAllUsers", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getAllUsers", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message());
                 }
             }
 
@@ -146,22 +153,23 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
+
     @Override
     public void setProfileInfo(String header, JsonObject json) {
-        userDAO.setProfileInfo(header,json).enqueue(new Callback<ResponseBody>() {
+        userDAO.setProfileInfo(header, json).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
 
                     mSetProfileStep1.setValue(true);
                     Log.d("SetProfileStep1", "ok");
-                    Log.d("SetProfileStep1","Tenim boolean " + mSetProfileStep1.getValue());
+                    Log.d("SetProfileStep1", "Tenim boolean " + mSetProfileStep1.getValue());
 
                 } else {
                     Log.d("SetProfileStep1", "error else");
                     mSetProfileStep1.setValue(false);
                 }
-                }
+            }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -172,46 +180,46 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
-   @Override
-   public void registerUser(JsonObject userJson) {
+    @Override
+    public void registerUser(JsonObject userJson) {
 
-       //userDAO.registerUser(userJson);
-       userDAO.registerUser(userJson).enqueue(new Callback<ResponseBody>() {
-           @Override
-           public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-               if (response.code() == 200) {
+        //userDAO.registerUser(userJson);
+        userDAO.registerUser(userJson).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
 
 
-                   mRegister.setValue(true);
-                   Log.d("Register", "ok");
-                   //mResponseToken.setValue(authToken);
+                    mRegister.setValue(true);
+                    Log.d("Register", "ok");
+                    //mResponseToken.setValue(authToken);
 
-               } else {
-                   Log.d("Register", "error else");
-                   mRegister.setValue(false);
-               }
-           }
+                } else {
+                    Log.d("Register", "error else");
+                    mRegister.setValue(false);
+                }
+            }
 
-           @Override
-           public void onFailure(Call<ResponseBody> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-               Log.d("Register", t.toString());
-               mRegister.setValue(false);
-           }
+                Log.d("Register", t.toString());
+                mRegister.setValue(false);
+            }
 
-       });
-   }
+        });
+    }
 
     @Override
-    public void createTokenUser(String Auth){
+    public void createTokenUser(String Auth) {
 
         userDAO.createTokenUser(Auth).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200 ){
+                if (response.code() == 200) {
                     try {
                         String authToken = response.body().string().split(":")[1];
-                        authToken=authToken.substring(2,authToken.length()-2);
+                        authToken = authToken.substring(2, authToken.length() - 2);
 
                         Log.d("UserService", authToken);
                         mResponseToken.setValue(authToken);
@@ -219,8 +227,7 @@ public class UserServiceImpl implements UserServiceI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     String aux = null;
                     try {
                         String r = response.errorBody().string();
@@ -239,6 +246,13 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
-
-
 }
+
+    //public void setUserDAOI(Retrofit retrofit)  {
+        //this.userDAO = retrofit;
+    //}
+    //public void UserDAOImpl getUserDAOI(Retrofit retrofit)  {
+        //this.userDAO = retrofit;
+
+
+

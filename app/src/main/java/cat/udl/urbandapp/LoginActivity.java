@@ -88,6 +88,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    } public UserViewModel getUserViewModel(){
+        return this.userViewModel;
+
     }
+
 
 }

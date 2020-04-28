@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TabHost;
 
@@ -82,6 +83,8 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
                 public void onClick(View v) {
                     DialogAddGenere dialogAddGenere = DialogAddGenere.newInstance(getActivity());
                     dialogAddGenere.show(getParentFragmentManager(), "probando");
+
+
                 }
             });
 

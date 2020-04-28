@@ -2,14 +2,10 @@ package cat.udl.urbandapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,11 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
     Button registerButton;
@@ -71,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "rellena los campos de registro!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "rellena los campos de registro!", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -85,12 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Register","Tenim boolean " + aBoolean);
                 if(aBoolean){
                     //register OK
-                    Toast.makeText(MainActivity.this, "Register Ok", Toast.LENGTH_SHORT).show();
-                    Intent da = new Intent(MainActivity.this,LoginActivity.class);
+                    Toast.makeText(RegisterActivity.this, "Register Ok", Toast.LENGTH_SHORT).show();
+                    Intent da = new Intent(RegisterActivity.this,LoginActivity.class);
                     startActivity(da);
                 }
                 else {
-                    Toast.makeText(MainActivity.this, "Register Error!!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Register Error!!!", Toast.LENGTH_SHORT).show();
 
                 }
 

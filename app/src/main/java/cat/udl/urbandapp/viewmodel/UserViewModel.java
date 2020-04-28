@@ -116,4 +116,9 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<Boolean> getResponseLiveDataProfileStep1() {
         return this.responseLiveStep1;
     }
+
+    public UserServiceI getRepository(){
+        return this.repository;
+    }
 }
+
