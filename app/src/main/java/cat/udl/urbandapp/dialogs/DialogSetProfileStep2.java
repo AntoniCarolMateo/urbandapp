@@ -1,10 +1,12 @@
 package cat.udl.urbandapp.dialogs;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.DialogCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +35,7 @@ import cat.udl.urbandapp.recyclerview.InstrumentAdapter;
 import cat.udl.urbandapp.recyclerview.InstrumentDiffCallback;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
-public class DialogSetProfileStep2 extends DialogFragment {
+public class DialogSetProfileStep2 extends DialogFragment implements LifecycleOwner {
 
     public View rootView;
     private FragmentActivity activity;
@@ -51,7 +53,6 @@ public class DialogSetProfileStep2 extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        tablesViewModel = new TablesViewModel(getActivity().getApplication());
         mPreferences = PreferencesProvider.providePreferences();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
@@ -73,26 +74,21 @@ public class DialogSetProfileStep2 extends DialogFragment {
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)
                 .create();
+        /*
 
+        @Jordi: He imlementat el recycler view seguin els pasos, pero no s'acava de actualitzar
+        La llista de la api la retorna correctament pero
+
+
+         */
         recyclerInstruments.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerInstruments.setHasFixedSize(true);
         final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
 
-        Instrument ins = new Instrument("Trompeta",5);
-        List<Instrument> list = new ArrayList<Instrument>();
-        list.add(ins);
-        ins = new Instrument("Guitarra",5);
-        list.add(ins);
-        ins = new Instrument("Caja", 3);
-        list.add(ins);
-        ins = new Instrument("Piano", 10);
-        list.add(ins);
-        instrumentAdapter.submitList(list);
 
 
-        //tablesViewModel.getListInstruments();
-
+        tablesViewModel = new TablesViewModel(getActivity().getApplication());
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +99,7 @@ public class DialogSetProfileStep2 extends DialogFragment {
 
         tablesViewModel.getInstruments().observe(this, new Observer<List<Instrument>>() {
             @Override
-            public void onChanged(List<Instrument> i) {
+            public void onChanged(@Nullable List<Instrument> i) {
                 instrumentAdapter.submitList(i);
             }
         });

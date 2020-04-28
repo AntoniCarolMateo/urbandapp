@@ -95,7 +95,6 @@ public class UserViewModel extends AndroidViewModel {
         json.addProperty("birthdate", birth);
         json.addProperty("gender", gender);
         json.addProperty("description", desc);
-
         this.repository.setProfileInfo(header, json);
     }
 
@@ -116,4 +115,7 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<Boolean> getResponseLiveDataProfileStep1() {
         return this.responseLiveStep1;
     }
+
+
+
 }

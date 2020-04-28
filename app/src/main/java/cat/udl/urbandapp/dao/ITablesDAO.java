@@ -1,11 +1,5 @@
 package cat.udl.urbandapp.dao;
 
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
-
-import com.google.gson.JsonObject;
-
 
 import java.util.List;
 
@@ -15,16 +9,14 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 
 public interface ITablesDAO {
     //----------------------------------------------------------INSTRUMENTS
     @POST("users/profile/instruments/add")
-    Call<ResponseBody> addInstrument(@Header("Authorization") String auth, @Body JsonObject instruments);
+    Call<Instrument> addInstrument(@Header("Authorization") String auth, @Body List<Instrument> instruments);
 
     @GET("users/profile/instruments/list")
     Call<ResponseBody> getTableUserInstrument(@Header("Authorization") String auth);

@@ -60,7 +60,7 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Aplicar cambios", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                //APlicariamos cambios en la base de datos
+                viewModel.addInstruments();
             }
         });
         AlertDialog alertDialog = builder.setView(rootView)
@@ -113,11 +113,11 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
             public void onClick(View v) {
                 String _instrument = (String) choice_instrument.getSelectedItem();
                 int _expirience = experienceBar.getProgress();
-                viewModel.addInstrument(_instrument, _expirience);
+                viewModel.addInstrumentToList(_instrument, _expirience);
             }
         });
 
-       /* viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
+       viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean){
@@ -126,7 +126,7 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
                     Toast.makeText(getContext(), "Error añadiendo el isntrumento", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
 
 
         alertDialog.setCanceledOnTouchOutside(false);

@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import cat.udl.urbandapp.dialogs.DatePickerFragment;
@@ -54,7 +55,7 @@ import cat.udl.urbandapp.DefaultActivity;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
-public class DialogSetProfileStep1 extends DialogFragment implements View.OnClickListener {
+public class DialogSetProfileStep1 extends DialogFragment implements View.OnClickListener , LifecycleOwner {
 
     public final int REQUES_ID_MULTIPLE_PERMISIONS = 3;
     public View rootView;

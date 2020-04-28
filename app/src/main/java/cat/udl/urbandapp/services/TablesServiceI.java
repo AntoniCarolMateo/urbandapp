@@ -5,22 +5,15 @@ import androidx.lifecycle.LiveData;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.JsonObject;
-
 import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -33,7 +26,7 @@ public interface TablesServiceI {
     void getTableUserInstrument(@Header("Authorization") String Auth);
 
     @POST("users/profile/instruments/add")
-    void addInstrument(@Header("Authorization") String Auth, @Body JsonObject instrument);
+    void addInstrument(@Header("Authorization") String Auth, @Body List<Instrument> instrument);
 
     @POST("users/profile/instruments/delete/{name}")
     void removeInstrument(@Header("Authorization") String Auth, @Query("name") String nameInstrument);
@@ -54,7 +47,7 @@ public interface TablesServiceI {
 
     MutableLiveData<User> getLiveDataUser();
 
-    LiveData<List<Instrument>> getTableInstruments();
+    MutableLiveData<List<Instrument>> getTableInstruments();
 
     MutableLiveData<Boolean> getLiveDataAddedIns();
 

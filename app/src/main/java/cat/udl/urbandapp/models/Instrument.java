@@ -1,18 +1,17 @@
 package cat.udl.urbandapp.models;
 
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Instrument {
 
-    @SerializedName("id_instrument")
-    private int idInstrument;
-
-
     @SerializedName("name")
+    @Expose
     private String name;
 
     @SerializedName("expirience")
+    @Expose
     private int expirience;
 
     public Instrument(){
@@ -39,20 +38,7 @@ public class Instrument {
         this.expirience = expirience;
     }
 
-    public int getIdInstrument() {
-        return idInstrument;
-    }
 
-    public void setIdInstrument(int idInstrument) {
-        this.idInstrument = idInstrument;
-    }
-
-    public JsonObject toJson() {
-        JsonObject json = new JsonObject();
-        json.addProperty("name", this.name);
-        json.addProperty("expirience", this.expirience);
-        return json;
-    }
 }
 
 

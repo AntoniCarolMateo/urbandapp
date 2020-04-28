@@ -2,6 +2,8 @@ package cat.udl.urbandapp.viewmodel;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.graphics.drawable.TransitionDrawable;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,40 +31,48 @@ import cat.udl.urbandapp.services.UserServiceI;
 import cat.udl.urbandapp.services.UserServiceImpl;
 
 public class TablesViewModel extends AndroidViewModel {
+
+    private List<Instrument> addedInstruments;
+
     private UserServiceI repository;
     private TablesServiceI tablesRepository;
-    private MutableLiveData<String> responseLiveDataToken = new MutableLiveData<>();
-    private UserViewModel userViewModel;
+    private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<User> responseLiveUser;
     private LiveData<List<Instrument>> mInstruments;
+    private List<Instrument> userInstruments;
     private MutableLiveData<Boolean> responseAddedInstrument;
     private SharedPreferences mPreferences = PreferencesProvider.providePreferences();
 
     public TablesViewModel(@NonNull Application application) {
         super(application);
         repository = new UserServiceImpl();
-        userViewModel = new UserViewModel(getApplication());
         tablesRepository = new TablesServiceImpl();
+        responseLiveDataToken = new MutableLiveData<>();
         responseLiveUser = repository.getLiveDataUser();
         responseAddedInstrument = tablesRepository.getLiveDataAddedIns();
+        addedInstruments = new ArrayList<Instrument>();
 
-        mInstruments = Transformations.switchMap(responseLiveDataToken, new Function<String, LiveData<List<Instrument>>>() {
-            @Override
-            public LiveData<List<Instrument>> apply(String input) {
-                mInstruments = tablesRepository.getTableInstruments();
-                return mInstruments;
-            }
+        mInstruments  = tablesRepository.getTableInstruments();
 
-        });
+
+        init();
+    }
+
+    public void init(){
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.getTableUserInstrument(header);
 
     }
 
-    public void addInstrument(String nameInstrument, int exp){
+    public void addInstrumentToList(String nameInstrument, int exp){
         Instrument ins = new Instrument(nameInstrument, exp);
-        Toast.makeText(getApplication(), ins.toString(), Toast.LENGTH_SHORT).show();
-        JsonObject jsonIns = ins.toJson();
+        Toast.makeText(getApplication(), nameInstrument +"  "+ exp, Toast.LENGTH_SHORT).show();
+        addedInstruments.add(ins);
+    }
+
+    public void addInstruments(){
         String header = this.mPreferences.getString("token","");
-        tablesRepository.addInstrument(header, jsonIns);
+        tablesRepository.addInstrument(header, this.addedInstruments);
     }
 
     public  void removeInstrument(Instrument instrument){
@@ -85,6 +95,11 @@ public class TablesViewModel extends AndroidViewModel {
 
     public void getListInstruments() {
         String header = this.mPreferences.getString("token","");
-         tablesRepository.getTableUserInstrument(header);
+
     }
+
+    public List<Instrument> getAddedInstruments() {
+        return addedInstruments;
+    }
+
 }
