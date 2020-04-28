@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
+
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -20,6 +24,10 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
     public View rootView;
     private SharedPreferences mPreferences;
 
+    Button button;
+    CheckBox Rock_gnr,Pop_gnr;
+
+
     public static DialogAddGenere newInstance(FragmentActivity activity) {
         DialogAddGenere dialog = new DialogAddGenere();
         return dialog;
@@ -27,7 +35,12 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
         this.mPreferences = PreferencesProvider.providePreferences();
+        addListenerOnButtonClick();
+      
         initView();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -49,4 +62,34 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
         rootView = LayoutInflater.from
                 (getContext()).inflate(R.layout.dialog_add_genere, null, false);
     }
+
+    private void addListenerOnButtonClick(){
+        //Getting instance of CheckBoxes and Button from the activty_main.xml file
+        //Rock_gnr =(CheckBox)findViewById(R.id.Rock_gnr);
+        //Pop_gnr=(CheckBox)findViewById(R.id.Pop_gnr);
+        //button=(Button)findViewById(R.id.button);
+        //button.setOnClickListener(new View.OnClickListener() {
+
+            /*
+            @Override
+            public void onClick(View view) {
+
+                if(Rock_gnr.isChecked()){
+
+                }
+                if(Pop_gnr.isChecked()){
+
+                }
+                }
+
+
+
+
+
+        });*/
+    }
 }
+
+
+
+
