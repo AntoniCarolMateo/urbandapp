@@ -27,7 +27,7 @@ public interface ITablesDAO {
     Call<ResponseBody> removeInstrument(@Header("Authorization") String auth, @Path("name") String nameInstrument);
 
     //----------------------------------------------------------GENERES
-    @POST("/users/profile/musical_genre/add")
+    @POST("/users/profile/musical_genres/add")
     Call<ResponseBody> addGenere (@Header("Authorization") String auth, @Body List<MusicalGenere> list_generes);
 
     @DELETE("/users/profile/musical_genres/delete/{name}")

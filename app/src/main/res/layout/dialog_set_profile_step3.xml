@@ -36,11 +36,17 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_generes"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/border_recycler_view" />
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_generes"
+            android:layout_width="match_parent"
+            android:layout_height="162dp"
+            android:background="@drawable/border_recycler_view" />
+    </LinearLayout>
 
     <Space
         android:layout_width="match_parent"

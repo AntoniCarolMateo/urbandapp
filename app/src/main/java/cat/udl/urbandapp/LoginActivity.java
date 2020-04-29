@@ -3,8 +3,10 @@ package cat.udl.urbandapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     private UserViewModel userViewModel;
     private Button login;
     EditText username;
@@ -27,12 +30,10 @@ public class LoginActivity extends AppCompatActivity {
 //    RadioButton btn_banda;
 
     private SharedPreferences mPreferences;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         this.mPreferences = PreferencesProvider.providePreferences();

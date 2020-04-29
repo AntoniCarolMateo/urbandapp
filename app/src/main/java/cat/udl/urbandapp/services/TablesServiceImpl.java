@@ -204,7 +204,7 @@ public class TablesServiceImpl implements TablesServiceI {
                     List<MusicalGenere> mList = new ArrayList<>();
                     mList = response.body();
                     mlistGeneres.setValue(mList);
-                    Log.d("getUserGeneres", "Number of instruments: " + mList.size());
+                    Log.d("getUserGeneres", "Number of generes: " + mList.size());
                 } else {
                     mlistGeneres.setValue(new ArrayList<MusicalGenere>());
                     Log.d("getUser", "Error " + response.code() + " message:" + response.message());

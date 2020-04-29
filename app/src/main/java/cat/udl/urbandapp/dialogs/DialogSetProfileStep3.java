@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -87,6 +88,16 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
                 @Override
                 public void onChanged(List<MusicalGenere> i) {
                     genereAdapter.submitList(i);
+                }
+            });
+
+            tablesViewModel.getResponseChangedList().observe(this, new Observer<Boolean>() {
+                @Override
+                public void onChanged(Boolean added) {
+                    Log.d("Genres", "List actualized: " + added);
+                    if (added) {
+                        tablesViewModel.getListGeneres();
+                    }
                 }
             });
 

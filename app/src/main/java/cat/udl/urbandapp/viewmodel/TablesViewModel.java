@@ -43,7 +43,7 @@ public class TablesViewModel extends AndroidViewModel {
 
     private LiveData<List<Instrument>> mInstruments;
     private LiveData<List<MusicalGenere>> mGeneres;
-    private MutableLiveData<Boolean> responseAddedInstrument;
+    private MutableLiveData<Boolean> responseChangedList;
     private SharedPreferences mPreferences = PreferencesProvider.providePreferences();
 
     private List<Instrument> instruments = new ArrayList<>();
@@ -55,7 +55,7 @@ public class TablesViewModel extends AndroidViewModel {
         userViewModel = new UserViewModel(getApplication());
         tablesRepository = new TablesServiceImpl();
         responseLiveUser = repository.getLiveDataUser();
-        responseAddedInstrument = tablesRepository.getLiveWorkedOrNot();
+        responseChangedList = tablesRepository.getLiveWorkedOrNot();
 
         mInstruments = tablesRepository.getTableInstruments();
         mGeneres = tablesRepository.getTableGeneres();
@@ -103,7 +103,7 @@ public class TablesViewModel extends AndroidViewModel {
         return mInstruments;
     }
 
-    public MutableLiveData<Boolean> getResponseAddedInstrument() { return responseAddedInstrument;}
+    public MutableLiveData<Boolean> getResponseChangedList() { return responseChangedList;}
 
     public void getListInstruments() {
         String header = this.mPreferences.getString("token","");

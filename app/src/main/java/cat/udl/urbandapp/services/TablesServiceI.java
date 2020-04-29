@@ -40,7 +40,7 @@ public interface TablesServiceI {
     @DELETE("users/profile/deleteInstrument")
     void removeInstrument(@Header("Authorization") String Auth, @Path("name") String nameInstrument);
 
-    @POST("/users/profile/musical_genre/add}")
+    @POST("/users/profile/musical_genres/add}")
     void addGenere (@Header("Authorization") String auth, @Body List<MusicalGenere> list_generes);
 
 

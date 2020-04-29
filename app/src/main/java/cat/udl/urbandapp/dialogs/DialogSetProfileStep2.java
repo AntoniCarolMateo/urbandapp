@@ -99,7 +99,7 @@ public class DialogSetProfileStep2 extends DialogFragment {
             }
         });
 
-        tablesViewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
+        tablesViewModel.getResponseChangedList().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean added) {
                 Log.d(TAG, "New instrument added: " + added);

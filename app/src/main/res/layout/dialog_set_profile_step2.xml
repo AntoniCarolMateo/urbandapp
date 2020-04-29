@@ -39,8 +39,7 @@
             android:id="@+id/recyclerView_instruments"
             android:layout_width="match_parent"
             android:layout_height="145dp"
-            android:background="@drawable/border_recycler_view"
-            tools:listitem="@layout/item_genere_list" />
+            android:background="@drawable/border_recycler_view" />
 
     </LinearLayout>
 
