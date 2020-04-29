@@ -1,11 +1,5 @@
 package cat.udl.urbandapp.dao;
 
-import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
-
-import com.google.gson.JsonObject;
-
 
 import java.util.List;
 
@@ -13,23 +7,22 @@ import cat.udl.urbandapp.models.Instrument;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 
 public interface ITablesDAO {
     //----------------------------------------------------------INSTRUMENTS
-    @POST("users/profile/addInstrument")
-    Call<ResponseBody> addInstrument(@Header("Authorization") String auth, @Body JsonObject instruments);
+    @POST("/users/profile/instruments/add")
+    Call<ResponseBody> addInstrument(@Header("Authorization") String auth, @Body List<Instrument> instruments);
 
-    @GET("users/profile/getInstrumentsList")
-    Call<ResponseBody> getTableUserInstrument(@Header("Authorization") String auth);
+    @GET("/users/profile/instruments/list")
+    Call<List<Instrument>> getTableUserInstrument(@Header("Authorization") String auth);
 
-    @POST("users/profile/deleteInstrument/{name}")
+    @DELETE("/users/profile/instruments/delete/{name}")
     Call<ResponseBody> removeInstrument(@Header("Authorization") String auth, @Path("name") String nameInstrument);
 
     //----------------------------------------------------------GENERES

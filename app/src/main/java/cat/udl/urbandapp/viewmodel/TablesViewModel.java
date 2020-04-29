@@ -2,6 +2,7 @@ package cat.udl.urbandapp.viewmodel;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,8 @@ import cat.udl.urbandapp.services.UserServiceI;
 import cat.udl.urbandapp.services.UserServiceImpl;
 
 public class TablesViewModel extends AndroidViewModel {
+
+    private String TAG = "TablesViewModel";
     private UserServiceI repository;
     private TablesServiceI tablesRepository;
     private MutableLiveData<String> responseLiveDataToken = new MutableLiveData<>();
@@ -38,6 +41,8 @@ public class TablesViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> responseAddedInstrument;
     private SharedPreferences mPreferences = PreferencesProvider.providePreferences();
 
+    private List<Instrument> instruments = new ArrayList<>();
+
     public TablesViewModel(@NonNull Application application) {
         super(application);
         repository = new UserServiceImpl();
@@ -45,24 +50,33 @@ public class TablesViewModel extends AndroidViewModel {
         tablesRepository = new TablesServiceImpl();
         responseLiveUser = repository.getLiveDataUser();
         responseAddedInstrument = tablesRepository.getLiveDataAddedIns();
+        mInstruments = tablesRepository.getTableInstruments();
 
-        mInstruments = Transformations.switchMap(responseLiveDataToken, new Function<String, LiveData<List<Instrument>>>() {
-            @Override
-            public LiveData<List<Instrument>> apply(String input) {
-                mInstruments = tablesRepository.getTableInstruments();
-                return mInstruments;
-            }
-
-        });
+//        mInstruments = Transformations.switchMap(responseLiveDataToken, new Function<String, LiveData<List<Instrument>>>() {
+//            @Override
+//            public LiveData<List<Instrument>> apply(String input) {
+//                mInstruments = tablesRepository.getTableInstruments();
+//                return mInstruments;
+//            }
+//
+//        });
 
     }
 
     public void addInstrument(String nameInstrument, int exp){
+
         Instrument ins = new Instrument(nameInstrument, exp);
-        Toast.makeText(getApplication(), ins.toString(), Toast.LENGTH_SHORT).show();
-        JsonObject jsonIns = ins.toJson();
+        this.instruments.add(ins);
+    }
+
+    public void resetInstruments(){
+        this.instruments = new ArrayList<>();
+    }
+
+    public void saveInstrument(){
         String header = this.mPreferences.getString("token","");
-        tablesRepository.addInstrument(header, jsonIns);
+        Log.d(TAG, "Token:"+ header + "New instrument:"+this.instruments);
+        tablesRepository.addInstrument(header, this.instruments);
     }
 
     public  void removeInstrument(Instrument instrument){
