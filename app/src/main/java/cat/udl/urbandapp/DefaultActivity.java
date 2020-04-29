@@ -35,7 +35,9 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 //@Jordi: Tenemos que hablar de la seguridad de la API de Google, se puede indicar en el Google Cloud
 // que solo vuestra app pueda utilizar esta key de google maps!
 
+
 public class DefaultActivity extends AppCompatActivity implements OnMapReadyCallback{
+
     private Button logout;
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
@@ -89,6 +91,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         return true;
     }
     */
+
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
