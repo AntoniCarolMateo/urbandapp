@@ -1,7 +1,11 @@
 package cat.udl.urbandapp.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Instrument {
 
@@ -47,11 +51,33 @@ public class Instrument {
         this.idInstrument = idInstrument;
     }
 
-    public JsonObject toJson() {
-        JsonObject json = new JsonObject();
-        json.addProperty("name", this.name);
-        json.addProperty("expirience", this.expirience);
-        return json;
+    @Override
+    public boolean equals(Object o) {
+
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof Instrument)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        Instrument e = (Instrument) o;
+
+        // Compare the data members and return accordingly
+        return this.name.equals(e.getNameInstrument())
+                && this.expirience == e.getExpirience();
+
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Name: " + name +" Experience: " +expirience;
     }
 }
 

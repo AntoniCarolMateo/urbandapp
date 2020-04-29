@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,8 @@ import cat.udl.urbandapp.recyclerview.InstrumentDiffCallback;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
 public class DialogSetProfileStep2 extends DialogFragment {
+
+    private String TAG = "DialogSetProfileStep2";
 
     public View rootView;
     private FragmentActivity activity;
@@ -79,24 +82,24 @@ public class DialogSetProfileStep2 extends DialogFragment {
         final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
 
-        Instrument ins = new Instrument("Trompeta",5);
-        List<Instrument> list = new ArrayList<Instrument>();
-        list.add(ins);
-        ins = new Instrument("Guitarra",5);
-        list.add(ins);
-        ins = new Instrument("Caja", 3);
-        list.add(ins);
-        ins = new Instrument("Piano", 10);
-        list.add(ins);
-        instrumentAdapter.submitList(list);
+//        Instrument ins = new Instrument("Trompeta",5);
+//        List<Instrument> list = new ArrayList<Instrument>();
+//        list.add(ins);
+//        ins = new Instrument("Guitarra",5);
+//        list.add(ins);
+//        ins = new Instrument("Caja", 3);
+//        list.add(ins);
+//        ins = new Instrument("Piano", 10);
+//        list.add(ins);
+//        instrumentAdapter.submitList(list);
 
 
-        //tablesViewModel.getListInstruments();
+        tablesViewModel.getListInstruments();
 
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity());
+                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity(), tablesViewModel);
                 dialogAddInstrument.show(getParentFragmentManager(), "probando");
             }
         });
@@ -108,6 +111,15 @@ public class DialogSetProfileStep2 extends DialogFragment {
             }
         });
 
+        tablesViewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean added) {
+                Log.d(TAG, "New instrument added: " + added);
+                if (added) {
+                    tablesViewModel.getListInstruments();
+                }
+            }
+        });
 
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
@@ -120,6 +132,8 @@ public class DialogSetProfileStep2 extends DialogFragment {
         addInstrument = rootView.findViewById(R.id.addInstrument);
         recyclerInstruments = rootView.findViewById(R.id.recyclerView_instruments);
     }
+
+
 
 
 

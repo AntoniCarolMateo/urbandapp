@@ -86,42 +86,24 @@ public class TablesServiceImpl implements TablesServiceI {
 
     @Override
     public void getTableUserInstrument(final String Auth) {
-        tablesDAO.getTableUserInstrument(Auth).enqueue(new Callback<ResponseBody>() {
+        tablesDAO.getTableUserInstrument(Auth).enqueue(new Callback<List<Instrument>>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<List<Instrument>> call, Response<List<Instrument>> response) {
                 if (response.code() == 200) {
-                    try {
-                        //TODO: MIRAR COMO COGER LA LISTA CORRECTAMENTE
-                        String respuestaBody = response.body().string();
-                        JSONArray mIstruments = new JSONArray(respuestaBody);
-                        List<Instrument> mList = new ArrayList<>();
-                        for (int i = 0; i < mIstruments.length(); i++) {
-                            JSONObject mInstrumentJson =  mIstruments.getJSONObject(i);
-                            Instrument ins = new Instrument();
-
-                            ins.setNameInstrument(mInstrumentJson.getString("name"));
-                            ins.setExpirience(mInstrumentJson.getInt("expirience"));
-                            mList.add(ins);
-                        }
-                        mlistInstruent.setValue(mList);
-
-
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
-
+                    List<Instrument> mList = new ArrayList<>();
+                    mList = response.body();
+                    mlistInstruent.setValue(mList);
+                    Log.d("getUserInstruments", "Number of instruments: " + mList.size());
                 } else {
                     mlistInstruent.setValue(new ArrayList<Instrument>());
                     Log.d("getUser", "Error " + response.code() + " message:" + response.message());
                     Log.d("getUser", "header es: " + Auth);
 
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<List<Instrument>> call, Throwable t) {
                 Log.d("getInstrumentUserList", t.getMessage().toString());
             }
         });
@@ -129,15 +111,17 @@ public class TablesServiceImpl implements TablesServiceI {
 
 
     @Override
-    public void addInstrument(String Auth, JsonObject instrument) {
+    public void addInstrument(String Auth, List<Instrument> instrument) {
         tablesDAO.addInstrument(Auth, instrument).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("Add Instrument", ""+call.request().url());
                 if (response.code() == 200){
                     mInstrumentAdded.setValue(true);
                     Log.d("Add Instrument", "Added succesfully");
                 }else{
                     mInstrumentAdded.setValue(false);
+                    Log.d("Add Instrument", ""+response.code()+response.message());
                     Log.d("Add Instrument", "Failed to Add instrument");
                 }
             }
@@ -156,10 +140,10 @@ public class TablesServiceImpl implements TablesServiceI {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200){
-                    mRemovedInstrument.setValue(true);
+                    mInstrumentAdded.setValue(true);
                     Log.d("Remove Instrument", "Removed succesfully");
                 }else{
-                    mRemovedInstrument.setValue(false);
+                    mInstrumentAdded.setValue(false);
                     Log.d("Remove Instrument", "Failed to Add instrument");
                 }
             }
