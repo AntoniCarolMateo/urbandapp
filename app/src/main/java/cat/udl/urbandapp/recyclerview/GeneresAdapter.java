@@ -1,25 +1,34 @@
 package cat.udl.urbandapp.recyclerview;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.MusicalGenere;
+import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
 public class GeneresAdapter extends ListAdapter<MusicalGenere, GeneresAdapter.GenereHolder> {
 
+    private AdapterView.OnItemClickListener InstrumentListener;
+    private FragmentActivity activity;
+    private final static String TAG ="GenereAdapter";
+    private TablesViewModel tablesViewModel;
 
-
-    public GeneresAdapter(@NonNull DiffUtil.ItemCallback<MusicalGenere> diffCallback) {
+    public GeneresAdapter(@NonNull DiffUtil.ItemCallback<MusicalGenere> diffCallback, TablesViewModel viewModel, FragmentActivity activity) {
         super(diffCallback);
+        this.tablesViewModel = viewModel;
+        this.activity = activity;
     }
 
 
@@ -38,15 +47,10 @@ public class GeneresAdapter extends ListAdapter<MusicalGenere, GeneresAdapter.Ge
             holder.button_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //remove Genere
+                    tablesViewModel.removeGenere(current_genere);
                 }
             });
     }
-
-
-
-
-
 
     class GenereHolder extends RecyclerView.ViewHolder {
 

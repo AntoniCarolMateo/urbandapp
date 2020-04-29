@@ -4,6 +4,7 @@ package cat.udl.urbandapp.dao;
 import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,15 +27,12 @@ public interface ITablesDAO {
     Call<ResponseBody> removeInstrument(@Header("Authorization") String auth, @Path("name") String nameInstrument);
 
     //----------------------------------------------------------GENERES
-    @POST("users/profile/addGenere/{name}")
-    Call<ResponseBody> addGenere (@Header("Authorization") String auth, @Path("name") String nameGenere);
+    @POST("/users/profile/musical_genre/add")
+    Call<ResponseBody> addGenere (@Header("Authorization") String auth, @Body List<MusicalGenere> list_generes);
 
-    @POST("users/profile/addMultipleGeneres")
-    Call<ResponseBody> addMultipleGeneres(@Header("Authorization") String auth, @Body List<String> list_generes);
-
-    @POST("users/profile/deleteGenere/{name}")
+    @DELETE("/users/profile/musical_genres/delete/{name}")
     Call<ResponseBody> removeGenere(@Header("Authorization") String auth, @Path("name") String nameGenere);
 
-    @GET("users/profile/getGeneresList")
-    Call<ResponseBody> getTableUserGenere(@Header("Authorization") String auth);
+    @GET("/users/profile/musical_genres/list")
+    Call<List<MusicalGenere>> getTableUserGenere(@Header("Authorization") String auth);
 }

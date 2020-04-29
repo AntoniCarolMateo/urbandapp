@@ -8,6 +8,7 @@ import java.util.List;
 
 import cat.udl.urbandapp.dao.TablesDAOImpl;
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 
@@ -50,16 +51,16 @@ public class TablesServiceImpl implements TablesServiceI {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<User> mUser;
     public final MutableLiveData<List<Instrument>> mlistInstruent;
-    public final MutableLiveData<Boolean> mInstrumentAdded;
-    public final MutableLiveData<Boolean> mRemovedInstrument;
+    public final MutableLiveData<List<MusicalGenere>> mlistGeneres;
+    public final MutableLiveData<Boolean> mResponseWorked;
 
 
     public TablesServiceImpl() {
         tablesDAO = new TablesDAOImpl();
         mUser = new MutableLiveData<>();
         mlistInstruent = new MutableLiveData<>();
-        mInstrumentAdded = new MutableLiveData<>();
-        mRemovedInstrument = new MutableLiveData<>();
+        mlistGeneres = new MutableLiveData<>();
+        mResponseWorked = new MutableLiveData<>();
 
     }
 
@@ -74,13 +75,14 @@ public class TablesServiceImpl implements TablesServiceI {
     }
 
     @Override
-    public MutableLiveData<Boolean> getLiveDataAddedIns() {
-        return mInstrumentAdded;
+    public MutableLiveData<Boolean> getLiveWorkedOrNot() {
+        return mResponseWorked;
     }
 
+
     @Override
-    public MutableLiveData<Boolean> getLiveDataRemoveIns() {
-        return mRemovedInstrument;
+    public LiveData<List<MusicalGenere>> getTableGeneres() {
+        return mlistGeneres;
     }
 
 
@@ -117,10 +119,10 @@ public class TablesServiceImpl implements TablesServiceI {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("Add Instrument", ""+call.request().url());
                 if (response.code() == 200){
-                    mInstrumentAdded.setValue(true);
+                    mResponseWorked.setValue(true);
                     Log.d("Add Instrument", "Added succesfully");
                 }else{
-                    mInstrumentAdded.setValue(false);
+                    mResponseWorked.setValue(false);
                     Log.d("Add Instrument", ""+response.code()+response.message());
                     Log.d("Add Instrument", "Failed to Add instrument");
                 }
@@ -140,10 +142,10 @@ public class TablesServiceImpl implements TablesServiceI {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200){
-                    mInstrumentAdded.setValue(true);
+                    mResponseWorked.setValue(true);
                     Log.d("Remove Instrument", "Removed succesfully");
                 }else{
-                    mInstrumentAdded.setValue(false);
+                    mResponseWorked.setValue(false);
                     Log.d("Remove Instrument", "Failed to Add instrument");
                 }
             }
@@ -156,23 +158,66 @@ public class TablesServiceImpl implements TablesServiceI {
     }
 
     @Override
-    public void addGenere(String auth, String nameGenere) {
+    public void addGenere(String auth, List<MusicalGenere> list_generes) {
+        tablesDAO.addGenere(auth, list_generes).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code()==200){
+                    mResponseWorked.setValue(true);
+                }else{
+                    mResponseWorked.setValue(false);
+                }
+            }
 
-    }
-
-    @Override
-    public void removeMultipleGeneres(String auth, List<String> list_generes) {
-
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mResponseWorked.setValue(false);
+            }
+        });
     }
 
     @Override
     public void removeGenere(String auth, String nameGenere) {
+        tablesDAO.removeGenere(auth, nameGenere).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code()==200){
+                    mResponseWorked.setValue(true);
+                }else{
+                    mResponseWorked.setValue(false);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mResponseWorked.setValue(false);
+            }
+        });
     }
 
     @Override
-    public void getTableUserGenere(String auth) {
+    public void getTableUserGenere(final String auth) {
+        tablesDAO.getTableUserGenere(auth).enqueue(new Callback<List<MusicalGenere>>() {
+            @Override
+            public void onResponse(Call<List<MusicalGenere>> call, Response<List<MusicalGenere>> response) {
+                if (response.code() == 200) {
+                    List<MusicalGenere> mList = new ArrayList<>();
+                    mList = response.body();
+                    mlistGeneres.setValue(mList);
+                    Log.d("getUserGeneres", "Number of instruments: " + mList.size());
+                } else {
+                    mlistGeneres.setValue(new ArrayList<MusicalGenere>());
+                    Log.d("getUser", "Error " + response.code() + " message:" + response.message());
+                    Log.d("getUser", "header es: " + auth);
 
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MusicalGenere>> call, Throwable t) {
+                Log.d("getInstrumentUserList", t.getMessage().toString());
+            }
+        });
     }
 
 

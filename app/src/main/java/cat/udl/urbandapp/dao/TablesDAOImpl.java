@@ -1,9 +1,12 @@
 package cat.udl.urbandapp.dao;
 
 
+import androidx.recyclerview.widget.ItemTouchHelper;
+
 import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -28,24 +31,23 @@ public class TablesDAOImpl implements ITablesDAO {
     }
 
 
+
+
     //----------------------------------------------------------GENERES
-    @Override
-    public Call<ResponseBody> addGenere(String auth, String nameGenere) {
-        return retrofit.create(ITablesDAO.class).addGenere(auth, nameGenere);
-    }
+
 
     @Override
-    public Call<ResponseBody> addMultipleGeneres(String auth, List<String> list_generes) {
-        return retrofit.create(ITablesDAO.class).addMultipleGeneres(auth, list_generes);
+    public Call<ResponseBody> addGenere(String auth, List<MusicalGenere> list_generes) {
+        return retrofit.create(ITablesDAO.class).addGenere(auth, list_generes);
     }
 
     @Override
     public Call<ResponseBody> removeGenere(String auth, String nameGenere) {
-        return retrofit.create(ITablesDAO.class).addGenere(auth, nameGenere);
+        return retrofit.create(ITablesDAO.class).removeGenere(auth, nameGenere);
     }
 
     @Override
-    public Call<ResponseBody> getTableUserGenere(String auth) {
+    public Call<List<MusicalGenere>> getTableUserGenere(String auth) {
         return retrofit.create(ITablesDAO.class).getTableUserGenere(auth);
     }
 }

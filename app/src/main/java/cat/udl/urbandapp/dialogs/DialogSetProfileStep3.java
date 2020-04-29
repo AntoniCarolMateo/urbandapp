@@ -3,6 +3,7 @@
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cat.udl.urbandapp.R;
+import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.recyclerview.GenereDiffCallback;
 import cat.udl.urbandapp.recyclerview.GeneresAdapter;
@@ -44,6 +46,7 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            tablesViewModel = new TablesViewModel(getActivity().getApplication());
             initView();
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
@@ -66,26 +69,26 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
             recyclerView_generes.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView_generes.setHasFixedSize(true);
-            final GeneresAdapter genereAdapter = new GeneresAdapter(new GenereDiffCallback());
+            final GeneresAdapter genereAdapter = new GeneresAdapter(new GenereDiffCallback(), tablesViewModel, this.getActivity());
             recyclerView_generes.setAdapter(genereAdapter);
 
-            List<MusicalGenere> list = new ArrayList<MusicalGenere>();
-            MusicalGenere genere = new MusicalGenere("Pop");
-            list.add(genere);
-            genere = new MusicalGenere("Rock");
-            list.add(genere);
-            genereAdapter.submitList(list);
+            tablesViewModel.getListGeneres();
 
 
             add_generes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogAddGenere dialogAddGenere = DialogAddGenere.newInstance(getActivity());
+                    DialogAddGenere dialogAddGenere = DialogAddGenere.newInstance(getActivity(), tablesViewModel);
                     dialogAddGenere.show(getParentFragmentManager(), "probando");
                 }
             });
 
-
+            tablesViewModel.getGeneres().observe(this, new Observer<List<MusicalGenere>>() {
+                @Override
+                public void onChanged(List<MusicalGenere> i) {
+                    genereAdapter.submitList(i);
+                }
+            });
 
             alertDialog.setCanceledOnTouchOutside(false);
             return alertDialog;

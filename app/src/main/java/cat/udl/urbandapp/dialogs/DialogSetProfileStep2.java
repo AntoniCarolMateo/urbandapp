@@ -82,18 +82,6 @@ public class DialogSetProfileStep2 extends DialogFragment {
         final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
 
-//        Instrument ins = new Instrument("Trompeta",5);
-//        List<Instrument> list = new ArrayList<Instrument>();
-//        list.add(ins);
-//        ins = new Instrument("Guitarra",5);
-//        list.add(ins);
-//        ins = new Instrument("Caja", 3);
-//        list.add(ins);
-//        ins = new Instrument("Piano", 10);
-//        list.add(ins);
-//        instrumentAdapter.submitList(list);
-
-
         tablesViewModel.getListInstruments();
 
         addInstrument.setOnClickListener(new View.OnClickListener() {

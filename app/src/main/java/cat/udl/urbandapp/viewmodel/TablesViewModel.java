@@ -18,9 +18,12 @@ import java.util.ArrayList;
 import com.google.gson.JsonObject;
 
 
+import org.bouncycastle.cms.CMSAuthenticatedGenerator;
+
 import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 
@@ -37,11 +40,14 @@ public class TablesViewModel extends AndroidViewModel {
     private MutableLiveData<String> responseLiveDataToken = new MutableLiveData<>();
     private UserViewModel userViewModel;
     private MutableLiveData<User> responseLiveUser;
+
     private LiveData<List<Instrument>> mInstruments;
+    private LiveData<List<MusicalGenere>> mGeneres;
     private MutableLiveData<Boolean> responseAddedInstrument;
     private SharedPreferences mPreferences = PreferencesProvider.providePreferences();
 
     private List<Instrument> instruments = new ArrayList<>();
+    private List<MusicalGenere> generes = new ArrayList<>();
 
     public TablesViewModel(@NonNull Application application) {
         super(application);
@@ -49,8 +55,10 @@ public class TablesViewModel extends AndroidViewModel {
         userViewModel = new UserViewModel(getApplication());
         tablesRepository = new TablesServiceImpl();
         responseLiveUser = repository.getLiveDataUser();
-        responseAddedInstrument = tablesRepository.getLiveDataAddedIns();
+        responseAddedInstrument = tablesRepository.getLiveWorkedOrNot();
+
         mInstruments = tablesRepository.getTableInstruments();
+        mGeneres = tablesRepository.getTableGeneres();
 
 //        mInstruments = Transformations.switchMap(responseLiveDataToken, new Function<String, LiveData<List<Instrument>>>() {
 //            @Override
@@ -101,4 +109,39 @@ public class TablesViewModel extends AndroidViewModel {
         String header = this.mPreferences.getString("token","");
          tablesRepository.getTableUserInstrument(header);
     }
+
+
+    //------------------------------------------------------------------GENERES
+
+    public void addGenenres(List<MusicalGenere> list){
+        this.generes = list;
+        Log.d("AddGenere" , list.toString());
+    }
+
+    public  void saveGeneres(){
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.addGenere(header, this.generes);
+    }
+
+    public void resetGeneres(){
+        this.generes = new ArrayList<>();
+    }
+
+    public void removeGenere(MusicalGenere genere){
+        String name = genere.getName();
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.removeGenere(header, name);
+    }
+
+    public  void getListGeneres(){
+        String header = this.mPreferences.getString("token","");
+        tablesRepository.getTableUserGenere(header);
+    }
+
+
+    public LiveData<List<MusicalGenere>> getGeneres(){
+        return mGeneres;
+    }
+
+
 }

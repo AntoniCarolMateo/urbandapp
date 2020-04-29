@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 
 import okhttp3.ResponseBody;
@@ -36,27 +37,27 @@ public interface TablesServiceI {
     @POST("/users/profile/instruments/add")
     void addInstrument(@Header("Authorization") String Auth, @Body List<Instrument> instrument);
 
-    @POST("users/profile/deleteInstrument")
-    void removeInstrument(@Header("Authorization") String Auth, @Query("name") String nameInstrument);
+    @DELETE("users/profile/deleteInstrument")
+    void removeInstrument(@Header("Authorization") String Auth, @Path("name") String nameInstrument);
 
-    @DELETE("/users/profile/instruments/delete/{name}")
-    void addGenere (@Header("Authorization") String auth, @Path("name") String nameGenere);
+    @POST("/users/profile/musical_genre/add}")
+    void addGenere (@Header("Authorization") String auth, @Body List<MusicalGenere> list_generes);
 
-    @POST("users/profile/addMultipleGeneres")
-    void removeMultipleGeneres(@Header("Authorization") String auth, @Body List<String> list_generes);
 
-    @POST("users/profile/deleteGenere/{name}")
+    @DELETE("/users/profile/musical_genres/delete/{name}")
     void removeGenere(@Header("Authorization") String auth, @Path("name") String nameGenere);
 
 
-    @GET("users/profile/getGeneresList")
+    @GET("/users/profile/musical_genres/list")
     void getTableUserGenere(@Header("Authorization") String auth);
 
     MutableLiveData<User> getLiveDataUser();
 
     LiveData<List<Instrument>> getTableInstruments();
 
-    MutableLiveData<Boolean> getLiveDataAddedIns();
+    MutableLiveData<Boolean> getLiveWorkedOrNot();
 
-    MutableLiveData<Boolean> getLiveDataRemoveIns();
+
+
+    LiveData<List<MusicalGenere>> getTableGeneres();
 }
