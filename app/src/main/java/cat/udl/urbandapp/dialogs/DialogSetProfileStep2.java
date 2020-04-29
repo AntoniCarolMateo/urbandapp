@@ -1,12 +1,10 @@
 package cat.udl.urbandapp.dialogs;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.DialogCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +34,9 @@ import cat.udl.urbandapp.recyclerview.InstrumentAdapter;
 import cat.udl.urbandapp.recyclerview.InstrumentDiffCallback;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
-public class DialogSetProfileStep2 extends DialogFragment implements LifecycleOwner {
+public class DialogSetProfileStep2 extends DialogFragment {
+
+    private String TAG = "DialogSetProfileStep2";
 
     public View rootView;
     private FragmentActivity activity;
@@ -53,6 +54,7 @@ public class DialogSetProfileStep2 extends DialogFragment implements LifecycleOw
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        tablesViewModel = new TablesViewModel(getActivity().getApplication());
         mPreferences = PreferencesProvider.providePreferences();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
@@ -74,36 +76,50 @@ public class DialogSetProfileStep2 extends DialogFragment implements LifecycleOw
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)
                 .create();
-        /*
 
-        @Jordi: He imlementat el recycler view seguin els pasos, pero no s'acava de actualitzar
-        La llista de la api la retorna correctament pero
-
-
-         */
         recyclerInstruments.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerInstruments.setHasFixedSize(true);
         final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
 
+//        Instrument ins = new Instrument("Trompeta",5);
+//        List<Instrument> list = new ArrayList<Instrument>();
+//        list.add(ins);
+//        ins = new Instrument("Guitarra",5);
+//        list.add(ins);
+//        ins = new Instrument("Caja", 3);
+//        list.add(ins);
+//        ins = new Instrument("Piano", 10);
+//        list.add(ins);
+//        instrumentAdapter.submitList(list);
 
 
-        tablesViewModel = new TablesViewModel(getActivity().getApplication());
+        tablesViewModel.getListInstruments();
+
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity());
+                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity(), tablesViewModel);
                 dialogAddInstrument.show(getParentFragmentManager(), "probando");
             }
         });
 
         tablesViewModel.getInstruments().observe(this, new Observer<List<Instrument>>() {
             @Override
-            public void onChanged(@Nullable List<Instrument> i) {
+            public void onChanged(List<Instrument> i) {
                 instrumentAdapter.submitList(i);
             }
         });
 
+        tablesViewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean added) {
+                Log.d(TAG, "New instrument added: " + added);
+                if (added) {
+                    tablesViewModel.getListInstruments();
+                }
+            }
+        });
 
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
@@ -116,6 +132,8 @@ public class DialogSetProfileStep2 extends DialogFragment implements LifecycleOw
         addInstrument = rootView.findViewById(R.id.addInstrument);
         recyclerInstruments = rootView.findViewById(R.id.recyclerView_instruments);
     }
+
+
 
 
 

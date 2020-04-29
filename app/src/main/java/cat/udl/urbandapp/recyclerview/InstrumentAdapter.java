@@ -48,14 +48,13 @@ public class InstrumentAdapter extends ListAdapter<Instrument, InstrumentAdapter
 
     @Override
     public void onBindViewHolder(@NonNull InstrumentHolder holder, int position) {
-        final Instrument currentInstrument = getItem(position);
+        final Instrument currentInstrument = (Instrument) getItem(position);
         holder.textViewName.setText(currentInstrument.getNameInstrument());
         holder.ratingExpirience.setRating(currentInstrument.getExpirience());
 
         holder.button_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: remove instrument
                         tablesViewModel.removeInstrument(currentInstrument);
             }
         });

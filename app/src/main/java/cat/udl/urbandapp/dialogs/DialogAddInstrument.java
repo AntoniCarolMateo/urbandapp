@@ -22,6 +22,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cat.udl.urbandapp.R;
@@ -43,12 +44,12 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
     private Spinner choice_instrument;
     private Button addInstrument;
     private RatingBar experienceBar;
-    private RecyclerView listaIntrumentos;
 
 
-    public static DialogAddInstrument newInstance(FragmentActivity activity) {
+    public static DialogAddInstrument newInstance(FragmentActivity activity, TablesViewModel tablesViewModel) {
         DialogAddInstrument dialog = new DialogAddInstrument();
         dialog.activity = activity;
+        dialog.viewModel = tablesViewModel;
         return dialog;
     }
 
@@ -56,11 +57,11 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         this.mPreferences = PreferencesProvider.providePreferences();
         initView();
-        viewModel = new TablesViewModel(getActivity().getApplication());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Aplicar cambios", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                viewModel.addInstruments();
+                viewModel.saveInstrument();
+                viewModel.resetInstruments();
             }
         });
         AlertDialog alertDialog = builder.setView(rootView)
@@ -113,11 +114,11 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
             public void onClick(View v) {
                 String _instrument = (String) choice_instrument.getSelectedItem();
                 int _expirience = experienceBar.getProgress();
-                viewModel.addInstrumentToList(_instrument, _expirience);
+                viewModel.addInstrument(_instrument, _expirience);
             }
         });
 
-       viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
+       /* viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean){
@@ -126,7 +127,7 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
                     Toast.makeText(getContext(), "Error añadiendo el isntrumento", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
 
         alertDialog.setCanceledOnTouchOutside(false);
