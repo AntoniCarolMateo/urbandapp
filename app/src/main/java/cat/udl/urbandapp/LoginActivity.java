@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import android.annotation.SuppressLint;
+
 import android.app.Notification;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -45,9 +47,15 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.loginUsername);
         password = findViewById(R.id.loginPassword);
         userViewModel = new UserViewModel(getApplication());
+
         usuario = findViewById(R.id.usuario);
         banda = findViewById(R.id.banda);
         patrocinador = findViewById(R.id.patrocinador);
+
+       /* btn_usuari = findViewById(R.id.btn_Usuario);
+        btn_patrocinador = findViewById(R.id.btn_Patrocinador);
+        btn_banda = findViewById(R.id.btn_Banda);*/
+
 
      
 
