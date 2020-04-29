@@ -44,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
        /* btn_usuari = findViewById(R.id.btn_Usuario);
         btn_patrocinador = findViewById(R.id.btn_Patrocinador);
         btn_banda = findViewById(R.id.btn_Banda);*/
+
+     
+
         userViewModel.getResponseLiveDataToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {

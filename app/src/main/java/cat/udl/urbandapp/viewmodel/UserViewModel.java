@@ -58,6 +58,9 @@ public class UserViewModel extends AndroidViewModel {
         user.addProperty("username", "+34" + username);
         //tenemos que encriptar el password en sha-256 antes de enviarlo
 
+        /* @Jordi: estos valores también se pueden definir en el build.gradle i leerlos
+         * (salt and itereations)
+         */
         String salt = "16";
         String encode_hash = Utils.encode(password,salt,29000);
         user.addProperty("password",   encode_hash);

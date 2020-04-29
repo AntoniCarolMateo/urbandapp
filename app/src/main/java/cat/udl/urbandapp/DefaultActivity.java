@@ -30,6 +30,9 @@ import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
+//@Jordi: Tenemos que hablar de la seguridad de la API de Google, se puede indicar en el Google Cloud
+// que solo vuestra app pueda utilizar esta key de google maps!
+
 public class DefaultActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Button logout;
     private SharedPreferences mPreferences;

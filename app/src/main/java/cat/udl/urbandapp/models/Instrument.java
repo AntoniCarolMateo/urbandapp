@@ -50,7 +50,6 @@ public class Instrument {
     public void setIdInstrument(int idInstrument) {
         this.idInstrument = idInstrument;
     }
-
     @Override
     public boolean equals(Object o) {
 
