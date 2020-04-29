@@ -20,7 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 
-        android:name=".App"
 
         >
         <activity android:name=".DefaultActivity">
