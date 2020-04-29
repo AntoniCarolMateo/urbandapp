@@ -108,8 +108,8 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
         // TODO: implementar chec first time
         //if (userViewModel.checkFirstTime)
-        //DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
-        //first.show(getSupportFragmentManager(), "first set up profile");
+        DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+        first.show(getSupportFragmentManager(), "first set up profile");
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override
