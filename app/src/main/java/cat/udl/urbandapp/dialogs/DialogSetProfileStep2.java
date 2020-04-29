@@ -16,9 +16,11 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,9 +36,11 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
 
 public class DialogSetProfileStep2 extends DialogFragment {
 
+    private String TAG = "DialogSetProfileStep2";
+
     public View rootView;
     private FragmentActivity activity;
-    private Button addInstrument;
+    private ImageView addInstrument;
     private SharedPreferences mPreferences;
     private TablesViewModel tablesViewModel;
     private RecyclerView recyclerInstruments;
@@ -75,15 +79,15 @@ public class DialogSetProfileStep2 extends DialogFragment {
 
         recyclerInstruments.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerInstruments.setHasFixedSize(true);
-        final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel);
+        final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), tablesViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
 
-        tablesViewModel.getInstruments();
+        tablesViewModel.getListInstruments();
 
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity());
+                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity(), tablesViewModel);
                 dialogAddInstrument.show(getParentFragmentManager(), "probando");
             }
         });
@@ -95,6 +99,15 @@ public class DialogSetProfileStep2 extends DialogFragment {
             }
         });
 
+        tablesViewModel.getResponseChangedList().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean added) {
+                Log.d(TAG, "New instrument added: " + added);
+                if (added) {
+                    tablesViewModel.getListInstruments();
+                }
+            }
+        });
 
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
@@ -108,17 +121,9 @@ public class DialogSetProfileStep2 extends DialogFragment {
         recyclerInstruments = rootView.findViewById(R.id.recyclerView_instruments);
     }
 
-    public void verificarYPedirPermisosDeCamara() {
-        int estadoDePermiso = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);
-        if (estadoDePermiso != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getContext(), "El permiso para la cámara está concedido", Toast.LENGTH_SHORT).show();
-            requestPermissions(new String[]{(Manifest.permission.CAMERA)}, 1);
-            // En caso de que haya dado permisos ponemos la bandera en true
-            // y llamar al método
 
 
-        }
-    }
+
 
 }
 

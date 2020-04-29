@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     @SerializedName("created_at")
@@ -34,7 +35,7 @@ public class User {
     @SerializedName("longitude")
     private float longitude;
 
-    ArrayList<Instrument> userInstruments;
+    List<Instrument> userInstruments;
 
     public User() {
     }
@@ -62,11 +63,11 @@ public class User {
         this.longitude = longitude;
     }
 
-    public ArrayList<Instrument> getUserInstruments() {
+    public List<Instrument> getUserInstruments() {
         return userInstruments;
     }
 
-    public void setUserInstruments(ArrayList<Instrument> listInstruments) {
+    public void setUserInstruments(List<Instrument> listInstruments) {
         this.userInstruments = listInstruments;
     }
 

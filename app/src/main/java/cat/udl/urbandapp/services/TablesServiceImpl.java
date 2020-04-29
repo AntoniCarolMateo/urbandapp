@@ -8,6 +8,7 @@ import java.util.List;
 
 import cat.udl.urbandapp.dao.TablesDAOImpl;
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 
@@ -50,16 +51,16 @@ public class TablesServiceImpl implements TablesServiceI {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<User> mUser;
     public final MutableLiveData<List<Instrument>> mlistInstruent;
-    public final MutableLiveData<Boolean> mInstrumentAdded;
-    public final MutableLiveData<Boolean> mRemovedInstrument;
+    public final MutableLiveData<List<MusicalGenere>> mlistGeneres;
+    public final MutableLiveData<Boolean> mResponseWorked;
 
 
     public TablesServiceImpl() {
         tablesDAO = new TablesDAOImpl();
         mUser = new MutableLiveData<>();
         mlistInstruent = new MutableLiveData<>();
-        mInstrumentAdded = new MutableLiveData<>();
-        mRemovedInstrument = new MutableLiveData<>();
+        mlistGeneres = new MutableLiveData<>();
+        mResponseWorked = new MutableLiveData<>();
 
     }
 
@@ -74,54 +75,37 @@ public class TablesServiceImpl implements TablesServiceI {
     }
 
     @Override
-    public MutableLiveData<Boolean> getLiveDataAddedIns() {
-        return mInstrumentAdded;
+    public MutableLiveData<Boolean> getLiveWorkedOrNot() {
+        return mResponseWorked;
     }
 
+
     @Override
-    public MutableLiveData<Boolean> getLiveDataRemoveIns() {
-        return mRemovedInstrument;
+    public LiveData<List<MusicalGenere>> getTableGeneres() {
+        return mlistGeneres;
     }
 
 
     @Override
     public void getTableUserInstrument(final String Auth) {
-        tablesDAO.getTableUserInstrument(Auth).enqueue(new Callback<ResponseBody>() {
+        tablesDAO.getTableUserInstrument(Auth).enqueue(new Callback<List<Instrument>>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<List<Instrument>> call, Response<List<Instrument>> response) {
                 if (response.code() == 200) {
-                    try {
-                        //TODO: MIRAR COMO COGER LA LISTA CORRECTAMENTE
-                        String respuestaBody = response.body().string();
-                        JSONArray mIstruments = new JSONArray(respuestaBody);
-                        List<Instrument> mList = new ArrayList<>();
-                        for (int i = 0; i < mIstruments.length(); i++) {
-                            JSONObject mInstrumentJson =  mIstruments.getJSONObject(i);
-                            Instrument ins = new Instrument();
-
-                            ins.setNameInstrument(mInstrumentJson.getString("name"));
-                            ins.setExpirience(mInstrumentJson.getInt("expirience"));
-                            mList.add(ins);
-                        }
-                        mlistInstruent.setValue(mList);
-
-
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
-
+                    List<Instrument> mList = new ArrayList<>();
+                    mList = response.body();
+                    mlistInstruent.setValue(mList);
+                    Log.d("getUserInstruments", "Number of instruments: " + mList.size());
                 } else {
                     mlistInstruent.setValue(new ArrayList<Instrument>());
-                    Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getUser", "Error " + response.code() + " message:" + response.message());
                     Log.d("getUser", "header es: " + Auth);
 
                 }
-
-
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<List<Instrument>> call, Throwable t) {
                 Log.d("getInstrumentUserList", t.getMessage().toString());
             }
         });
@@ -129,15 +113,17 @@ public class TablesServiceImpl implements TablesServiceI {
 
 
     @Override
-    public void addInstrument(String Auth, JsonObject instrument) {
+    public void addInstrument(String Auth, List<Instrument> instrument) {
         tablesDAO.addInstrument(Auth, instrument).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("Add Instrument", ""+call.request().url());
                 if (response.code() == 200){
-                    mInstrumentAdded.setValue(true);
+                    mResponseWorked.setValue(true);
                     Log.d("Add Instrument", "Added succesfully");
                 }else{
-                    mInstrumentAdded.setValue(false);
+                    mResponseWorked.setValue(false);
+                    Log.d("Add Instrument", ""+response.code()+response.message());
                     Log.d("Add Instrument", "Failed to Add instrument");
                 }
             }
@@ -151,15 +137,15 @@ public class TablesServiceImpl implements TablesServiceI {
     }
 
     @Override
-    public void removeInstrument(String Auth, JsonObject instrument) {
+    public void removeInstrument(String Auth, String instrument) {
         tablesDAO.removeInstrument(Auth, instrument).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200){
-                    mRemovedInstrument.setValue(true);
+                    mResponseWorked.setValue(true);
                     Log.d("Remove Instrument", "Removed succesfully");
                 }else{
-                    mRemovedInstrument.setValue(false);
+                    mResponseWorked.setValue(false);
                     Log.d("Remove Instrument", "Failed to Add instrument");
                 }
             }
@@ -171,6 +157,68 @@ public class TablesServiceImpl implements TablesServiceI {
         });
     }
 
+    @Override
+    public void addGenere(String auth, List<MusicalGenere> list_generes) {
+        tablesDAO.addGenere(auth, list_generes).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code()==200){
+                    mResponseWorked.setValue(true);
+                }else{
+                    mResponseWorked.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mResponseWorked.setValue(false);
+            }
+        });
+    }
+
+    @Override
+    public void removeGenere(String auth, String nameGenere) {
+        tablesDAO.removeGenere(auth, nameGenere).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code()==200){
+                    mResponseWorked.setValue(true);
+                }else{
+                    mResponseWorked.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                mResponseWorked.setValue(false);
+            }
+        });
+    }
+
+    @Override
+    public void getTableUserGenere(final String auth) {
+        tablesDAO.getTableUserGenere(auth).enqueue(new Callback<List<MusicalGenere>>() {
+            @Override
+            public void onResponse(Call<List<MusicalGenere>> call, Response<List<MusicalGenere>> response) {
+                if (response.code() == 200) {
+                    List<MusicalGenere> mList = new ArrayList<>();
+                    mList = response.body();
+                    mlistGeneres.setValue(mList);
+                    Log.d("getUserGeneres", "Number of generes: " + mList.size());
+                } else {
+                    mlistGeneres.setValue(new ArrayList<MusicalGenere>());
+                    Log.d("getUser", "Error " + response.code() + " message:" + response.message());
+                    Log.d("getUser", "header es: " + auth);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MusicalGenere>> call, Throwable t) {
+                Log.d("getInstrumentUserList", t.getMessage().toString());
+            }
+        });
+    }
 
 
 }

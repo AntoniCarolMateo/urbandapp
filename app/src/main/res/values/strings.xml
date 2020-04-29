@@ -8,4 +8,8 @@
     <string name="logo_app">logo_app</string>
     <string name="registro_de_usuario">Registro de usuario</string>
     <string name="rol">Rol</string>
+    <string name="rock">Rock</string>
+    <string name="pop">Pop</string>
+    <string name="country">Country</string>
+    <string name="jazz">Jazz</string>
 </resources>

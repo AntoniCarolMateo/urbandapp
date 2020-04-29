@@ -1,7 +1,11 @@
 package cat.udl.urbandapp.models;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Instrument {
 
@@ -9,8 +13,8 @@ public class Instrument {
     private int idInstrument;
 
 
-    @SerializedName("nameInstrument")
-    private String nameInstrument;
+    @SerializedName("name")
+    private String name;
 
     @SerializedName("expirience")
     private int expirience;
@@ -19,16 +23,16 @@ public class Instrument {
 
     }
     public Instrument(String nameInstrument, int expirience) {
-        this.nameInstrument = nameInstrument;
+        this.name = nameInstrument;
         this.expirience = expirience;
     }
 
     public String getNameInstrument() {
-        return nameInstrument;
+        return name;
     }
 
     public void setNameInstrument(String nameInstrument) {
-        this.nameInstrument = nameInstrument;
+        this.name = nameInstrument;
     }
 
     public int getExpirience() {
@@ -46,13 +50,33 @@ public class Instrument {
     public void setIdInstrument(int idInstrument) {
         this.idInstrument = idInstrument;
     }
+    @Override
+    public boolean equals(Object o) {
 
-    // TODO: Esto no hace falta el retrfoit te lo hace!
-    public JsonObject toJson() {
-        JsonObject json = new JsonObject();
-        json.addProperty("nameInstrument", this.nameInstrument);
-        json.addProperty("expirience", this.expirience);
-        return json;
+        // If the object is compared with itself then return true
+        if (o == this) {
+            return true;
+        }
+
+        /* Check if o is an instance of Complex or not
+          "null instanceof [type]" also returns false */
+        if (!(o instanceof Instrument)) {
+            return false;
+        }
+
+        // typecast o to Complex so that we can compare data members
+        Instrument e = (Instrument) o;
+
+        // Compare the data members and return accordingly
+        return this.name.equals(e.getNameInstrument())
+                && this.expirience == e.getExpirience();
+
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Name: " + name +" Experience: " +expirience;
     }
 }
 

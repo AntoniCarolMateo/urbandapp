@@ -3,8 +3,10 @@ package cat.udl.urbandapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,21 +20,20 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     private UserViewModel userViewModel;
     private Button login;
     EditText username;
     EditText password;
-    RadioButton btn_usuari;
-    RadioButton btn_patrocinador;
-    RadioButton btn_banda;
+//    RadioButton btn_usuari;
+//    RadioButton btn_patrocinador;
+//    RadioButton btn_banda;
 
     private SharedPreferences mPreferences;
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         this.mPreferences = PreferencesProvider.providePreferences();
@@ -40,19 +41,23 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.loginUsername);
         password = findViewById(R.id.loginPassword);
         userViewModel = new UserViewModel(getApplication());
-        btn_usuari = findViewById(R.id.btn_Usuario);
+       /* btn_usuari = findViewById(R.id.btn_Usuario);
         btn_patrocinador = findViewById(R.id.btn_Patrocinador);
-        btn_banda = findViewById(R.id.btn_Banda);
+        btn_banda = findViewById(R.id.btn_Banda);*/
 
-        // @Jordi: Esta vista se tiene que hacer más bonita... no me convence...
+     
 
         userViewModel.getResponseLiveDataToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mPreferences.edit().putString("token",s).apply();
-                Log.d("Login","Tenim token " + s);
+                mPreferences.edit().putString("token", s).apply();
+                Log.d("Login", "Tenim token " + s);
+                Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+                Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                startActivity(da);
 
-                if (btn_usuari.isChecked()){
+
+                /*if (btn_usuari.isChecked()){
                     Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
                     startActivity(da);
 
@@ -69,7 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                     Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
                     startActivity(da);
                 }
-                //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+
+            }*/
             }
         });
 
