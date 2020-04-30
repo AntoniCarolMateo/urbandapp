@@ -7,6 +7,8 @@ import com.google.gson.JsonObject;
 import java.util.List;
 
 import cat.udl.urbandapp.models.User;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -47,6 +49,12 @@ public interface UserServiceI {
     @DELETE("users/delete_subscribed/{username}")
     void userDeleteSubscribe(@Header("Authorization") String auth, @Path("username") String username);
 
+    @POST("account/profile/setfirstSetUp")
+    void firstTimeProfileSetUp(@Header ("Authorization") String Auth);
+
+    @GET("account/profile/getfirstSetUp")
+    void getFirstTimeBoolean(@Header ("Authorization") String auth);
+
     MutableLiveData<String> getLiveDataToken();
 
     MutableLiveData<User> getLiveDataUser();
@@ -59,7 +67,10 @@ public interface UserServiceI {
 
     MutableLiveData<Boolean> getLiveDataProfileStep1();
 
+    MutableLiveData<Boolean> getLiveDataFirstTime();
+
     MutableLiveData<Boolean> getLiveDataSubscription();
 
     MutableLiveData<Boolean> getLiveDataDeleteSubscription();
 }
+

@@ -111,11 +111,17 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         mbienvenida = findViewById(R.id.bienvenidaText);
         profile = findViewById(R.id.button_profile);
 
-        // TODO: implementar chec first time
-        //if (userViewModel.checkFirstTime)
-       DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
-       first.show(getSupportFragmentManager(), "first set up profile");
+        userViewModel.getFirstTime();
 
+        userViewModel.getResponseIsFirstTime().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean firstTime) {
+                if (firstTime){
+                    DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+                    first.show(getSupportFragmentManager(), "first set up profile");
+                }
+            }
+        });
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override
             public void onChanged(User s) {

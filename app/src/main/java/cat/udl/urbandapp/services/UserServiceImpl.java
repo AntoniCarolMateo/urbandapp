@@ -34,6 +34,10 @@ public class UserServiceImpl implements UserServiceI {
     public final MutableLiveData<List<User>> mAllUsers;
     public final MutableLiveData<Boolean> mRegister;
     public final MutableLiveData<Boolean> mSetProfileStep1;
+    public final MutableLiveData<User> mUserSubscribed;
+    public final MutableLiveData<Boolean> mSubscription;
+    public final MutableLiveData<Boolean> mDeleteSubscription;
+
 
     public final MutableLiveData<Boolean> mFirstTime;
 
@@ -45,6 +49,10 @@ public class UserServiceImpl implements UserServiceI {
         mRegister = new MutableLiveData<>();
         mSetProfileStep1 = new MutableLiveData<>();
         mFirstTime = new MutableLiveData<>();
+        mUserSubscribed = new MutableLiveData<>();
+        mSubscription = new MutableLiveData<>();
+        mDeleteSubscription  = new MutableLiveData<>();
+
     }
     public MutableLiveData<String> getLiveDataToken(){
         return mResponseToken;
@@ -52,13 +60,36 @@ public class UserServiceImpl implements UserServiceI {
     public MutableLiveData<User> getLiveDataUser(){
         return mUser;
     }
-    public MutableLiveData<Boolean> getLiveDataRegister(){return  mRegister;}
-    public MutableLiveData<Boolean> getLiveDataProfileStep1() { return mSetProfileStep1; }
+
+    public MutableLiveData<User> getLiveDataUserSubscription(){
+        return mUserSubscribed;
+    }
+    public MutableLiveData<Boolean> getLiveDataSubscription(){
+        return mSubscription;
+    }
+    public MutableLiveData<Boolean> getLiveDataDeleteSubscription(){
+        return mDeleteSubscription;
+    }
 
     public MutableLiveData<Boolean> getLiveDataFirstSetup() { return mFirstTime; }
 
     public MutableLiveData<List<User>> getLiveDataAllUsers(){
         return mAllUsers;
+    }
+
+    @Override
+    public MutableLiveData<Boolean> getLiveDataRegister() {
+        return mRegister;
+    }
+
+    @Override
+    public MutableLiveData<Boolean> getLiveDataProfileStep1() {
+        return mSetProfileStep1;
+    }
+
+    @Override
+    public MutableLiveData<Boolean> getLiveDataFirstTime() {
+        return mFirstTime;
     }
 
 
@@ -106,7 +137,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void firstProfileSetUpDone(String header) {
+    public void firstTimeProfileSetUp(String header) {
         userDAO.firstTimeProfileSetUp(header).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -128,7 +159,7 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void getfirstTime(String auth) {
+    public void getFirstTimeBoolean(String auth) {
         userDAO.getFirstTimeBoolean(auth).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -195,60 +226,36 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
+
+    // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
     @Override
-    public void setProfileInfo(String header, JsonObject json) {
-        userDAO.setProfileInfo(header,json).enqueue(new Callback<ResponseBody>() {
+    public void registerUser(JsonObject userJson) {
+
+        //userDAO.registerUser(userJson);
+        userDAO.registerUser(userJson).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
 
-                    mSetProfileStep1.setValue(true);
-                    Log.d("SetProfileStep1", "ok");
-                    Log.d("SetProfileStep1","Tenim boolean " + mSetProfileStep1.getValue());
+                    mRegister.setValue(true);
+                    Log.d("Register", "ok");
+                    //mResponseToken.setValue(authToken);
 
                 } else {
-                    Log.d("SetProfileStep1", "error else");
-                    mSetProfileStep1.setValue(false);
+                    Log.d("Register", "error else");
+                    mRegister.setValue(false);
                 }
-                }
+            }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("SetProfileStep1", t.toString());
-                mSetProfileStep1.setValue(false);
+
+                Log.d("Register", t.toString());
+                mRegister.setValue(false);
             }
+
         });
     }
-
-    // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
-   @Override
-   public void registerUser(JsonObject userJson) {
-
-       //userDAO.registerUser(userJson);
-       userDAO.registerUser(userJson).enqueue(new Callback<ResponseBody>() {
-           @Override
-           public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-               if (response.code() == 200) {
-
-                   mRegister.setValue(true);
-                   Log.d("Register", "ok");
-                   //mResponseToken.setValue(authToken);
-
-               } else {
-                   Log.d("Register", "error else");
-                   mRegister.setValue(false);
-               }
-           }
-
-           @Override
-           public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-               Log.d("Register", t.toString());
-               mRegister.setValue(false);
-           }
-
-       });
-   }
 
     @Override
     public void createTokenUser(String Auth){
@@ -287,8 +294,162 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
+    @Override
+    public void setProfileInfo(String header, JsonObject json) {
+        userDAO.setProfileInfo(header,json).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+
+                    mSetProfileStep1.setValue(true);
+                    Log.d("SetProfileStep1", "ok");
+                    Log.d("SetProfileStep1","Tenim boolean " + mSetProfileStep1.getValue());
+
+                } else {
+                    Log.d("SetProfileStep1", "error else");
+                    mSetProfileStep1.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("SetProfileStep1", t.toString());
+                mSetProfileStep1.setValue(false);
+            }
+        });
+    }
+
+    @Override
+    public void getInfoSubscribed(String Auth, String username) {
+        userDAO.getInfoSubscribed(Auth, username).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    // mResponseWorked.setValue(true);
+                    String respuestaBody = null;
+                    try {
+                        respuestaBody = response.body().string();
+                        Log.d("getInfoSubscribed ", "respuesta: " + respuestaBody);
+
+                        JSONArray respuesta = new JSONArray(respuestaBody);
+                        JSONObject mUserjson = respuesta.getJSONObject(0);
+                        User u = new User();
+
+                        u.setUsername(mUserjson.getString("username"));
+                        //Log.d("getInfoSubscribed ", "usernmae: "  +u.getUsername());
+                        u.setGenere(mUserjson.getString("genere"));
+                        //Log.d("getInfoSubscribed ", "genere: "  +u.getGenere());
+                        u.setDescription(mUserjson.getString("description"));
+                        JSONObject subscription = respuesta.getJSONObject(1);
+                        Boolean sub = subscription.getBoolean("subscribed");
+                        u.setHasSubscribed(sub);
+                        mUserSubscribed.setValue(u);
+                        //Log.d("getInfoSubscribed ", "description: "  +u.getDescription());
+                        //Log.d("getInfoSubscribed ", "sub: "  +sub);
+
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                        mUserSubscribed.setValue(new User());
+                    }
+
+                    Log.d("getInfoSubscribed ", "getInfoSubscribed succesfully");
+                } else {
+                    //mResponseWorked.setValue(false);
+                    mUserSubscribed.setValue(new User());
+                    Log.d("getInfoSubscribed", "Failed to getInfoSubscribed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("getInfoSubscribed", t.getMessage().toString());
+            }
+        });
+    }
+
+    @Override
+    public void userSubscribe(String Auth, String username) {
+        userDAO.userSubscribe(Auth,username).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200){
+                    // mResponseWorked.setValue(true);
+                    String respuestaBody = null;
+
+                    try {
+                        respuestaBody = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("userSubscribe ", "respuesta: "  +respuestaBody);
+
+                    if(Integer.parseInt(respuestaBody) == 1){
+                        Log.d("userSubscribe ", "respuesta es OK" );
+                        mSubscription.setValue(true);
+                    }
+                    else{
+                        Log.d("userSubscribe ", "la respuesta NO es OK, es: " + respuestaBody );
+                        mSubscription.setValue(false);
+                    }
 
 
 
+                    Log.d("userSubscribe ", "userSubscribe succesfully");
+                }else{
+                    //mResponseWorked.setValue(false);
+                    mSubscription.setValue(false);
 
+                    Log.d("userSubscribe", "Failed to userSubscribe");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("userSubscribe", t.getMessage().toString());
+            }
+        });
+    }
+
+    @Override
+    public void userDeleteSubscribe(String Auth, String username) {
+        userDAO.userDeleteSubscribe(Auth, username).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200) {
+                    // mResponseWorked.setValue(true);
+                    String respuestaBody = null;
+
+                    try {
+                        respuestaBody = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("userDeleteSubscribe ", "respuesta: " + respuestaBody);
+
+                    if (Integer.parseInt(respuestaBody) == 1) {
+                        Log.d("userDeleteSubscribe ", "respuesta es 1");
+                        mDeleteSubscription.setValue(true);
+                    } else {
+                        Log.d("userDeleteSubscribe ", "la respuesta NO es correcta, es: " + respuestaBody);
+                        mDeleteSubscription.setValue(false);
+                    }
+
+
+                    Log.d("userDeleteSubscribe ", "userDeleteSubscribe succesfully");
+                } else {
+                    //mResponseWorked.setValue(false);
+                    mDeleteSubscription.setValue(false);
+
+                    Log.d("userDeleteSubscribe", "Failed to userDeleteSubscribe");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("userDeleteSubscribe", t.getMessage().toString());
+            }
+        });
+    }
 }
+
