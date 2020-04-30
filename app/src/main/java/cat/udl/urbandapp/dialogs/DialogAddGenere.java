@@ -29,6 +29,7 @@ import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
@@ -40,13 +41,14 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
     private SharedPreferences mPreferences;
     private TablesViewModel viewModel;
-
+    private UserViewModel userViewModel;
     private Button button_add_genere;
 
 
 
     public static DialogAddGenere newInstance(FragmentActivity activity, TablesViewModel viewModel) {
         DialogAddGenere dialog = new DialogAddGenere();
+        dialog.userViewModel = new UserViewModel(activity.getApplication());
         dialog.activity = activity;
         dialog.viewModel = viewModel;
         return dialog;
@@ -65,15 +67,18 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
         builder.setPositiveButton("Aplicar cambios", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                     viewModel.saveGeneres();
+                    userViewModel.firstSetUpDone();
             }
         });
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)
                 .create();
+
         button_add_genere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel.addGenenres(my_sel_items);
+
             }
         });
         listView.setOnItemClickListener(new OnItemClickListener() {

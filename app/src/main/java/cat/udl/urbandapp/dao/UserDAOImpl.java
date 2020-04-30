@@ -69,6 +69,16 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
+    public Call<ResponseBody> firstTimeProfileSetUp(String Auth) {
+        return retrofit.create(IUserDAO.class).firstTimeProfileSetUp(Auth);
+    }
+
+    @Override
+    public Call<Boolean> getFirstTimeBoolean(String auth) {
+        return retrofit.create(IUserDAO.class).getFirstTimeBoolean(auth);
+    }
+
+    @Override
         //public Call<Void> registerUser(JsonObject userJson) {
         public Call<ResponseBody> registerUser(JsonObject userJson) {
             return retrofit.create(IUserDAO.class).registerUser(userJson);

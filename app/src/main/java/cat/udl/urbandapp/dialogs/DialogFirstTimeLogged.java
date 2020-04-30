@@ -33,8 +33,8 @@ public class DialogFirstTimeLogged extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton(" Configura tu perfil por primera vez!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Intent profile = new Intent(getContext(), UserProfileActivity.class);
-                startActivity(profile);
+                DialogSetProfileStep1 dialogstep1 = new DialogSetProfileStep1().newInstance(getActivity());
+                dialogstep1.show(getActivity().getSupportFragmentManager(),"STEP 1");
             }
         });
 

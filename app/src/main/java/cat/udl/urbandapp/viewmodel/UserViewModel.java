@@ -35,10 +35,8 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> responseLiveRegister;
     private MutableLiveData<Boolean> responseLiveStep1;
     private MutableLiveData<List<User>> responseAllUsers;
+    private MutableLiveData<Boolean> responseIsFirstTime;
 
-    private MutableLiveData<User> responseUserSubscription;
-    private MutableLiveData<Boolean> responseSubscription;
-    private MutableLiveData<Boolean> responseDeleteSubscription;
     private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -49,9 +47,8 @@ public class UserViewModel extends AndroidViewModel {
         responseAllUsers = repository.getLiveDataAllUsers();
         responseLiveRegister = repository.getLiveDataRegister();
         responseLiveStep1 = repository.getLiveDataProfileStep1();
-        responseUserSubscription = repository.getLiveDataUserSubscription();
-        responseSubscription = repository.getLiveDataSubscription();
-        responseDeleteSubscription = repository.getLiveDataDeleteSubscription();
+        responseIsFirstTime = repository.getLiveDataFirstSetup();
+
         this.mPreferences = PreferencesProvider.providePreferences();
     }
 
@@ -93,25 +90,6 @@ public class UserViewModel extends AndroidViewModel {
         repository.getAllUsers();
     }
 
-    public void getUsersSubscribed(String username){
-        String header = this.mPreferences.getString("token","");
-        repository.getInfoSubscribed(header,username);
-
-    };
-
-    public void subscribeUser(String username){
-        String header = this.mPreferences.getString("token","");
-        repository.userSubscribe(header,username);
-
-    };
-
-    public void removeSubscription(String username){
-        String header = this.mPreferences.getString("token","");
-        repository.userDeleteSubscribe(header,username);
-
-    };
-
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setProfileInfo(String name, String surname, int exp, String birth, String gender, String desc) {
         String header = this.mPreferences.getString("token","");
@@ -124,8 +102,15 @@ public class UserViewModel extends AndroidViewModel {
         json.addProperty("description", desc);
         this.repository.setProfileInfo(header, json);
     }
+    public void getFirstTime() {
+        String header = this.mPreferences.getString("token","");
+        this.repository.getfirstTime(header);
+    }
 
-
+    public void firstSetUpDone() {
+        String header = this.mPreferences.getString("token","");
+        this.repository.firstProfileSetUpDone(header);
+    }
 
     public LiveData<String> getResponseLiveDataToken() {
         return this.responseLiveDataToken;
@@ -142,14 +127,8 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<Boolean> getResponseLiveDataProfileStep1() {
         return this.responseLiveStep1;
     }
+    public LiveData<Boolean> getResponseIsFirstTime(){ return this.responseIsFirstTime;}
 
-    public LiveData<User> getResponseUserSubscription(){return this.responseUserSubscription;}
 
-    public LiveData<Boolean> getResponseLiveDataSubscription(){
-        return this.responseSubscription;
-    }
 
-    public LiveData<Boolean> getResponseLiveDataDeleteSubscription(){
-        return this.responseDeleteSubscription;
-    }
 }

@@ -29,6 +29,7 @@ import cat.udl.urbandapp.recyclerview.GeneresAdapter;
 import cat.udl.urbandapp.recyclerview.InstrumentAdapter;
 import cat.udl.urbandapp.recyclerview.InstrumentDiffCallback;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.UserViewModel;
 
     public class DialogSetProfileStep3 extends DialogFragment {
 
@@ -37,6 +38,7 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
         private ImageView add_generes;
         private RecyclerView recyclerView_generes;
         private TablesViewModel tablesViewModel;
+        private UserViewModel userViewModel;
 
         public static DialogSetProfileStep3 newInstance(FragmentActivity activity) {
             DialogSetProfileStep3 dialog = new DialogSetProfileStep3();
@@ -48,11 +50,12 @@ import cat.udl.urbandapp.viewmodel.TablesViewModel;
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             tablesViewModel = new TablesViewModel(getActivity().getApplication());
+            userViewModel = new UserViewModel(getActivity().getApplication());
             initView();
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Finish the set up", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-
+                        userViewModel.firstSetUpDone();
                 }
             });
             builder.setNegativeButton("Prevous Step", new DialogInterface.OnClickListener() {

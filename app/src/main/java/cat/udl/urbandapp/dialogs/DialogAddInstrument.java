@@ -32,6 +32,7 @@ import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.recyclerview.InstrumentAdapter;
 import cat.udl.urbandapp.recyclerview.InstrumentDiffCallback;
 import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogAddInstrument extends DialogFragment implements LifecycleOwner {
 

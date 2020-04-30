@@ -17,7 +17,6 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        DialogSetProfileStep1 dialog = DialogSetProfileStep1.newInstance(UserProfileActivity.this);
-        dialog.show(getSupportFragmentManager(),"Probando dialogs");
+
     }
 }

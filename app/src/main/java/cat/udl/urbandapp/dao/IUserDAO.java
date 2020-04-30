@@ -42,6 +42,7 @@ public interface IUserDAO {
     // Si llamáis a getUsers(null, token) -> todos los usuarios
     // Su llamáis a getUsers(filter, token) -> lista filtrada
     // Muy limpio y muy faci de leer :)
+
     @GET("users/all")
     Call<ResponseBody> getAllUsers();
 
@@ -58,4 +59,10 @@ public interface IUserDAO {
 
     @POST("account/update_profile")
     Call<ResponseBody> setProfileInfo(@Header("Authorization") String Auth, @Body JsonObject json);
+
+    @POST("account/profile/setfirstSetUp")
+    Call<ResponseBody> firstTimeProfileSetUp(@Header ("Authorization") String Auth);
+
+    @GET("account/profile/getfirstSetUp")
+    Call<Boolean> getFirstTimeBoolean(@Header ("Authorization") String auth);
 }
