@@ -73,8 +73,10 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
-                        Toast.makeText(DefaultActivity.this, "marker clicado: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
-
+                        //Toast.makeText(DefaultActivity.this, "marker clicado: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
+                        Intent theIntent = new Intent(DefaultActivity.this, MusicoActivity.class);
+                        theIntent.putExtra("username", marker.getTitle());
+                        startActivity(theIntent);
                         return false;
                     }
                 });
@@ -111,8 +113,8 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
         // TODO: implementar chec first time
         //if (userViewModel.checkFirstTime)
-        DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
-        first.show(getSupportFragmentManager(), "first set up profile");
+       // DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+        //first.show(getSupportFragmentManager(), "first set up profile");
 
         userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
             @Override
@@ -137,6 +139,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mPreferences.edit().putString("token","").apply();
                 mPreferences.edit().putString("token","").apply();
                 Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
                 startActivity(chooser);

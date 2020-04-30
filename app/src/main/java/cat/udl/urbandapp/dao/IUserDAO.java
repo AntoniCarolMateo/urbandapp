@@ -9,10 +9,12 @@ import org.json.JSONObject;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface IUserDAO {
     /*
@@ -42,6 +44,17 @@ public interface IUserDAO {
     // Muy limpio y muy faci de leer :)
     @GET("users/all")
     Call<ResponseBody> getAllUsers();
+
+
+    @GET("users/get_info_by_subscription/{username}")
+    Call<ResponseBody> getInfoSubscribed(@Header("Authorization") String auth, @Path("username") String username);
+
+    @GET("users/subscribe/{username}")
+    Call<ResponseBody> userSubscribe(@Header("Authorization") String auth, @Path("username") String username);
+
+    @DELETE("users/delete_subscribed/{username}")
+    Call<ResponseBody> userDeleteSubscribe(@Header("Authorization") String auth, @Path("username") String username);
+
 
     @POST("account/update_profile")
     Call<ResponseBody> setProfileInfo(@Header("Authorization") String Auth, @Body JsonObject json);

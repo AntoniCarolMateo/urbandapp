@@ -26,8 +26,16 @@ public class User {
     private String phone;
     @SerializedName("photo")
     private String photo;
+    @SerializedName("description")
+    private String description;
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @SerializedName("latitude")
     private float latitude;
@@ -35,11 +43,20 @@ public class User {
     @SerializedName("longitude")
     private float longitude;
 
+    private boolean hasSubscribed;
+
     List<Instrument> userInstruments;
 
     public User() {
     }
 
+    public boolean isHasSubscribed() {
+        return hasSubscribed;
+    }
+
+    public void setHasSubscribed(boolean hasSubscribed) {
+        this.hasSubscribed = hasSubscribed;
+    }
 
     public User(String created_at, String username, String email, String name, String surname, String birthday, String genere) {
         this.created_at = created_at;

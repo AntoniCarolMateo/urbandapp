@@ -36,6 +36,9 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> responseLiveStep1;
     private MutableLiveData<List<User>> responseAllUsers;
 
+    private MutableLiveData<User> responseUserSubscription;
+    private MutableLiveData<Boolean> responseSubscription;
+    private MutableLiveData<Boolean> responseDeleteSubscription;
     private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -46,7 +49,9 @@ public class UserViewModel extends AndroidViewModel {
         responseAllUsers = repository.getLiveDataAllUsers();
         responseLiveRegister = repository.getLiveDataRegister();
         responseLiveStep1 = repository.getLiveDataProfileStep1();
-
+        responseUserSubscription = repository.getLiveDataUserSubscription();
+        responseSubscription = repository.getLiveDataSubscription();
+        responseDeleteSubscription = repository.getLiveDataDeleteSubscription();
         this.mPreferences = PreferencesProvider.providePreferences();
     }
 
@@ -88,6 +93,25 @@ public class UserViewModel extends AndroidViewModel {
         repository.getAllUsers();
     }
 
+    public void getUsersSubscribed(String username){
+        String header = this.mPreferences.getString("token","");
+        repository.getInfoSubscribed(header,username);
+
+    };
+
+    public void subscribeUser(String username){
+        String header = this.mPreferences.getString("token","");
+        repository.userSubscribe(header,username);
+
+    };
+
+    public void removeSubscription(String username){
+        String header = this.mPreferences.getString("token","");
+        repository.userDeleteSubscribe(header,username);
+
+    };
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setProfileInfo(String name, String surname, int exp, String birth, String gender, String desc) {
         String header = this.mPreferences.getString("token","");
@@ -119,6 +143,13 @@ public class UserViewModel extends AndroidViewModel {
         return this.responseLiveStep1;
     }
 
+    public LiveData<User> getResponseUserSubscription(){return this.responseUserSubscription;}
 
+    public LiveData<Boolean> getResponseLiveDataSubscription(){
+        return this.responseSubscription;
+    }
 
+    public LiveData<Boolean> getResponseLiveDataDeleteSubscription(){
+        return this.responseDeleteSubscription;
+    }
 }

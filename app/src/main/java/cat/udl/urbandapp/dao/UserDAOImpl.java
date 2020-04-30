@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.http.GET;
 
 public class UserDAOImpl implements IUserDAO {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
@@ -38,6 +39,27 @@ public class UserDAOImpl implements IUserDAO {
     public Call<ResponseBody> getAllUsers(){
 
         return  retrofit.create(IUserDAO.class).getAllUsers();
+
+    }
+
+    @Override
+    public Call<ResponseBody> getInfoSubscribed(String auth, String username){
+
+        return  retrofit.create(IUserDAO.class).getInfoSubscribed(auth,username);
+
+    }
+
+    @Override
+    public Call<ResponseBody> userSubscribe(String auth, String username){
+
+        return  retrofit.create(IUserDAO.class).userSubscribe(auth,username);
+
+    }
+
+    @Override
+    public Call<ResponseBody> userDeleteSubscribe(String auth, String username){
+
+        return  retrofit.create(IUserDAO.class).userDeleteSubscribe(auth,username);
 
     }
 
