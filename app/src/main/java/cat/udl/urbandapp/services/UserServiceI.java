@@ -55,6 +55,9 @@ public interface UserServiceI {
     @GET("account/profile/getfirstSetUp")
     void getFirstTimeBoolean(@Header ("Authorization") String auth);
 
+    @GET("account/profile/show")
+    void showPrivateProfile(@Header("Authorization") String auth);
+
     MutableLiveData<String> getLiveDataToken();
 
     MutableLiveData<User> getLiveDataUser();
@@ -72,5 +75,7 @@ public interface UserServiceI {
     MutableLiveData<Boolean> getLiveDataSubscription();
 
     MutableLiveData<Boolean> getLiveDataDeleteSubscription();
+
+
 }
 

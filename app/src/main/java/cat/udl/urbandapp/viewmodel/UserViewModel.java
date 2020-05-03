@@ -116,7 +116,7 @@ public class UserViewModel extends AndroidViewModel {
     };
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setProfileInfo(String name, String surname, int exp, String birth, String gender, String desc) {
+    public void setProfileInfo(String name, String surname, float exp, String birth, String gender, String desc) {
         String header = this.mPreferences.getString("token","");
         JsonObject json = new JsonObject();
         json.addProperty("name", name);
@@ -165,5 +165,8 @@ public class UserViewModel extends AndroidViewModel {
     }
 
 
-
+    public void showPrivateProfile() {
+        String token = mPreferences.getString("token","");
+        repository.showPrivateProfile(token);
+    }
 }

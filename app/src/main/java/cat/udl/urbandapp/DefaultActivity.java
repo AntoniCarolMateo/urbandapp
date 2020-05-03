@@ -140,7 +140,13 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
         userViewModel.getProfileUser();
 
-
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
+                startActivity(profile);
+            }
+        });
         logout = findViewById(R.id.buttonLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

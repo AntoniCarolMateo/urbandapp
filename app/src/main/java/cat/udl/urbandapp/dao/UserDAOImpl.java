@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
+import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -76,6 +77,11 @@ public class UserDAOImpl implements IUserDAO {
     @Override
     public Call<Boolean> getFirstTimeBoolean(String auth) {
         return retrofit.create(IUserDAO.class).getFirstTimeBoolean(auth);
+    }
+
+    @Override
+    public Call<User> showPrivateProfile(String auth) {
+        return retrofit.create(IUserDAO.class).showPrivateProfile(auth);
     }
 
     @Override

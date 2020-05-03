@@ -101,7 +101,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
             public void onClick(DialogInterface dialog, int id) {
                 String _name = name.getText().toString();
                 String _surname = surname.getText().toString();
-                int _exp = (int) generalExp.getRating();
+                float _exp = generalExp.getRating();
                 String _birth  = calendar.getText().toString();
                 String _gender = "";
                 String _description = description.getText().toString();

@@ -18,7 +18,7 @@ public class User {
     private String name;
     @SerializedName("surname")
     private String surname;
-    @SerializedName("birthday")
+    @SerializedName("birthdate")
     private String birthday;
     @SerializedName("genere")
     private String genere;
@@ -42,6 +42,9 @@ public class User {
 
     @SerializedName("longitude")
     private float longitude;
+
+    @SerializedName("gen_exp")
+    private float gen_exp;
 
     private boolean hasSubscribed;
 
@@ -174,6 +177,14 @@ public class User {
 
     public void setGenere(String genere) {
         this.genere = genere;
+    }
+
+    public float getGen_exp() {
+        return gen_exp;
+    }
+
+    public void setGen_exp(float gen_exp) {
+        this.gen_exp = gen_exp;
     }
 
     @NonNull
