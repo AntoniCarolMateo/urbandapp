@@ -69,4 +69,7 @@ public interface IUserDAO {
 
     @GET("account/profile/show")
     Call<User> showPrivateProfile(@Header ("Authorization") String auth);
+
+    @POST("account/profile/setUsername/{username}")
+    Call<ResponseBody> setUsername(@Header ("Authorization") String auth, @Path("username") String username);
 }

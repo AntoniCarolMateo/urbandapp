@@ -85,6 +85,11 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
+    public Call<ResponseBody> setUsername(String auth, String username) {
+        return retrofit.create(IUserDAO.class).setUsername(auth, username);
+    }
+
+    @Override
         //public Call<Void> registerUser(JsonObject userJson) {
         public Call<ResponseBody> registerUser(JsonObject userJson) {
             return retrofit.create(IUserDAO.class).registerUser(userJson);

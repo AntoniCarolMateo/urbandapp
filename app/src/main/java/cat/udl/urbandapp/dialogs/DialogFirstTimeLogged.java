@@ -11,15 +11,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 import cat.udl.urbandapp.DefaultActivity;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.UserProfileActivity;
+import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogFirstTimeLogged extends DialogFragment {
 
     public View rootView;
     private Activity activity;
+    private EditText editText_username;
+    private UserViewModel userViewModel;
 
     public static DialogFirstTimeLogged newInstance(DefaultActivity activity) {
         DialogFirstTimeLogged dialog = new DialogFirstTimeLogged();
@@ -29,10 +33,13 @@ public class DialogFirstTimeLogged extends DialogFragment {
 
     @NonNull @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        userViewModel = new UserViewModel(getActivity().getApplication());
         initView();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton(" Configura tu perfil por primera vez!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                String username = editText_username.getText().toString();
+                userViewModel.setUsername(username);
                 DialogSetProfileStep1 dialogstep1 = new DialogSetProfileStep1().newInstance(getActivity());
                 dialogstep1.show(getActivity().getSupportFragmentManager(),"STEP 1");
             }
@@ -53,6 +60,7 @@ public class DialogFirstTimeLogged extends DialogFragment {
     private void initView() {
         rootView = LayoutInflater.from
                 (getContext()).inflate(R.layout.dialog_first_time_logged, null, false);
+        editText_username = rootView.findViewById(R.id.editText_username);
     }
 }
 

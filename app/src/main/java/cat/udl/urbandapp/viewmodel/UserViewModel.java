@@ -169,4 +169,9 @@ public class UserViewModel extends AndroidViewModel {
         String token = mPreferences.getString("token","");
         repository.showPrivateProfile(token);
     }
+
+    public void setUsername(String username) {
+        String token = mPreferences.getString("token", "");
+        repository.setUsername(token,username);
+    }
 }

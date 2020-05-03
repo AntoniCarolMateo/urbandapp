@@ -199,6 +199,21 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
+    @Override
+    public void setUsername(String auth, String username) {
+        userDAO.setUsername(auth, username).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     @Override
     public void getAllUsers(){
