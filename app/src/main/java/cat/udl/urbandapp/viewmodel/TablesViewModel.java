@@ -71,7 +71,7 @@ public class TablesViewModel extends AndroidViewModel {
 
     }
 
-    public void addInstrument(String nameInstrument, int exp){
+    public void addInstrument(String nameInstrument, float exp){
 
         Instrument ins = new Instrument(nameInstrument, exp);
         this.instruments.add(ins);
