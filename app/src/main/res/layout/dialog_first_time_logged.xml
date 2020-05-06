@@ -43,6 +43,22 @@
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="14sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="En primer lugar, escoge un nombre para poder ser identificado más facilmente"
+        android:textAlignment="center"
+        android:textColor="@color/secondaryTextColor" />
+
+    <EditText
+        android:id="@+id/editText_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="musico455"
+        android:textAlignment="center" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="31dp" />

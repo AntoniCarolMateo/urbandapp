@@ -17,12 +17,12 @@ public class Instrument {
     private String name;
 
     @SerializedName("expirience")
-    private int expirience;
+    private float expirience;
 
     public Instrument(){
 
     }
-    public Instrument(String nameInstrument, int expirience) {
+    public Instrument(String nameInstrument, float expirience) {
         this.name = nameInstrument;
         this.expirience = expirience;
     }
@@ -35,11 +35,11 @@ public class Instrument {
         this.name = nameInstrument;
     }
 
-    public int getExpirience() {
+    public float getExpirience() {
         return expirience;
     }
 
-    public void setExpirience(int expirience) {
+    public void setExpirience(float expirience) {
         this.expirience = expirience;
     }
 

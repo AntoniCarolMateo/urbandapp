@@ -114,7 +114,7 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
             @Override
             public void onClick(View v) {
                 String _instrument = (String) choice_instrument.getSelectedItem();
-                int _expirience = experienceBar.getProgress();
+                float _expirience = experienceBar.getRating();
                 viewModel.addInstrument(_instrument, _expirience);
             }
         });

@@ -179,6 +179,41 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
+    @Override
+    public void showPrivateProfile(String auth) {
+        userDAO.showPrivateProfile(auth).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    User usr = response.body();
+                    Log.d("showPrivateProfile", "we got user :  " + usr.toString() + "exp :" + usr.getGen_exp());
+                    mUser.setValue(usr);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                mUser.setValue(null);
+                Log.d("showPrivateProfile", "Something wrong happened");
+            }
+        });
+    }
+
+    @Override
+    public void setUsername(String auth, String username) {
+        userDAO.setUsername(auth, username).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     @Override
     public void getAllUsers(){

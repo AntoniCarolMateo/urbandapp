@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import cat.udl.urbandapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -65,4 +66,10 @@ public interface IUserDAO {
 
     @GET("account/profile/getfirstSetUp")
     Call<Boolean> getFirstTimeBoolean(@Header ("Authorization") String auth);
+
+    @GET("account/profile/show")
+    Call<User> showPrivateProfile(@Header ("Authorization") String auth);
+
+    @POST("account/profile/setUsername/{username}")
+    Call<ResponseBody> setUsername(@Header ("Authorization") String auth, @Path("username") String username);
 }
