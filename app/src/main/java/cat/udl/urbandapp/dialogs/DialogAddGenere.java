@@ -9,9 +9,6 @@ import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Toast;
 
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
@@ -43,15 +40,10 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
     private List<MusicalGenere> my_sel_items;
 
     private SharedPreferences mPreferences;
-<<<<<<< HEAD
     private TablesViewModel viewModel;
     private UserViewModel userViewModel;
     private Button button_add_genere;
 
-=======
-    Button button;
-    CheckBox Rock_gnr,Pop_gnr;
->>>>>>> Toni-Android
 
 
     public static DialogAddGenere newInstance(FragmentActivity activity, TablesViewModel viewModel) {
@@ -64,18 +56,11 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-<<<<<<< HEAD
 
         super.onCreate(savedInstanceState);
 
         this.mPreferences = PreferencesProvider.providePreferences();
 
-=======
-        super.onCreate(savedInstanceState);
-
-        this.mPreferences = PreferencesProvider.providePreferences();
-        addListenerOnButtonClick();
->>>>>>> Toni-Android
         initView();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -130,42 +115,11 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
 
     }
-<<<<<<< HEAD
 
 
 
-=======
-    private void addListenerOnButtonClick(){
-        //Getting instance of CheckBoxes and Button from the activty_main.xml file
-        //Rock_gnr =(CheckBox)findViewById(R.id.Rock_gnr);
-        //Pop_gnr=(CheckBox)findViewById(R.id.Pop_gnr);
-        //button=(Button)findViewById(R.id.button);
-        //button.setOnClickListener(new View.OnClickListener() {
-
-            /*
-            @Override
-            public void onClick(View view) {
-
-                if(Rock_gnr.isChecked()){
-
-                }
-                if(Pop_gnr.isChecked()){
-
-                }
-                }
-
-
-
-
-
-        });*/
-    }
->>>>>>> Toni-Android
 }
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> Toni-Android
