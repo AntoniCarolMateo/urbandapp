@@ -31,13 +31,14 @@ public class UserServiceImpl implements UserServiceI {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<String> mResponseToken;
     public final MutableLiveData<User> mUser;
-    public final MutableLiveData<List<User>> mAllUsers;
+
     public final MutableLiveData<Boolean> mRegister;
     public final MutableLiveData<Boolean> mSetProfileStep1;
     public final MutableLiveData<User> mUserSubscribed;
     public final MutableLiveData<Boolean> mSubscription;
     public final MutableLiveData<Boolean> mDeleteSubscription;
 
+    public final MutableLiveData<List<User>> mAllUsers;
 
     public final MutableLiveData<Boolean> mFirstTime;
 
@@ -210,6 +211,28 @@ public class UserServiceImpl implements UserServiceI {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+            }
+        });
+    }
+
+    @Override
+    public void getFilteredUsers(String header, String ins, String gen) {
+        userDAO.getFilteredUsers(header, ins, gen).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                // ACTIUALIZAR LA Mutavle lie data dels user filtered
+                if (response.code() == 200) {
+                    List<User> mlist = response.body();
+                    mAllUsers.setValue(mlist);
+                }
+                else{
+                    mAllUsers.setValue(new ArrayList<User>());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                mAllUsers.setValue(new ArrayList<User>());
             }
         });
     }

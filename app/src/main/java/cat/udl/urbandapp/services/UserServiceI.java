@@ -2,6 +2,7 @@ package cat.udl.urbandapp.services;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UserServiceI {
     /*
@@ -60,6 +62,9 @@ public interface UserServiceI {
 
     @POST("account/profile/serUsername/{username}")
     void setUsername(@Header("Authorization") String auth, @Path("username") String username);
+
+    @GET("users/all")
+    void getFilteredUsers(String header, @Query("instruments") String ins, @Query("genres")String gen);
 
     MutableLiveData<String> getLiveDataToken();
 

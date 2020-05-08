@@ -22,10 +22,8 @@
 
 
         >
-        <activity android:name=".DefaultActivity">
-        </activity>
 
-        android:theme="@style/AppTheme">
+
         <activity android:name=".MusicoActivity"></activity>
         <activity android:name=".DefaultActivity" />
 
@@ -39,6 +37,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserProfileActivity" />
+        <activity android:name=".FiltersActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

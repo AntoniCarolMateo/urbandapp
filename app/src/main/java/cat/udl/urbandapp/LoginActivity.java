@@ -48,9 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.loginPassword);
         userViewModel = new UserViewModel(getApplication());
 
-        usuario = findViewById(R.id.usuario);
+       /* usuario = findViewById(R.id.usuario);
         banda = findViewById(R.id.banda);
-        patrocinador = findViewById(R.id.patrocinador);
+        patrocinador = findViewById(R.id.patrocinador);*/
 
        /* btn_usuari = findViewById(R.id.btn_Usuario);
         btn_patrocinador = findViewById(R.id.btn_Patrocinador);
@@ -65,11 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                 mPreferences.edit().putString("token", s).apply();
                 Log.d("Login", "Tenim token " + s);
                 Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+                Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
+                startActivity(da);
 
+               /* if (usuario.isChecked()) {
 
-                if (usuario.isChecked()) {
-                    Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
-                    startActivity(da);
                     Toast.makeText(LoginActivity.this, usuario.getText(), Toast.LENGTH_SHORT).show();
                 } else if (banda.isChecked()) {
                     Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
@@ -79,14 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                     Intent da = new Intent(LoginActivity.this, DefaultActivity.class);
                     startActivity(da);
                     Toast.makeText(LoginActivity.this, patrocinador.getText(), Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
 
             }
         });
 
 
-            rol = (RadioGroup) findViewById(R.id.rol);
+//            rol = (RadioGroup) findViewById(R.id.rol);
             login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                 String _username = username.getText().toString();
                 String _password = password.getText().toString();
                 userViewModel.createTokenUser(_username, _password);
-                int selectedId = rol.getCheckedRadioButtonId();
-                usuario = (RadioButton) findViewById(selectedId);
+//                int selectedId = rol.getCheckedRadioButtonId();
+//                usuario = (RadioButton) findViewById(selectedId);
 
             }
         });

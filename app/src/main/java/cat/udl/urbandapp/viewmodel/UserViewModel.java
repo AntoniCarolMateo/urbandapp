@@ -97,6 +97,11 @@ public class UserViewModel extends AndroidViewModel {
         repository.getAllUsers();
     }
 
+    public void getFilteredUsers(String ins, String gen){
+        String header = this.mPreferences.getString("token","");
+        repository.getFilteredUsers(header,ins,gen);
+    }
+
     public void getUsersSubscribed(String username){
         String header = this.mPreferences.getString("token","");
         repository.getInfoSubscribed(header,username);

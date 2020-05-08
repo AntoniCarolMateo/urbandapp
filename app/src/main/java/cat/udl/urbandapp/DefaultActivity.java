@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DefaultActivity extends AppCompatActivity implements OnMapReadyCallback{
 
+    private Button filters;
     private Button logout;
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
@@ -110,6 +112,9 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
         profile = findViewById(R.id.button_profile);
+        filters = findViewById(R.id.button_filters);
+        logout = findViewById(R.id.buttonLogout);
+
 
         userViewModel.getFirstTime();
 
@@ -136,28 +141,42 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
         userViewModel = new UserViewModel(getApplication());
 
-
-
         userViewModel.getProfileUser();
 
-        profile.setOnClickListener(new View.OnClickListener() {
+
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPreferences.edit().putString("token", "").apply();
+                Intent chooser = new Intent(DefaultActivity.this, ChooserActivity.class);
+                startActivity(chooser);
+
+            }
+        });
+
+
+        filters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent filter = new Intent(DefaultActivity.this, FiltersActivity.class);
+                startActivity(filter);
+
+            }
+        });
+
+
+        profile.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
                 startActivity(profile);
             }
         });
-        logout = findViewById(R.id.buttonLogout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPreferences.edit().putString("token","").apply();
-                mPreferences.edit().putString("token","").apply();
-                Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
-                startActivity(chooser);
 
-            }
-        });
+
+
     }
 
     @Override

@@ -6,6 +6,8 @@ import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 import cat.udl.urbandapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -16,6 +18,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface IUserDAO {
     /*
@@ -72,4 +75,7 @@ public interface IUserDAO {
 
     @POST("account/profile/setUsername/{username}")
     Call<ResponseBody> setUsername(@Header ("Authorization") String auth, @Path("username") String username);
+
+    @GET("users/all?instruments={instruments}&genres={genres}")
+    Call <List<User>> getFilteredUsers(String header, @Query("instruments") String ins, @Query("genres")String gen);
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.List;
 
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
@@ -87,6 +88,11 @@ public class UserDAOImpl implements IUserDAO {
     @Override
     public Call<ResponseBody> setUsername(String auth, String username) {
         return retrofit.create(IUserDAO.class).setUsername(auth, username);
+    }
+
+    @Override
+    public Call<List<User>> getFilteredUsers(String auth, String ins, String gen) {
+        return retrofit.create(IUserDAO.class).getFilteredUsers(auth, ins, gen);
     }
 
     @Override
