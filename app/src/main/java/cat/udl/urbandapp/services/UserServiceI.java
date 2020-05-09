@@ -33,8 +33,10 @@ public interface UserServiceI {
 
 
     @GET("users/all")
-    void getAllUsers();
+    void getAllUsers(@Header("Authorization") String auth);
 
+    @GET("users/match")
+    void getMatch(@Header("Authorization") String auth);
 
     @POST("account/update_profile")
     void setProfileInfo(String header, JsonObject json);
@@ -72,5 +74,7 @@ public interface UserServiceI {
     MutableLiveData<Boolean> getLiveDataSubscription();
 
     MutableLiveData<Boolean> getLiveDataDeleteSubscription();
+
+    MutableLiveData<User> getLiveDataMatch();
 }
 

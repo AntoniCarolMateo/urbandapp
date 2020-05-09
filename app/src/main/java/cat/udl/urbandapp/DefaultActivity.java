@@ -46,7 +46,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private Button profile;
     private GoogleMap googleMap;
 
-
+    private Button buttonMatch;
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         // Add a marker in Barcelona
@@ -110,6 +110,8 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
         profile = findViewById(R.id.button_profile);
+        buttonMatch = findViewById(R.id.buttonMatch);
+
 
         userViewModel.getFirstTime();
 
@@ -134,6 +136,14 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
+        userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User s) {
+                Log.d("DefaultActivity","Tenim match " + s.toString());
+                Toast.makeText(DefaultActivity.this," Has hecho match con el usuario: " + s.getUsername(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         userViewModel = new UserViewModel(getApplication());
 
 
@@ -150,6 +160,13 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
                 Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
                 startActivity(chooser);
 
+            }
+        });
+
+        buttonMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userViewModel.getMatch();
             }
         });
     }

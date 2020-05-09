@@ -44,8 +44,10 @@ public interface IUserDAO {
     // Muy limpio y muy faci de leer :)
 
     @GET("users/all")
-    Call<ResponseBody> getAllUsers();
+    Call<ResponseBody> getAllUsers(@Header("Authorization") String auth);
 
+    @GET("users/match")
+    Call<ResponseBody> getMatch(@Header("Authorization") String auth);
 
     @GET("users/get_info_by_subscription/{username}")
     Call<ResponseBody> getInfoSubscribed(@Header("Authorization") String auth, @Path("username") String username);

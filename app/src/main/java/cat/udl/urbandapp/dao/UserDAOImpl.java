@@ -34,11 +34,17 @@ public class UserDAOImpl implements IUserDAO {
 
     }
 
+    @Override
+    public Call<ResponseBody> getMatch(String auth){
+
+        return  retrofit.create(IUserDAO.class).getMatch(auth);
+
+    }
 
     @Override
-    public Call<ResponseBody> getAllUsers(){
+    public Call<ResponseBody> getAllUsers(String auth){
 
-        return  retrofit.create(IUserDAO.class).getAllUsers();
+        return  retrofit.create(IUserDAO.class).getAllUsers(auth);
 
     }
 
