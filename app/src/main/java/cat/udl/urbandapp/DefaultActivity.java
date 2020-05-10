@@ -139,12 +139,12 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
             @Override
             public void onChanged(User s) {
-                Log.d("DefaultActivity","Tenim match " + s.toString());
+                Log.d("DefaultActivity","Tenim match " + s.getUsername());
                 Toast.makeText(DefaultActivity.this," Has hecho match con el usuario: " + s.getUsername(), Toast.LENGTH_LONG).show();
             }
         });
 
-        userViewModel = new UserViewModel(getApplication());
+       // userViewModel = new UserViewModel(getApplication());
 
 
 
