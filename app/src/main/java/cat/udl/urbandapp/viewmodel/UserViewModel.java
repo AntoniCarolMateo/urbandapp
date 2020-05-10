@@ -52,6 +52,7 @@ public class UserViewModel extends AndroidViewModel {
     private List<String> list_filter_gen = new ArrayList<>();
 
 
+    private MutableLiveData<User> responseMatch;
     private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -66,6 +67,7 @@ public class UserViewModel extends AndroidViewModel {
         responseUserSubscription = repository.getLiveDataUserSubscription();
         responseSubscription = repository.getLiveDataSubscription();
         responseDeleteSubscription = repository.getLiveDataDeleteSubscription();
+        responseMatch = repository.getLiveDataMatch();
 
         mFilterInstruments = new MutableLiveData<>();
         mFilterGenres = new MutableLiveData<>();
@@ -140,6 +142,11 @@ public class UserViewModel extends AndroidViewModel {
         mFilterGenres.setValue(genresToShow);
     }
 
+    public void getMatch(){
+        Log.d("DefaultAcitivity","UserVIewModel getMatch");
+        String header = this.mPreferences.getString("token","");
+        repository.getMatch(header);
+    }
     public void getUsersSubscribed(String username){
         String header = this.mPreferences.getString("token","");
         repository.getInfoSubscribed(header,username);
@@ -213,6 +220,11 @@ public class UserViewModel extends AndroidViewModel {
         return this.responseLiveStep1;
     }
     public LiveData<Boolean> getResponseIsFirstTime(){ return this.responseIsFirstTime;}
+
+
+    public LiveData<User> getResponseLiveDataMatch() {
+        return this.responseMatch;
+    }
 
     public LiveData<User> getResponseUserSubscription(){return this.responseUserSubscription;}
 

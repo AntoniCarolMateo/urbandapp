@@ -33,14 +33,13 @@ public class UserServiceImpl implements UserServiceI {
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
     public final MutableLiveData<String> mResponseToken;
     public final MutableLiveData<User> mUser;
-
+    public final MutableLiveData<List<User>> mAllUsers;
     public final MutableLiveData<Boolean> mRegister;
     public final MutableLiveData<Boolean> mSetProfileStep1;
     public final MutableLiveData<User> mUserSubscribed;
     public final MutableLiveData<Boolean> mSubscription;
     public final MutableLiveData<Boolean> mDeleteSubscription;
-
-    public final MutableLiveData<List<User>> mAllUsers;
+    public final MutableLiveData<User> mMatch;
 
     public final MutableLiveData<Boolean> mFirstTime;
 
@@ -55,6 +54,7 @@ public class UserServiceImpl implements UserServiceI {
         mUserSubscribed = new MutableLiveData<>();
         mSubscription = new MutableLiveData<>();
         mDeleteSubscription  = new MutableLiveData<>();
+        mMatch = new MutableLiveData<>();
 
     }
     public MutableLiveData<String> getLiveDataToken(){
@@ -95,6 +95,11 @@ public class UserServiceImpl implements UserServiceI {
         return mFirstTime;
     }
 
+    @Override
+    public MutableLiveData<User> getLiveDataMatch(){
+        Log.d("DefaultActivity","userServiceImpls match");
+        return mMatch;
+    }
 
     @Override
     public void getProfileUser(final String Auth){
@@ -135,6 +140,49 @@ public class UserServiceImpl implements UserServiceI {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("getUser", t.getMessage().toString());
                 mUser.setValue(new User());
+            }
+        });
+    }
+
+    @Override
+    public void getMatch(final String Auth){
+
+        userDAO.getMatch(Auth).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code() == 200 ){
+                    try {
+
+                        String respuestaBody = response.body().string();
+                        Log.d("getMatch", "Ok getMatch");
+                        Log.d("getMatch", respuestaBody);
+                        JSONObject mUserjson = new JSONObject(respuestaBody);
+                        Log.d("getMatch", "El JSONObject es: " + mUserjson.toString());
+                        User u = new User();
+
+                        u.setUsername(mUserjson.getString("username"));
+                        u.setCreated_at(mUserjson.getString("created_at"));
+
+                        Log.d("getMatch", u.getUsername());
+                        Log.d("getMatch", u.getCreated_at());
+
+                        mMatch.setValue(u);
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    mMatch.setValue(new User());
+                    Log.d("getMatch", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getMatch", "header es: " + Auth);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("getMatch", t.getMessage().toString());
+                mMatch.setValue(new User());
             }
         });
     }
@@ -207,7 +255,7 @@ public class UserServiceImpl implements UserServiceI {
         userDAO.setUsername(auth, username).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                
+
             }
 
             @Override

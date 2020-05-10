@@ -1,6 +1,5 @@
 package cat.udl.urbandapp.services;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
@@ -40,6 +39,8 @@ public interface UserServiceI {
     @GET("users/all")
     void getAllUsers(@Header("Authorization") String Auth);
 
+    @GET("users/match")
+    void getMatch(@Header("Authorization") String auth);
 
     @POST("account/update_profile")
     void setProfileInfo(String header, JsonObject json);
@@ -87,7 +88,6 @@ public interface UserServiceI {
 
     MutableLiveData<Boolean> getLiveDataDeleteSubscription();
 
-
-
+    MutableLiveData<User> getLiveDataMatch();
 }
 

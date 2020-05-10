@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +38,6 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DefaultActivity extends AppCompatActivity implements OnMapReadyCallback{
 
-    private Button filters;
     private Button logout;
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
@@ -48,7 +46,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private Button profile;
     private GoogleMap googleMap;
 
-
+    private Button buttonMatch;
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         // Add a marker in Barcelona
@@ -112,8 +110,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         userViewModel = new UserViewModel(getApplication());
         mbienvenida = findViewById(R.id.bienvenidaText);
         profile = findViewById(R.id.button_profile);
-        filters = findViewById(R.id.button_filters);
-        logout = findViewById(R.id.buttonLogout);
+        buttonMatch = findViewById(R.id.buttonMatch);
 
 
         userViewModel.getFirstTime();
@@ -139,44 +136,39 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        userViewModel = new UserViewModel(getApplication());
+        userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User s) {
+                Log.d("DefaultActivity","Tenim match " + s.getUsername());
+                Toast.makeText(DefaultActivity.this," Has hecho match con el usuario: " + s.getUsername(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+       // userViewModel = new UserViewModel(getApplication());
+
+
 
         userViewModel.getProfileUser();
 
 
-
+        logout = findViewById(R.id.buttonLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPreferences.edit().putString("token", "").apply();
-                Intent chooser = new Intent(DefaultActivity.this, ChooserActivity.class);
+                mPreferences.edit().putString("token","").apply();
+                mPreferences.edit().putString("token","").apply();
+                Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
                 startActivity(chooser);
 
             }
         });
 
-
-        filters.setOnClickListener(new View.OnClickListener() {
+        buttonMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent filter = new Intent(DefaultActivity.this, FiltersActivity.class);
-                startActivity(filter);
-
+                userViewModel.getMatch();
             }
         });
-
-
-        profile.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
-                startActivity(profile);
-            }
-        });
-
-
-
     }
 
     @Override
