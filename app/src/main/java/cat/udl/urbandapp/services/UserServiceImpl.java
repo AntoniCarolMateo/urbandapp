@@ -17,6 +17,8 @@ import java.util.List;
 
 import cat.udl.urbandapp.dao.IUserDAO;
 import cat.udl.urbandapp.dao.UserDAOImpl;
+import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -216,32 +218,38 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void getFilteredUsers(String header, String ins, String gen) {
-        userDAO.getFilteredUsers(header, ins, gen).enqueue(new Callback<List<User>>() {
+    public void getFilteredUsers(String header, List<String> instruments, List<String> gen) {
+        Log.d("KELOKE", instruments.toString() + " and " + gen.toString());
+        userDAO.getFilteredUsers(header, instruments, gen).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 // ACTIUALIZAR LA Mutavle lie data dels user filtered
                 if (response.code() == 200) {
                     List<User> mlist = response.body();
                     mAllUsers.setValue(mlist);
+                    Log.d("UserServiceImpl", mAllUsers.getValue().toString());
                 }
                 else{
                     mAllUsers.setValue(new ArrayList<User>());
+                    Log.d("values", "kepasoooo");
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 mAllUsers.setValue(new ArrayList<User>());
+                Log.d("UserServiceImpl", t.toString());
             }
         });
     }
 
 
-    @Override
-    public void getAllUsers(){
 
-        userDAO.getAllUsers().enqueue(new Callback<ResponseBody>() {
+
+    @Override
+    public void getAllUsers(String auth){
+
+        userDAO.getAllUsers(auth).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200 ){

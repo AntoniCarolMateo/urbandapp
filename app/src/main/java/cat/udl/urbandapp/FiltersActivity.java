@@ -19,17 +19,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import cat.udl.urbandapp.dialogs.FilterMultipleChoice;
+import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.recyclerview.UserDiffCallback;
 import cat.udl.urbandapp.recyclerview.UsersAdapter;
+import cat.udl.urbandapp.viewmodel.TablesViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 
-public class FiltersActivity extends AppCompatActivity {
+public class FiltersActivity extends AppCompatActivity  {
 
 
     UserViewModel userViewModel;
+    private TablesViewModel tablesViewModel;
     private Button aply;
     private EditText editText_instruments;
     private EditText editText_genres;
@@ -47,11 +51,12 @@ public class FiltersActivity extends AppCompatActivity {
         initView();
 
         userViewModel = new UserViewModel(getApplication());
+        tablesViewModel = new TablesViewModel(getApplication());
 
         //init recycler view
         recyclerView_users.setLayoutManager(new LinearLayoutManager(this));
         recyclerView_users.setHasFixedSize(true);
-        final UsersAdapter usersAdapter = new UsersAdapter(new UserDiffCallback());
+        final UsersAdapter usersAdapter = new UsersAdapter(new UserDiffCallback(), userViewModel);
         recyclerView_users.setAdapter(usersAdapter);
 
         userViewModel.getAllUsers();
@@ -63,20 +68,43 @@ public class FiltersActivity extends AppCompatActivity {
             }
         });
 
+        editText_instruments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterMultipleChoice dialog = FilterMultipleChoice.newInstance(FiltersActivity.this, userViewModel, tablesViewModel, "INSTRUMENTS");
+                dialog.show(getSupportFragmentManager(), "INSTRUMENTS");
+                }
+        });
+
         editText_genres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Opciones Dialog
+                    FilterMultipleChoice dialog = FilterMultipleChoice.newInstance(FiltersActivity.this, userViewModel, tablesViewModel, "GENRES");
+                    dialog.show(getSupportFragmentManager(), "GENRES");
+
             }
         });
+
+        userViewModel.getSelectedFilterInstruments().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                editText_instruments.setText(strings.toString());
+            }
+        });
+        userViewModel.getSelectedFilterGenres().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                editText_genres.setText(strings.toString());
+            }
+        });
+
+
 
 
         aply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               String instrument = editText_instruments.getText().toString();
-               String genre = editText_genres.getText().toString();
-               userViewModel.getFilteredUsers(instrument, genre);
+               userViewModel.getFilteredUsers();
 
             }
         });
@@ -87,7 +115,11 @@ public class FiltersActivity extends AppCompatActivity {
         editText_genres = findViewById(R.id.editText_genre_filter);
         editText_instruments = findViewById(R.id.editText_ins_filter);
         recyclerView_users = findViewById(R.id.recyclerView_users_filter);
+
+
     }
+
+
+
 }
 
-//int _

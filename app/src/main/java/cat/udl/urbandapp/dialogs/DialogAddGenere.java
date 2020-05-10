@@ -1,5 +1,6 @@
 package cat.udl.urbandapp.dialogs;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -34,10 +35,10 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
     public View rootView;
-    public FragmentActivity activity;
+    public Activity activity;
     private ListView listView;
     private String lv_items[] = { "Rock", "Pop","Country"};
-    private List<MusicalGenere> my_sel_items;
+    private List<MusicalGenere> my_sel_items = new ArrayList<MusicalGenere>();
 
     private SharedPreferences mPreferences;
     private TablesViewModel viewModel;
@@ -46,7 +47,7 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
 
 
-    public static DialogAddGenere newInstance(FragmentActivity activity, TablesViewModel viewModel) {
+    public static DialogAddGenere newInstance(Activity activity, TablesViewModel viewModel) {
         DialogAddGenere dialog = new DialogAddGenere();
         dialog.userViewModel = new UserViewModel(activity.getApplication());
         dialog.activity = activity;
@@ -84,19 +85,21 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                my_sel_items = new ArrayList<MusicalGenere>();
+                MusicalGenere genre = new MusicalGenere();
+                genre.setName(listView.getAdapter().getItem(position).toString());
                 SparseBooleanArray a = listView.getCheckedItemPositions();
-
-                for (int i = 0; i< lv_items.length; i++){
-                    MusicalGenere genre = new MusicalGenere();
-                    if (a.valueAt(i)){
-                        genre.setName(listView.getAdapter().getItem(i).toString());
-                        my_sel_items.add(genre);
-
+                if (a.valueAt(0)) {
+                    my_sel_items.add(genre);
+                }
+                else{
+                    for (int i = 0; i < my_sel_items.size();i++){
+                        my_sel_items.remove(i);
                     }
+
                 }
                 Log.d("values", my_sel_items.toString());
             }
+
         });
 
         alertDialog.setCanceledOnTouchOutside(false);

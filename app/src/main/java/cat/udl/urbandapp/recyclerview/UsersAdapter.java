@@ -15,12 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.User;
+import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserHolder> {
 
+    private UserViewModel userViewModel;
 
-    public UsersAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback) {
+    public UsersAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback, UserViewModel userViewModel) {
         super(diffCallback);
+        this.userViewModel = userViewModel;
+
 
     }
     @NonNull

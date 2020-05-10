@@ -1,5 +1,6 @@
 package cat.udl.urbandapp.services;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
@@ -7,6 +8,8 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -35,7 +38,7 @@ public interface UserServiceI {
 
 
     @GET("users/all")
-    void getAllUsers();
+    void getAllUsers(@Header("Authorization") String Auth);
 
 
     @POST("account/update_profile")
@@ -64,7 +67,7 @@ public interface UserServiceI {
     void setUsername(@Header("Authorization") String auth, @Path("username") String username);
 
     @GET("users/all")
-    void getFilteredUsers(String header, @Query("instruments") String ins, @Query("genres")String gen);
+    void getFilteredUsers(@Header("Authorization") String header, @Query("instruments") List<String> instruments, @Query("genres")List<String> genres);
 
     MutableLiveData<String> getLiveDataToken();
 

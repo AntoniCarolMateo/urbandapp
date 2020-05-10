@@ -7,10 +7,10 @@
     <ListView
         android:id="@+id/list_view_filters"
         android:layout_width="match_parent"
-        android:layout_height="519dp" />
+        android:layout_height="275dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_done"
         android:layout_width="match_parent"
         android:layout_height="71dp"
         android:text="Button" />

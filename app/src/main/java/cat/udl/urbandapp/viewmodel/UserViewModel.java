@@ -18,10 +18,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.services.UserServiceI;
@@ -41,6 +44,14 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> responseSubscription;
     private MutableLiveData<Boolean> responseDeleteSubscription;
 
+    private MutableLiveData<List<String>> mFilterInstruments;
+    private MutableLiveData<List<String>> mFilterGenres;
+
+
+    private List<String> list_filter_ins = new ArrayList<>();
+    private List<String> list_filter_gen = new ArrayList<>();
+
+
     private SharedPreferences mPreferences;
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -55,6 +66,9 @@ public class UserViewModel extends AndroidViewModel {
         responseUserSubscription = repository.getLiveDataUserSubscription();
         responseSubscription = repository.getLiveDataSubscription();
         responseDeleteSubscription = repository.getLiveDataDeleteSubscription();
+
+        mFilterInstruments = new MutableLiveData<>();
+        mFilterGenres = new MutableLiveData<>();
 
         this.mPreferences = PreferencesProvider.providePreferences();
     }
@@ -94,12 +108,36 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void getAllUsers(){
-        repository.getAllUsers();
+        String header = this.mPreferences.getString("token","");
+        repository.getAllUsers(header);
     }
 
-    public void getFilteredUsers(String ins, String gen){
+    public void getFilteredUsers(){
         String header = this.mPreferences.getString("token","");
-        repository.getFilteredUsers(header,ins,gen);
+        Log.d("KELOKE,","InstrumentsFilter:  "+list_filter_ins.toString());
+        Log.d("KELOKE,","Generes filter :   " + list_filter_gen.toString());
+        repository.getFilteredUsers(header,list_filter_ins, list_filter_gen);
+    }
+
+    public void filterInstruments(List<Instrument> my_sel_items) {
+        List<String> instrToShow = new ArrayList<>();
+        for (int i = 0; i < my_sel_items.size(); i++){
+            instrToShow.add(my_sel_items.get(i).getNameInstrument());
+        }
+        this.list_filter_ins = instrToShow;
+        Log.d("KELOKE",list_filter_ins.toString());
+        mFilterInstruments.setValue(instrToShow);
+    }
+
+    public void filterGenres(List<MusicalGenere> my_sel_items) {
+        List<String> genresToShow = new ArrayList<>();
+        for (int i = 0; i < my_sel_items.size(); i++){
+            genresToShow.add(my_sel_items.get(i).getName());
+        }
+
+        this.list_filter_gen = genresToShow;
+        Log.d("KELOKE VIRE",list_filter_ins.toString());
+        mFilterGenres.setValue(genresToShow);
     }
 
     public void getUsersSubscribed(String username){
@@ -142,6 +180,23 @@ public class UserViewModel extends AndroidViewModel {
         this.repository.firstTimeProfileSetUp(header);
     }
 
+    public LiveData<Boolean> getResponseLiveDataDeleteSubscription(){
+        return this.responseDeleteSubscription;
+    }
+
+
+    public void showPrivateProfile() {
+        String token = mPreferences.getString("token","");
+        repository.showPrivateProfile(token);
+    }
+
+    public void setUsername(String username) {
+        String token = mPreferences.getString("token", "");
+        repository.setUsername(token,username);
+    }
+
+
+
     public LiveData<String> getResponseLiveDataToken() {
         return this.responseLiveDataToken;
     }
@@ -165,18 +220,6 @@ public class UserViewModel extends AndroidViewModel {
         return this.responseSubscription;
     }
 
-    public LiveData<Boolean> getResponseLiveDataDeleteSubscription(){
-        return this.responseDeleteSubscription;
-    }
-
-
-    public void showPrivateProfile() {
-        String token = mPreferences.getString("token","");
-        repository.showPrivateProfile(token);
-    }
-
-    public void setUsername(String username) {
-        String token = mPreferences.getString("token", "");
-        repository.setUsername(token,username);
-    }
+    public  LiveData<List<String>> getSelectedFilterInstruments(){ return mFilterInstruments;}
+    public LiveData<List<String>> getSelectedFilterGenres(){ return mFilterGenres;}
 }

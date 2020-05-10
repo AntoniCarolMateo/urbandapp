@@ -9,6 +9,8 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.List;
 
+import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -38,9 +40,9 @@ public class UserDAOImpl implements IUserDAO {
 
 
     @Override
-    public Call<ResponseBody> getAllUsers(){
+    public Call<ResponseBody> getAllUsers(String auth){
 
-        return  retrofit.create(IUserDAO.class).getAllUsers();
+        return  retrofit.create(IUserDAO.class).getAllUsers(auth);
 
     }
 
@@ -91,8 +93,8 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<List<User>> getFilteredUsers(String auth, String ins, String gen) {
-        return retrofit.create(IUserDAO.class).getFilteredUsers(auth, ins, gen);
+    public Call<List<User>> getFilteredUsers(String auth, List<String> instruments, List<String> gen) {
+        return retrofit.create(IUserDAO.class).getFilteredUsers(auth, instruments, gen);
     }
 
     @Override

@@ -46,6 +46,8 @@ public class TablesViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> responseChangedList;
     private SharedPreferences mPreferences = PreferencesProvider.providePreferences();
 
+
+
     private List<Instrument> instruments = new ArrayList<>();
     private List<MusicalGenere> generes = new ArrayList<>();
 
@@ -142,6 +144,7 @@ public class TablesViewModel extends AndroidViewModel {
     public LiveData<List<MusicalGenere>> getGeneres(){
         return mGeneres;
     }
+
 
 
 }

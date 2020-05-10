@@ -1,5 +1,6 @@
 package cat.udl.urbandapp.dao;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
@@ -8,6 +9,8 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -48,7 +51,7 @@ public interface IUserDAO {
     // Muy limpio y muy faci de leer :)
 
     @GET("users/all")
-    Call<ResponseBody> getAllUsers();
+    Call<ResponseBody> getAllUsers(@Header("Authorization") String auth);
 
 
     @GET("users/get_info_by_subscription/{username}")
@@ -76,6 +79,7 @@ public interface IUserDAO {
     @POST("account/profile/setUsername/{username}")
     Call<ResponseBody> setUsername(@Header ("Authorization") String auth, @Path("username") String username);
 
-    @GET("users/all?instruments={instruments}&genres={genres}")
-    Call <List<User>> getFilteredUsers(String header, @Query("instruments") String ins, @Query("genres")String gen);
+    @GET("users/all")
+    Call <List<User>> getFilteredUsers(@Header("Authorization") String auth, @Nullable
+                                       @Query("instruments") List<String> instruments, @Nullable @Query("genres")List<String> genres);
 }
