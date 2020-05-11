@@ -169,6 +169,13 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
                 userViewModel.getMatch();
             }
         });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
+                startActivity(profile);
+            }
+        });
     }
 
     @Override
