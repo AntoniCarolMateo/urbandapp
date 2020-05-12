@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import cat.udl.urbandapp.dialogs.DialogFirstTimeLogged;
+import cat.udl.urbandapp.dialogs.DialogMatchUser;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -44,6 +45,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private UserViewModel userViewModel;
     private TextView mbienvenida;
     private Button profile;
+    private Button filters;
     private GoogleMap googleMap;
 
     private Button buttonMatch;
@@ -105,12 +107,7 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
-        this.mPreferences = PreferencesProvider.providePreferences();
-        userViewModel = new UserViewModel(getApplication());
-        mbienvenida = findViewById(R.id.bienvenidaText);
-        profile = findViewById(R.id.button_profile);
-        buttonMatch = findViewById(R.id.buttonMatch);
+        initView();
 
 
         userViewModel.getFirstTime();
@@ -140,7 +137,10 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onChanged(User s) {
                 Log.d("DefaultActivity","Tenim match " + s.getUsername());
-                Toast.makeText(DefaultActivity.this," Has hecho match con el usuario: " + s.getUsername(), Toast.LENGTH_LONG).show();
+                DialogMatchUser match = DialogMatchUser.newInstance(DefaultActivity.this, userViewModel);
+                match.show(getSupportFragmentManager(), "Match con user");
+
+
             }
         });
 
@@ -176,6 +176,23 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
                 startActivity(profile);
             }
         });
+        filters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filters = new Intent(DefaultActivity.this, FiltersActivity.class);
+                startActivity(filters);
+            }
+        });
+    }
+
+    private void initView() {
+        this.mPreferences = PreferencesProvider.providePreferences();
+        userViewModel = new UserViewModel(getApplication());
+        mbienvenida = findViewById(R.id.bienvenidaText);
+        profile = findViewById(R.id.button_profile);
+        buttonMatch = findViewById(R.id.buttonMatch);
+        filters = findViewById(R.id.button_filters_default);
+
     }
 
     @Override

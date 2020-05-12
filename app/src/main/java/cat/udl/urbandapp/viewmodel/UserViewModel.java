@@ -234,4 +234,10 @@ public class UserViewModel extends AndroidViewModel {
 
     public  LiveData<List<String>> getSelectedFilterInstruments(){ return mFilterInstruments;}
     public LiveData<List<String>> getSelectedFilterGenres(){ return mFilterGenres;}
+
+    public User getRecentMatch() {
+        User match_usr = responseMatch.getValue();
+        Log.d("MATCH", match_usr.toString());
+        return match_usr;
+    }
 }

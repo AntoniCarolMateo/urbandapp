@@ -275,7 +275,7 @@ public class UserServiceImpl implements UserServiceI {
                 if (response.code() == 200) {
                     List<User> mlist = response.body();
                     mAllUsers.setValue(mlist);
-                    Log.d("UserServiceImpl", mAllUsers.getValue().toString());
+                    Log.d("Keloke", mAllUsers.getValue().toString());
                 }
                 else{
                     mAllUsers.setValue(new ArrayList<User>());

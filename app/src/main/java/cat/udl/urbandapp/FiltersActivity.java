@@ -59,8 +59,6 @@ public class FiltersActivity extends AppCompatActivity  {
         final UsersAdapter usersAdapter = new UsersAdapter(new UserDiffCallback(), userViewModel);
         recyclerView_users.setAdapter(usersAdapter);
 
-        userViewModel.getAllUsers();
-
         userViewModel.getResponseLiveDataAllUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
