@@ -70,6 +70,9 @@ public interface UserServiceI {
     @GET("users/all")
     void getFilteredUsers(@Header("Authorization") String header, @Query("instruments") List<String> instruments, @Query("genres")List<String> genres);
 
+    @POST("account/profile/serUserRol/{rol}")
+    void setUserRol(@Header("Authorization")String auth,  @Path("rol") String rol);
+
     MutableLiveData<String> getLiveDataToken();
 
     MutableLiveData<User> getLiveDataUser();
@@ -89,5 +92,7 @@ public interface UserServiceI {
     MutableLiveData<Boolean> getLiveDataDeleteSubscription();
 
     MutableLiveData<User> getLiveDataMatch();
+
+
 }
 

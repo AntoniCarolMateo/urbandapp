@@ -291,7 +291,20 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
+    @Override
+    public void setUserRol(String auth, String rol) {
+        userDAO.setUserRol(auth,rol).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
 
 
     @Override
