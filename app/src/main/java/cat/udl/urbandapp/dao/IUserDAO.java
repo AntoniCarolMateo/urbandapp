@@ -84,4 +84,7 @@ public interface IUserDAO {
     @GET("users/all")
     Call <List<User>> getFilteredUsers(@Header("Authorization") String auth, @Nullable
                                        @Query("instruments") List<String> instruments, @Nullable @Query("genres")List<String> genres);
+
+    @POST("account/profile/serUserRol/{rol}")
+    Call<ResponseBody> setUserRol(@Header("Authorization")String auth,  @Path("rol") String rol);
 }

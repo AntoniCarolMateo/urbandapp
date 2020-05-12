@@ -201,6 +201,10 @@ public class UserViewModel extends AndroidViewModel {
         String token = mPreferences.getString("token", "");
         repository.setUsername(token,username);
     }
+    public void setUserRol(String rol) {
+        String token = mPreferences.getString("token", "");
+        repository.setUserRol(token,rol);
+    }
 
 
 
