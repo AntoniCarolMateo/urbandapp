@@ -203,7 +203,8 @@ public class UserViewModel extends AndroidViewModel {
     }
     public void setUserRol(String rol) {
         String token = mPreferences.getString("token", "");
-        repository.setUserRol(token,rol);
+        Log.d("KELOKEE", "Usrview mode   "+ rol );
+ ;      repository.setUserRol(token,rol);
     }
 
 

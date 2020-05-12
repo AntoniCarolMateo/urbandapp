@@ -296,7 +296,12 @@ public class UserServiceImpl implements UserServiceI {
         userDAO.setUserRol(auth,rol).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
+                    if (response.code() == 200){
+                        Log.d("KELOKEE", " SHA FET OKEY ROLES");
+                    }else{
+                        Log.d("KELOKEE","NO HA ANT VE  " + response.message());
+                        
+                    }
             }
 
             @Override

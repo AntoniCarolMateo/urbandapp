@@ -64,13 +64,13 @@ public interface UserServiceI {
     @GET("account/profile/show")
     void showPrivateProfile(@Header("Authorization") String auth);
 
-    @POST("account/profile/serUsername/{username}")
+    @POST("account/profile/setUsername/{username}")
     void setUsername(@Header("Authorization") String auth, @Path("username") String username);
 
     @GET("users/all")
     void getFilteredUsers(@Header("Authorization") String header, @Query("instruments") List<String> instruments, @Query("genres")List<String> genres);
 
-    @POST("account/profile/serUserRol/{rol}")
+    @POST("account/profile/setUserRol/{rol}")
     void setUserRol(@Header("Authorization")String auth,  @Path("rol") String rol);
 
     MutableLiveData<String> getLiveDataToken();
