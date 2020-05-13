@@ -39,6 +39,7 @@ public class MusicoActivity extends AppCompatActivity {
         if (extras != null) {
             final String extra_username = extras.getString("username");
             Log.d("MusicoActivity","tenemos el username: " + extra_username);
+            username.setText(extra_username);
             userViewModel.getUsersSubscribed(extra_username);
             userViewModel.getResponseUserSubscription().observe(this, new Observer<User>() {
                 @Override
@@ -52,12 +53,17 @@ public class MusicoActivity extends AppCompatActivity {
                         Log.d("MusicoActivity","OKEY");
                         subscribe.setEnabled(false);
                         Log.d("MusicoActivity", "User :  " + s.getUsername()+ " gen " + s.getGenere() + " exp" + s.getGen_exp());
-                        username.setText(s.getUsername());
                         genere.setText(s.getGenere());
                         expirience.setRating(s.getGen_exp());
                         description.setText(s.getDescription());
                         role.setText(s.getRol());
+                        username.setVisibility(View.VISIBLE);
+                        genere.setVisibility(View.VISIBLE);
+                        expirience.setVisibility(View.VISIBLE);
+                        description.setVisibility(View.VISIBLE);
+                        role.setText(s.getRol());
                         Log.d("MusicoActivity", " estamos subscritos el boton subscribe se oculta");
+                        desubscribe.setEnabled(true);
                         desubscribe.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -68,9 +74,11 @@ public class MusicoActivity extends AppCompatActivity {
                     }
                     else{
                         //enseñar menos info, y dar la opcion de subscribirse
+                        emptyProfile();
                         Log.d("MusicoActivity", "no estamos subscritos el boton desubscribe se oculta");
                         //desubscribe.setVisibility(View.GONE);
                         desubscribe.setEnabled(false);
+                        subscribe.setEnabled(true);
                         subscribe.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -87,7 +95,8 @@ public class MusicoActivity extends AppCompatActivity {
                 public void onChanged(Boolean s) {
                     Log.d("MusicoActivity","Tenim  subscripcion  por retrofit: "  + s);
                     if(s){
-                        Toast.makeText(MusicoActivity.this, "Subscribido con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MusicoActivity.this, "Subscrito con exito", Toast.LENGTH_LONG).show();
+                        userViewModel.getUsersSubscribed(extra_username);
 
                     }
 
@@ -103,7 +112,8 @@ public class MusicoActivity extends AppCompatActivity {
                 public void onChanged(Boolean s) {
                     Log.d("MusicoActivity","Tenemso delete de  subscripcion  por retrofit: "  + s);
                     if(s){
-                        Toast.makeText(MusicoActivity.this, "Desubscribido con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MusicoActivity.this, "Desubscrito con exito", Toast.LENGTH_LONG).show();
+                        userViewModel.getUsersSubscribed(extra_username);
 
                     }
 
@@ -122,6 +132,13 @@ public class MusicoActivity extends AppCompatActivity {
 
     }
 
+    private void emptyProfile() {
+        genere.setVisibility(View.INVISIBLE);
+        description.setVisibility(View.INVISIBLE);
+        role.setVisibility(View.INVISIBLE);
+        expirience.setVisibility(View.INVISIBLE);
+    }
+
     private void initView() {
         subscribe = findViewById(R.id.botonSubscribirse);
         desubscribe = findViewById(R.id.botonDesub);
@@ -130,5 +147,11 @@ public class MusicoActivity extends AppCompatActivity {
         description = findViewById(R.id.textView_descr_musico);
         expirience = findViewById(R.id.ratingBar_exp_musico);
         role = findViewById(R.id.textView_rol_MUSICO);
+
+        genere.setVisibility(View.INVISIBLE);
+        description.setVisibility(View.INVISIBLE);
+        role.setVisibility(View.INVISIBLE);
+        expirience.setVisibility(View.INVISIBLE);
+
     }
 }
