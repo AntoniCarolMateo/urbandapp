@@ -29,6 +29,9 @@ public class User {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("rol")
+    private String rol;
+
     public String getDescription() {
         return description;
     }
@@ -185,6 +188,14 @@ public class User {
 
     public void setGen_exp(float gen_exp) {
         this.gen_exp = gen_exp;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     @NonNull

@@ -3,12 +3,12 @@ package cat.udl.urbandapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,30 +19,22 @@ public class MusicoActivity extends AppCompatActivity {
 
     private Button subscribe;
     private Button desubscribe;
-    private EditText username;
-    private EditText genere;
-    private EditText description;
+    private TextView username;
+    private TextView genere;
+    private TextView description;
+    private TextView role;
+    private ImageView profile_photo;
     private UserViewModel userViewModel;
-    private TextView labelDesc;
+    private RatingBar expirience;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musico);
+        initView();
         Bundle extras = getIntent().getExtras();
-        subscribe = findViewById(R.id.botonSubscribirse);
-        desubscribe = findViewById(R.id.botonDesub);
-        username = findViewById(R.id.musico_username);
-        genere = findViewById(R.id.musico_genere);
-        description = findViewById(R.id.musico_descripcion);
         userViewModel = new UserViewModel(getApplication());
-        labelDesc = findViewById(R.id.label_descripcion);
-        username.setFocusable(false);
-        username.setEnabled(false);
-        genere.setFocusable(false);
-        genere.setEnabled(false);
-        description.setFocusable(false);
-        description.setEnabled(false);
+
 
         if (extras != null) {
             final String extra_username = extras.getString("username");
@@ -53,13 +45,16 @@ public class MusicoActivity extends AppCompatActivity {
                 public void onChanged(final User s) {
                     Log.d("MusicoActivity","Tenim  user  por retrofit" + s.getUsername() + " sub: " + s.isHasSubscribed());
                     //Toast.makeText(MusicoActivity.this, "eci", Toast.LENGTH_LONG).show();
-                    username.setText(s.getUsername());
-                    genere.setText(s.getGenere());
-                    description.setText(s.getDescription());
+                    ;
                     if(s.isHasSubscribed()){
                         //Es un musico al que el usuario actual esta subscrito, enseñar mas informacio, y dar la opcion de desubscribise
                         //subscribe.setVisibility(View.GONE);
                         subscribe.setEnabled(false);
+                        username.setText(s.getUsername());
+                        genere.setText(s.getGenere());
+                        expirience.setRating(s.getGen_exp());
+                        description.setText(s.getDescription());
+                        role.setText(s.getRol());
                         Log.d("MusicoActivity", " estamos subscritos el boton subscribe se oculta");
                         desubscribe.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -74,8 +69,6 @@ public class MusicoActivity extends AppCompatActivity {
                         Log.d("MusicoActivity", "no estamos subscritos el boton desubscribe se oculta");
                         //desubscribe.setVisibility(View.GONE);
                         desubscribe.setEnabled(false);
-                        description.setVisibility(View.GONE);
-                        labelDesc.setVisibility(View.GONE);
                         subscribe.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -125,5 +118,15 @@ public class MusicoActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    private void initView() {
+        subscribe = findViewById(R.id.botonSubscribirse);
+        desubscribe = findViewById(R.id.botonDesub);
+        username = findViewById(R.id.textView_username_musico);
+        genere = findViewById(R.id.textView_genere_musico);
+        description = findViewById(R.id.textView_descr_musico);
+        expirience = findViewById(R.id.ratingBar_exp_musico);
+        role = findViewById(R.id.textView_rol_MUSICO);
     }
 }

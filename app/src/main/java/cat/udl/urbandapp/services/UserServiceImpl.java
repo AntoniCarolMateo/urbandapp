@@ -439,38 +439,16 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public void getInfoSubscribed(String Auth, String username) {
-        userDAO.getInfoSubscribed(Auth, username).enqueue(new Callback<ResponseBody>() {
+        userDAO.getInfoSubscribed(Auth, username).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
-                    // mResponseWorked.setValue(true);
-                    String respuestaBody = null;
-                    try {
-                        respuestaBody = response.body().string();
-                        Log.d("getInfoSubscribed ", "respuesta: " + respuestaBody);
 
-                        JSONArray respuesta = new JSONArray(respuestaBody);
-                        JSONObject mUserjson = respuesta.getJSONObject(0);
-                        User u = new User();
+                        User usr_in_marker = response.body();
 
-                        u.setUsername(mUserjson.getString("username"));
-                        //Log.d("getInfoSubscribed ", "usernmae: "  +u.getUsername());
-                        u.setGenere(mUserjson.getString("genere"));
-                        //Log.d("getInfoSubscribed ", "genere: "  +u.getGenere());
-                        u.setDescription(mUserjson.getString("description"));
-                        JSONObject subscription = respuesta.getJSONObject(1);
-                        Boolean sub = subscription.getBoolean("subscribed");
-                        u.setHasSubscribed(sub);
-                        mUserSubscribed.setValue(u);
+                        mUserSubscribed.setValue(usr_in_marker);
                         //Log.d("getInfoSubscribed ", "description: "  +u.getDescription());
                         //Log.d("getInfoSubscribed ", "sub: "  +sub);
-
-
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                        mUserSubscribed.setValue(new User());
-                    }
-
                     Log.d("getInfoSubscribed ", "getInfoSubscribed succesfully");
                 } else {
                     //mResponseWorked.setValue(false);
@@ -480,7 +458,7 @@ public class UserServiceImpl implements UserServiceI {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.d("getInfoSubscribed", t.getMessage().toString());
             }
         });

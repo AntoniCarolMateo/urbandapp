@@ -53,7 +53,7 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<ResponseBody> getInfoSubscribed(String auth, String username){
+    public Call<User> getInfoSubscribed(String auth, String username){
 
         return  retrofit.create(IUserDAO.class).getInfoSubscribed(auth,username);
 
