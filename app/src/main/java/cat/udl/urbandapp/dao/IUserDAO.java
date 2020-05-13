@@ -57,7 +57,7 @@ public interface IUserDAO {
     Call<User> getMatch(@Header("Authorization") String auth);
 
     @GET("users/get_info_by_subscription/{username}")
-    Call<User> getInfoSubscribed(@Header("Authorization") String auth, @Path("username") String username);
+    Call<ResponseBody> getInfoSubscribed(@Header("Authorization") String auth, @Path("username") String username);
 
     @GET("users/subscribe/{username}")
     Call<ResponseBody> userSubscribe(@Header("Authorization") String auth, @Path("username") String username);

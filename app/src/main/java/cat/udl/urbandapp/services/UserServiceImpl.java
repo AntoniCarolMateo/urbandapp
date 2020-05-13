@@ -53,30 +53,36 @@ public class UserServiceImpl implements UserServiceI {
         mFirstTime = new MutableLiveData<>();
         mUserSubscribed = new MutableLiveData<>();
         mSubscription = new MutableLiveData<>();
-        mDeleteSubscription  = new MutableLiveData<>();
+        mDeleteSubscription = new MutableLiveData<>();
         mMatch = new MutableLiveData<>();
 
     }
-    public MutableLiveData<String> getLiveDataToken(){
+
+    public MutableLiveData<String> getLiveDataToken() {
         return mResponseToken;
     }
-    public MutableLiveData<User> getLiveDataUser(){
+
+    public MutableLiveData<User> getLiveDataUser() {
         return mUser;
     }
 
-    public MutableLiveData<User> getLiveDataUserSubscription(){
+    public MutableLiveData<User> getLiveDataUserSubscription() {
         return mUserSubscribed;
     }
-    public MutableLiveData<Boolean> getLiveDataSubscription(){
+
+    public MutableLiveData<Boolean> getLiveDataSubscription() {
         return mSubscription;
     }
-    public MutableLiveData<Boolean> getLiveDataDeleteSubscription(){
+
+    public MutableLiveData<Boolean> getLiveDataDeleteSubscription() {
         return mDeleteSubscription;
     }
 
-    public MutableLiveData<Boolean> getLiveDataFirstSetup() { return mFirstTime; }
+    public MutableLiveData<Boolean> getLiveDataFirstSetup() {
+        return mFirstTime;
+    }
 
-    public MutableLiveData<List<User>> getLiveDataAllUsers(){
+    public MutableLiveData<List<User>> getLiveDataAllUsers() {
         return mAllUsers;
     }
 
@@ -96,18 +102,18 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public MutableLiveData<User> getLiveDataMatch(){
-        Log.d("DefaultActivity","userServiceImpls match");
+    public MutableLiveData<User> getLiveDataMatch() {
+        Log.d("DefaultActivity", "userServiceImpls match");
         return mMatch;
     }
 
     @Override
-    public void getProfileUser(final String Auth){
+    public void getProfileUser(final String Auth) {
 
         userDAO.getProfileUser(Auth).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200 ){
+                if (response.code() == 200) {
                     try {
 
                         String respuestaBody = response.body().string();
@@ -128,10 +134,9 @@ public class UserServiceImpl implements UserServiceI {
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     mUser.setValue(new User());
-                    Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message());
                     Log.d("getUser", "header es: " + Auth);
                 }
             }
@@ -145,22 +150,21 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void getMatch(final String Auth){
+    public void getMatch(final String Auth) {
 
         userDAO.getMatch(Auth).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() == 200 ){
-                        User usr_match = response.body();
-                        Log.d("getMatch", "Ok getMatch");
-                        Log.d("getMatch", usr_match.toString());
+                if (response.code() == 200) {
+                    User usr_match = response.body();
+                    Log.d("getMatch", "Ok getMatch");
+                    Log.d("getMatch", usr_match.toString());
 
-                        mMatch.setValue(usr_match);
+                    mMatch.setValue(usr_match);
 
-                }
-                else{
+                } else {
                     mMatch.setValue(new User());
-                    Log.d("getMatch", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getMatch", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message());
                     Log.d("getMatch", "header es: " + Auth);
                 }
             }
@@ -178,13 +182,13 @@ public class UserServiceImpl implements UserServiceI {
         userDAO.firstTimeProfileSetUp(header).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code()==200){
+                if (response.code() == 200) {
                     //If the Call is done corrected
                     mFirstTime.setValue(false);
-                    Log.d("UserServiceImp","First time done");
-                }else{
+                    Log.d("UserServiceImp", "First time done");
+                } else {
                     mFirstTime.setValue(false);
-                    Log.d("UserServiceImp","You need to complete all user profile!");
+                    Log.d("UserServiceImp", "You need to complete all user profile!");
                 }
             }
 
@@ -200,12 +204,11 @@ public class UserServiceImpl implements UserServiceI {
         userDAO.getFirstTimeBoolean(auth).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if (response.code()==200) {
+                if (response.code() == 200) {
                     Boolean isfirstTime = response.body();
                     mFirstTime.setValue(isfirstTime);
-                }
-                else{
-                    Log.d("First Time", "Something went wrong while getting the data + "+response.message());
+                } else {
+                    Log.d("First Time", "Something went wrong while getting the data + " + response.message());
                 }
             }
 
@@ -262,8 +265,7 @@ public class UserServiceImpl implements UserServiceI {
                     List<User> mlist = response.body();
                     mAllUsers.setValue(mlist);
                     Log.d("Keloke", mAllUsers.getValue().toString());
-                }
-                else{
+                } else {
                     mAllUsers.setValue(new ArrayList<User>());
                     Log.d("values", "kepasoooo");
                 }
@@ -279,15 +281,15 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public void setUserRol(String auth, String rol) {
-        userDAO.setUserRol(auth,rol).enqueue(new Callback<ResponseBody>() {
+        userDAO.setUserRol(auth, rol).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.code() == 200){
-                        Log.d("KELOKEE", " SHA FET OKEY ROLES");
-                    }else{
-                        Log.d("KELOKEE","NO HA ANT VE  " + response.message());
-                        
-                    }
+                if (response.code() == 200) {
+                    Log.d("KELOKEE", " SHA FET OKEY ROLES");
+                } else {
+                    Log.d("KELOKEE", "NO HA ANT VE  " + response.message());
+
+                }
             }
 
             @Override
@@ -299,12 +301,12 @@ public class UserServiceImpl implements UserServiceI {
 
 
     @Override
-    public void getAllUsers(String auth){
+    public void getAllUsers(String auth) {
 
         userDAO.getAllUsers(auth).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200 ){
+                if (response.code() == 200) {
                     try {
 
                         String respuestaBody = response.body().string();
@@ -313,7 +315,7 @@ public class UserServiceImpl implements UserServiceI {
                         JSONArray mUsers = new JSONArray(respuestaBody);
                         List<User> mList = new ArrayList<>();
                         for (int i = 0; i < mUsers.length(); i++) {
-                            JSONObject mUserjson =  mUsers.getJSONObject(i);
+                            JSONObject mUserjson = mUsers.getJSONObject(i);
                             User u = new User();
 
                             u.setUsername(mUserjson.getString("username"));
@@ -331,10 +333,9 @@ public class UserServiceImpl implements UserServiceI {
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     mUser.setValue(new User());
-                    Log.d("getAllUsers", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message() );
+                    Log.d("getAllUsers", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message());
                 }
             }
 
@@ -376,15 +377,15 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void createTokenUser(String Auth){
+    public void createTokenUser(String Auth) {
 
         userDAO.createTokenUser(Auth).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200 ){
+                if (response.code() == 200) {
                     try {
                         String authToken = response.body().string().split(":")[1];
-                        authToken=authToken.substring(2,authToken.length()-2);
+                        authToken = authToken.substring(2, authToken.length() - 2);
 
                         Log.d("UserService", authToken);
                         mResponseToken.setValue(authToken);
@@ -392,8 +393,7 @@ public class UserServiceImpl implements UserServiceI {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     String aux = null;
                     try {
                         String r = response.errorBody().string();
@@ -412,16 +412,17 @@ public class UserServiceImpl implements UserServiceI {
             }
         });
     }
+
     @Override
     public void setProfileInfo(String header, JsonObject json) {
-        userDAO.setProfileInfo(header,json).enqueue(new Callback<ResponseBody>() {
+        userDAO.setProfileInfo(header, json).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
 
                     mSetProfileStep1.setValue(true);
                     Log.d("SetProfileStep1", "ok");
-                    Log.d("SetProfileStep1","Tenim boolean " + mSetProfileStep1.getValue());
+                    Log.d("SetProfileStep1", "Tenim boolean " + mSetProfileStep1.getValue());
 
                 } else {
                     Log.d("SetProfileStep1", "error else");
@@ -439,16 +440,40 @@ public class UserServiceImpl implements UserServiceI {
 
     @Override
     public void getInfoSubscribed(String Auth, String username) {
-        userDAO.getInfoSubscribed(Auth, username).enqueue(new Callback<User>() {
+        userDAO.getInfoSubscribed(Auth, username).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
+                    // mResponseWorked.setValue(true);
+                    String respuestaBody = null;
+                    try {
+                        respuestaBody = response.body().string();
+                        Log.d("getInfoSubscribed ", "respuesta: " + respuestaBody);
 
-                        User usr_in_marker = response.body();
+                        JSONArray respuesta = new JSONArray(respuestaBody);
+                        JSONObject mUserjson = respuesta.getJSONObject(0);
+                        User u = new User();
+                        Log.d("getInfoSubscribed ", "kel");
+                        u.setUsername(mUserjson.getString("username"));
+                        u.setGenere(mUserjson.getString("genere"));
+                        u.setDescription(mUserjson.getString("description"));
+                        u.setRol(mUserjson.getString("rol"));
+                        u.setGen_exp((float)mUserjson.getInt("gen_exp"));
+                        JSONObject subscription = respuesta.getJSONObject(1);
+                        Boolean sub = subscription.getBoolean("subscribed");
+                        u.setHasSubscribed(sub);
+                        Log.d("getInfoSubscribed ", "user: " + u.getUsername() + " Genere " +u.getGenere() + " Descripc :" + u.getDescription());
+                        mUserSubscribed.setValue(u);
 
-                        mUserSubscribed.setValue(usr_in_marker);
-                        //Log.d("getInfoSubscribed ", "description: "  +u.getDescription());
                         //Log.d("getInfoSubscribed ", "sub: "  +sub);
+
+
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                        Log.d("getInfoSubscribed ", e.toString());
+                        mUserSubscribed.setValue(new User());
+                    }
+
                     Log.d("getInfoSubscribed ", "getInfoSubscribed succesfully");
                 } else {
                     //mResponseWorked.setValue(false);
@@ -458,11 +483,13 @@ public class UserServiceImpl implements UserServiceI {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("getInfoSubscribed", t.getMessage().toString());
             }
         });
     }
+
+
 
     @Override
     public void userSubscribe(String Auth, String username) {

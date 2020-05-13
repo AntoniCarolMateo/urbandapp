@@ -49,7 +49,9 @@ public class MusicoActivity extends AppCompatActivity {
                     if(s.isHasSubscribed()){
                         //Es un musico al que el usuario actual esta subscrito, enseñar mas informacio, y dar la opcion de desubscribise
                         //subscribe.setVisibility(View.GONE);
+                        Log.d("MusicoActivity","OKEY");
                         subscribe.setEnabled(false);
+                        Log.d("MusicoActivity", "User :  " + s.getUsername()+ " gen " + s.getGenere() + " exp" + s.getGen_exp());
                         username.setText(s.getUsername());
                         genere.setText(s.getGenere());
                         expirience.setRating(s.getGen_exp());
