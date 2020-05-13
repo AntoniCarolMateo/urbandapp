@@ -39,7 +39,7 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<ResponseBody> getMatch(String auth){
+    public Call<User> getMatch(String auth){
 
         return  retrofit.create(IUserDAO.class).getMatch(auth);
 

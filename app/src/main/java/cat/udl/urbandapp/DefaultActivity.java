@@ -133,16 +133,6 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User s) {
-                Log.d("DefaultActivity","Tenim match " + s.getUsername());
-                DialogMatchUser match = DialogMatchUser.newInstance(DefaultActivity.this, userViewModel);
-                match.show(getSupportFragmentManager(), "Match con user");
-
-
-            }
-        });
 
        // userViewModel = new UserViewModel(getApplication());
 
@@ -166,7 +156,10 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         buttonMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userViewModel.getMatch();
+                DialogMatchUser match = DialogMatchUser.newInstance(DefaultActivity.this, userViewModel);
+                match.show(getSupportFragmentManager(), "Match con user");
+
+
             }
         });
         profile.setOnClickListener(new View.OnClickListener() {

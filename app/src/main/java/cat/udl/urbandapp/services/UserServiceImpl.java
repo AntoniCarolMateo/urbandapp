@@ -147,30 +147,16 @@ public class UserServiceImpl implements UserServiceI {
     @Override
     public void getMatch(final String Auth){
 
-        userDAO.getMatch(Auth).enqueue(new Callback<ResponseBody>() {
+        userDAO.getMatch(Auth).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200 ){
-                    try {
-
-                        String respuestaBody = response.body().string();
+                        User usr_match = response.body();
                         Log.d("getMatch", "Ok getMatch");
-                        Log.d("getMatch", respuestaBody);
-                        JSONObject mUserjson = new JSONObject(respuestaBody);
-                        Log.d("getMatch", "El JSONObject es: " + mUserjson.toString());
-                        User u = new User();
+                        Log.d("getMatch", usr_match.toString());
 
-                        u.setUsername(mUserjson.getString("username"));
-                        u.setCreated_at(mUserjson.getString("created_at"));
+                        mMatch.setValue(usr_match);
 
-                        Log.d("getMatch", u.getUsername());
-                        Log.d("getMatch", u.getCreated_at());
-
-                        mMatch.setValue(u);
-
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
                 else{
                     mMatch.setValue(new User());
@@ -180,7 +166,7 @@ public class UserServiceImpl implements UserServiceI {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.d("getMatch", t.getMessage().toString());
                 mMatch.setValue(new User());
             }

@@ -61,6 +61,7 @@ public class DialogMatchUser extends DialogFragment implements LifecycleOwner {
             }
         });
 
+        userViewModel.getMatch();
         userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
