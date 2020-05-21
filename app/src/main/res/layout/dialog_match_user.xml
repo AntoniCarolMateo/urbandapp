@@ -9,19 +9,21 @@
         android:id="@+id/imageView_match_"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
         android:id="@+id/textView_match_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
-        android:text="TextView"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/nova_square"
+        android:text="Nombre usuario"
+        android:textColor="@color/primaryDarkColor"
         app:layout_constraintEnd_toEndOf="@+id/imageView_match_"
         app:layout_constraintStart_toStartOf="@+id/imageView_match_"
         app:layout_constraintTop_toTopOf="@+id/imageView_match_" />
@@ -30,9 +32,127 @@
         android:id="@+id/ratingBar_match_exp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:isIndicator="true"
-        app:layout_constraintEnd_toEndOf="@+id/textView_match_username"
-        app:layout_constraintStart_toStartOf="@+id/textView_match_username"
+        app:layout_constraintEnd_toEndOf="@+id/textView33"
+        app:layout_constraintStart_toStartOf="@+id/textView33"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/nova_square"
+        android:text=" ¡ Felicidades !"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/nova_square"
+        android:text="Has hecho match con este usuario"
+        android:textColor="@color/secondaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="32dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:srcCompat="@drawable/ic_action_trash" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="124dp" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="110dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/nova_square"
+        android:text="Su experiéncia"
+        android:textAlignment="center"
+        android:textColor="@color/secondaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_match_username" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:srcCompat="@drawable/ic_action_music_1" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="39dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:srcCompat="@drawable/ic_action_music_2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="27dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView31"
+        app:layout_constraintStart_toEndOf="@+id/textView31"
+        app:layout_constraintTop_toTopOf="@+id/textView31"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_action_music_1" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="25dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_action_music_2" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:srcCompat="@drawable/ic_action_music_1" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="35dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="156dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23"
+        app:srcCompat="@drawable/ic_action_music_2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

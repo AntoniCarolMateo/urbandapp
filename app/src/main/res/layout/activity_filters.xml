@@ -34,13 +34,14 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/button_aply"
-        android:layout_width="match_parent"
-        android:layout_height="69dp"
-        android:text="Aplicar" />
+        <ImageView
+            android:id="@+id/button_aply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+    </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
