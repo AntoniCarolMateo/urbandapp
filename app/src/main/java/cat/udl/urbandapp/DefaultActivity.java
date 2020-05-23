@@ -1,5 +1,6 @@
 package cat.udl.urbandapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -43,10 +45,9 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
     private UserViewModel userViewModel;
-    private TextView mbienvenida;
-    private Button profile;
-    private Button filters;
+
     private GoogleMap googleMap;
+    private BottomNavigationView navigation;
 
     private Button buttonMatch;
     @Override
@@ -126,10 +127,28 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             public void onChanged(User s) {
                 //mPreferences.edit().putString("token",s).apply();
                 Log.d("DefaultActivity","Tenim user " + s.toString());
-                mbienvenida.setText("Bienvenido usuario: " + s.getUsername());
                // Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
                 //startActivity(da);
                 //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.match_navigation:
+                        DialogMatchUser match_dialog = DialogMatchUser.newInstance(DefaultActivity.this,userViewModel);
+                        match_dialog.show(getSupportFragmentManager(), "Match");
+                        return true;
+                    case R.id.map_navigation:
+                        return true;
+                    case R.id.find_users:
+                        Intent filtersActivity = new Intent(DefaultActivity.this, FiltersActivity.class);
+                        startActivity(filtersActivity);
+                        return true;
+                }
+                return false;
             }
         });
 
@@ -140,51 +159,12 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
 
         userViewModel.getProfileUser();
 
-
-        logout = findViewById(R.id.buttonLogout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPreferences.edit().putString("token","").apply();
-                mPreferences.edit().putString("token","").apply();
-                Intent chooser = new Intent(DefaultActivity.this,ChooserActivity.class);
-                startActivity(chooser);
-
-            }
-        });
-
-        buttonMatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogMatchUser match = DialogMatchUser.newInstance(DefaultActivity.this, userViewModel);
-                match.show(getSupportFragmentManager(), "Match con user");
-
-
-            }
-        });
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
-                startActivity(profile);
-            }
-        });
-        filters.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent filters = new Intent(DefaultActivity.this, FiltersActivity.class);
-                startActivity(filters);
-            }
-        });
     }
 
     private void initView() {
         this.mPreferences = PreferencesProvider.providePreferences();
         userViewModel = new UserViewModel(getApplication());
-        mbienvenida = findViewById(R.id.bienvenidaText);
-        profile = findViewById(R.id.button_profile);
-        buttonMatch = findViewById(R.id.buttonMatch);
-        filters = findViewById(R.id.button_filters_default);
+        navigation = findViewById(R.id.naviation_default);
 
     }
 
