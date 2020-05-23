@@ -25,6 +25,7 @@ import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.services.UserServiceI;
@@ -201,9 +202,8 @@ public class UserViewModel extends AndroidViewModel {
         String token = mPreferences.getString("token", "");
         repository.setUsername(token,username);
     }
-    public void setUserRol(String rol) {
+    public void setUserRol(RolEnum rol) {
         String token = mPreferences.getString("token", "");
-        Log.d("KELOKEE", "Usrview mode   "+ rol );
  ;      repository.setUserRol(token,rol);
     }
 

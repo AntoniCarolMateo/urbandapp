@@ -69,11 +69,8 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     private EditText surname;
     private EditText description;
     private RatingBar generalExp;
-    private Button editProfilePicture;
-    private RadioGroup radio_group_genere;
     private RadioButton radio_male;
     private RadioButton radio_female;
-    private ImageView profile_photo;
 
     public static DialogSetProfileStep1 newInstance(DefaultActivity activity) {
         DialogSetProfileStep1 dialog = new DialogSetProfileStep1();
@@ -102,16 +99,16 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
                 String _name = name.getText().toString();
                 String _surname = surname.getText().toString();
                 float _exp = generalExp.getRating();
-                String _birth  = calendar.getText().toString();
+                String _birth = calendar.getText().toString();
                 String _gender = "";
                 String _description = description.getText().toString();
-                if(radio_female.isChecked()){
+                if (radio_female.isChecked()) {
                     _gender = "FEMALE";
-                }else if (radio_male.isChecked()){
+                } else if (radio_male.isChecked()) {
                     _gender = "MALE";
                 }
 
-                viewModel.setProfileInfo(_name,_surname,_exp, _birth, _gender, _description);
+                viewModel.setProfileInfo(_name, _surname, _exp, _birth, _gender, _description);
                 DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
                 step2.show(getParentFragmentManager(), "step 2");
             }
@@ -138,47 +135,28 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
                 .setCancelable(true)
                 .create();
 
-        editProfilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: abrir dialogo que pida permisos de la cámara
-                //PEDIRá permisos
-                checkAndroidVersion();
-                if (checkCameraHardware(getContext())){
-                    /*Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 1);*/
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent,0);
-                }
-
-            }
-        });
         alertDialog.setCanceledOnTouchOutside(false);
         return alertDialog;
     }
-
 
 
     //inicialtizar la vista del dialog
     private void initView() {
         rootView = LayoutInflater.from
                 (getContext()).inflate(R.layout.dialog_set_profile_step1, null, false);
-        editProfilePicture = rootView.findViewById(R.id.button_edit_picture);
         generalExp = rootView.findViewById(R.id.ratingBar_gen_exp);
         name = rootView.findViewById(R.id.editText_name);
         surname = rootView.findViewById(R.id.editText_surname);
         radio_female = rootView.findViewById(R.id.radioButton_female);
         radio_male = rootView.findViewById(R.id.radioButton_male);
-        radio_group_genere = rootView.findViewById(R.id.radio_group_genere);
-        profile_photo = rootView.findViewById(R.id.imageView_profile);
         description = rootView.findViewById(R.id.editText_desc);
 
         calendar = rootView.findViewById(R.id.editText_date);
         calendar.setOnClickListener(this);
     }
 
-    private void checkAndroidVersion(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+    private void checkAndroidVersion() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkAndRequestPermissions();
         }
     }
@@ -187,13 +165,13 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
         int camera = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
         int read = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
         List<String> listPermisionsNeeded = new ArrayList<>();
-        if (camera != PackageManager.PERMISSION_GRANTED){
+        if (camera != PackageManager.PERMISSION_GRANTED) {
             listPermisionsNeeded.add(Manifest.permission.CAMERA);
         }
-        if (read != PackageManager.PERMISSION_GRANTED){
+        if (read != PackageManager.PERMISSION_GRANTED) {
             listPermisionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
-        if(!listPermisionsNeeded.isEmpty()){
+        if (!listPermisionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(getActivity(), listPermisionsNeeded.toArray(new String[listPermisionsNeeded.size()]), REQUES_ID_MULTIPLE_PERMISIONS);
             return false;
         }
@@ -201,27 +179,27 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
-        switch (requestCode){
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
             case REQUES_ID_MULTIPLE_PERMISIONS: {
                 Map<String, Integer> perms = new HashMap<>();
                 perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
-                if (grantResults.length > 0){
-                    for (int i = 0;i< permissions.length; i++){
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < permissions.length; i++) {
                         perms.put(permissions[i], grantResults[i]);
                     }
                     if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
-                            perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                            perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-                    }else{
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.CAMERA)
-                                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)){
+                    } else {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
                             showDialogOK("Camera and Storage required for the app", new DialogInterface.OnClickListener() {
 
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    switch (which){
+                                    switch (which) {
                                         case DialogInterface.BUTTON_POSITIVE:
                                             checkAndRequestPermissions();
                                             break;
@@ -248,54 +226,31 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     }
 
     private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)){
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
 
-
     //-----------------------------------DATEPICKER----------------------------_//
     @Override
     public void onClick(View v) {
-                showDatePickerDialog();
-        }
+        showDatePickerDialog();
+    }
 
 
     private void showDatePickerDialog() {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener(){
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                final String selectedDate = year + "-" +month + "-"+ day;
+                final String selectedDate = year + "-" + month + "-" + day;
                 calendar.setText(selectedDate);
             }
         });
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
+}
 
-    //TODO:   TERMINAR LOGICA DE LA CÄMARA, proponer dejarlo para el siguiente esprint.
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 0:
-                Bitmap map = (Bitmap) data.getExtras().get("data");
-                profile_photo.setImageBitmap(map);
-                break;
-            /*case 1:
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri selectedImage = data.getData();
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String filePath = cursor.getString(columnIndex);
-                    cursor.close();
-
-                    Bitmap selectedImg = BitmapFactory.decodeFile(filePath);*/
-                }
-        }
-    }
 

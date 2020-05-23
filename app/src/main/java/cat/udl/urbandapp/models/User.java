@@ -28,9 +28,8 @@ public class User {
     private String photo;
     @SerializedName("description")
     private String description;
-
     @SerializedName("rol")
-    private String rol;
+    private RolEnum rol;
 
     public String getDescription() {
         return description;
@@ -190,11 +189,11 @@ public class User {
         this.gen_exp = gen_exp;
     }
 
-    public String getRol() {
+    public RolEnum getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(RolEnum rol) {
         this.rol = rol;
     }
 

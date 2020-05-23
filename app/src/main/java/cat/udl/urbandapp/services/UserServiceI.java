@@ -9,6 +9,7 @@ import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -71,7 +72,7 @@ public interface UserServiceI {
     void getFilteredUsers(@Header("Authorization") String header, @Query("instruments") List<String> instruments, @Query("genres")List<String> genres);
 
     @POST("account/profile/setUserRol/{rol}")
-    void setUserRol(@Header("Authorization")String auth,  @Path("rol") String rol);
+    void setUserRol(@Header("Authorization")String auth,  @Path("rol") RolEnum rol);
 
     MutableLiveData<String> getLiveDataToken();
 

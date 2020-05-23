@@ -11,6 +11,7 @@ import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -104,7 +105,7 @@ public class UserDAOImpl implements IUserDAO {
     }
 
     @Override
-    public Call<ResponseBody> setUserRol(String auth, String rol) {
+    public Call<ResponseBody> setUserRol(String auth, RolEnum rol) {
         return retrofit.create(IUserDAO.class).setUserRol(auth,rol);
     }
 

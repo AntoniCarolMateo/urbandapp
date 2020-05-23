@@ -24,6 +24,7 @@ import cat.udl.urbandapp.dialogs.DialogAddInstrument;
 import cat.udl.urbandapp.dialogs.DialogSetProfileStep1;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.recyclerview.GenereDiffCallback;
 import cat.udl.urbandapp.recyclerview.GeneresAdapter;
@@ -44,6 +45,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView description;
     private RecyclerView list_instruments;
     private RecyclerView list_genres;
+    private ImageView role;
     private FloatingActionButton addInstrument;
     private FloatingActionButton addGenre;
 
@@ -69,12 +71,14 @@ public class UserProfileActivity extends AppCompatActivity {
             @Override
             public void onChanged(User user) {
                 //Camvios en los lyouts!!!!
+                RolEnum _rol = user.getRol();
                 username.setText(user.getUsername());
                 name.setText(user.getName());
                 surname.setText(user.getSurname());
                 gen_expirience.setRating(user.getGen_exp());
                 birthday.setText(user.getBirthday());
                 description.setText(user.getDescription());
+                //role.setImageAlpha(_rol.getImageResource(user.getRol()));
 
             }
         });
@@ -157,6 +161,7 @@ public class UserProfileActivity extends AppCompatActivity {
         list_genres = findViewById(R.id.recyclerView_generes_profile);
         addGenre = findViewById(R.id.floating_add_genre);
         addInstrument = findViewById(R.id.floating_add_instrument);
+        role = findViewById(R.id.imageView_rol);
 
 
 

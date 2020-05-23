@@ -19,6 +19,7 @@ import cat.udl.urbandapp.dao.IUserDAO;
 import cat.udl.urbandapp.dao.UserDAOImpl;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.network.RetrofitClientInstance;
 import okhttp3.ResponseBody;
@@ -226,7 +227,6 @@ public class UserServiceImpl implements UserServiceI {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
                     User usr = response.body();
-                    Log.d("showPrivateProfile", "we got user :  " + usr.toString() + "exp :" + usr.getGen_exp());
                     mUser.setValue(usr);
                 }
             }
@@ -280,14 +280,14 @@ public class UserServiceImpl implements UserServiceI {
     }
 
     @Override
-    public void setUserRol(String auth, String rol) {
+    public void setUserRol(String auth, RolEnum rol) {
         userDAO.setUserRol(auth, rol).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 200) {
-                    Log.d("KELOKEE", " SHA FET OKEY ROLES");
+
                 } else {
-                    Log.d("KELOKEE", "NO HA ANT VE  " + response.message());
+
 
                 }
             }
@@ -453,11 +453,10 @@ public class UserServiceImpl implements UserServiceI {
                         JSONArray respuesta = new JSONArray(respuestaBody);
                         JSONObject mUserjson = respuesta.getJSONObject(0);
                         User u = new User();
-                        Log.d("getInfoSubscribed ", "kel");
                         u.setUsername(mUserjson.getString("username"));
                         u.setGenere(mUserjson.getString("genere"));
                         u.setDescription(mUserjson.getString("description"));
-                        u.setRol(mUserjson.getString("rol"));
+                        //u.setRol((RolEnum)  mUserjson.get("rol"));
                         u.setGen_exp((float)mUserjson.getInt("gen_exp"));
                         JSONObject subscription = respuesta.getJSONObject(1);
                         Boolean sub = subscription.getBoolean("subscribed");
