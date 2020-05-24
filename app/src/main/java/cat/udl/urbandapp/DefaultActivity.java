@@ -152,8 +152,9 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
                         DialogMatchUser match_dialog = DialogMatchUser.newInstance(DefaultActivity.this,userViewModel);
                         match_dialog.show(getSupportFragmentManager(), "Match");
                         return true;
-                    case R.id.map_navigation:
-                        return true;
+                    case R.id.profile_navigation:
+                        Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class );
+                        startActivity(profile);
                     case R.id.find_users:
                         Intent filtersActivity = new Intent(DefaultActivity.this, FiltersActivity.class);
                         startActivity(filtersActivity);

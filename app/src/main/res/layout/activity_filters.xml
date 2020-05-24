@@ -14,10 +14,9 @@
         android:layout_marginTop="16dp"
         android:text="Selecciona los filtros que consideres necesarios." />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="82dp"
-        android:orientation="horizontal">
+        android:layout_height="134dp">
 
         <EditText
             android:id="@+id/editText_ins_filter"
@@ -25,7 +24,9 @@
             android:layout_height="51dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Instrumento"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editText_genre_filter"
@@ -33,19 +34,33 @@
             android:layout_height="51dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="Género Musical"
+            app:layout_constraintEnd_toEndOf="@+id/editText_ins_filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_ins_filter" />
 
         <ImageView
             android:id="@+id/button_aply"
+            android:layout_width="80dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="68dp"
+            android:background="@color/secondaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_filter_users" />
+
+        <TextView
+            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_action_add" />
-    </LinearLayout>
+            android:layout_marginTop="7dp"
+            android:text="Filtrar"
+            app:layout_constraintEnd_toEndOf="@+id/button_aply"
+            app:layout_constraintStart_toStartOf="@+id/button_aply"
+            app:layout_constraintTop_toBottomOf="@+id/button_aply" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="28dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"

@@ -59,12 +59,10 @@ public class MusicoActivity extends AppCompatActivity {
                         subscribe.setEnabled(false);
                         int _rol = 0;
                         Log.d("MusicoActivity", "User :  " + s.getUsername()+ " gen " + s.getGenere() + " exp" + s.getGen_exp());
-                        if (s.getGenere() == "MALE") {
-                            //setMaleICon
-                            //genere.setImageDrawable();
+                        if (s.getGenere() == "FEMALE") {
+                            genere.setImageResource(R.drawable.femaleicon);
                         }else{
-                            //setFemaeICon
-                            //genere.setImageDrawale();
+                            genere.setImageResource(R.drawable.maleicon);
                         }
                         expirience.setRating(s.getGen_exp());
                         description.setText(s.getDescription());

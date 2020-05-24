@@ -203,12 +203,12 @@
 
     <ImageView
         android:id="@+id/imageView_rol_public"
-        android:layout_width="60dp"
-        android:layout_height="56dp"
+        android:layout_width="71dp"
+        android:layout_height="63dp"
         android:layout_marginStart="92dp"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:srcCompat="@drawable/ic_mr_button_connected_10_light" />
+        app:srcCompat="@drawable/musician" />
 
     <ImageView
         android:id="@+id/imageView_gender_public"

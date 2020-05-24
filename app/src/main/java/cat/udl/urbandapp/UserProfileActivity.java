@@ -76,6 +76,11 @@ public class UserProfileActivity extends AppCompatActivity {
                 gen_expirience.setRating(user.getGen_exp());
                 birthday.setText(user.getBirthday());
                 description.setText(user.getDescription());
+                if (user.getGenere() == "F") {
+                    genre_icon.setImageResource(R.drawable.femaleicon);
+                }else{
+                    genre_icon.setImageResource(R.drawable.maleicon);
+                }
                 //role.setImageAlpha(_rol.getImageResource(user.getRol()));
 
             }
@@ -160,6 +165,7 @@ public class UserProfileActivity extends AppCompatActivity {
         addGenre = findViewById(R.id.floating_add_genre);
         addInstrument = findViewById(R.id.floating_add_instrument);
         role = findViewById(R.id.imageView_rol);
+        genre_icon = findViewById(R.id.icon_genre);
 
 
 

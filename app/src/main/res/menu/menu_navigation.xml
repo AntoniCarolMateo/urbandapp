@@ -9,8 +9,10 @@
         android:icon="@drawable/icon_match_nav"/>
 
 
-    <item android:id="@+id/map_navigation"
-        android:title= "@string/mapa"
+    <item android:id="@+id/profile_navigation"
+        android:title= "PROFILE"
+        android:icon="@drawable/musician"
+        android:iconTint="@color/primaryTextColor"
         />
 
 
