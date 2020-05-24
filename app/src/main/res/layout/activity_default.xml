@@ -35,19 +35,40 @@
         app:menu="@menu/menu_navigation" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/user_card"
+        android:layout_width="108dp"
+        android:layout_height="94dp"
+        android:textAlignment="center"
+        app:cardBackgroundColor="#05132D6E"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
         app:layout_constraintEnd_toStartOf="@+id/guideline25"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
-        app:layout_constraintTop_toTopOf="@+id/map"/>
+        app:layout_constraintTop_toTopOf="@+id/map">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal|top"
+            app:srcCompat="@drawable/musician" />
+
+        <TextView
+            android:id="@+id/textView_username_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/nova_square"
+            android:gravity="bottom"
+            android:text="usrname"
+            android:textColor="@color/primaryTextColor" />
+    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="75dp" />
+        app:layout_constraintGuide_begin="122dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline23"

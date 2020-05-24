@@ -11,8 +11,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="409dp"
-            android:layout_height="346dp"
+            android:layout_width="347dp"
+            android:layout_height="138dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +100,32 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="150dp" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="left" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="53dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintEnd_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_action_music_1" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="53dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_action_music_1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class DialogSetProfileStep2 extends DialogFragment {
 
     public View rootView;
     private FragmentActivity activity;
-    private ImageView addInstrument;
+    private FloatingActionButton addInstrument;
     private SharedPreferences mPreferences;
     private TablesViewModel tablesViewModel;
     private RecyclerView recyclerInstruments;

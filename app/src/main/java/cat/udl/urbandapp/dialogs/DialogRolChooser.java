@@ -46,23 +46,43 @@ public class DialogRolChooser extends DialogFragment {
         userViewModel = new UserViewModel(getActivity().getApplication());
         initView();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        _rol = RolEnum.SOLO;
         usuari.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                if (_rol.equals(RolEnum.SPONSOR)) {
+                    patrocinador.setBackgroundColor(R.color.primaryTextColor);
+                }else if (_rol.equals(RolEnum.BAND)){
+                    banda.setBackgroundColor(R.color.primaryTextColor);
+                }
                 usuari.setBackgroundColor(R.color.primaryLightColor);
                 _rol = RolEnum.SOLO;
             }
         });
         banda.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                if (_rol.equals(RolEnum.SPONSOR))  {
+                    patrocinador.setBackgroundColor(R.color.primaryTextColor);
+                }else if (_rol == RolEnum.SOLO){
+                    usuari.setBackgroundColor(R.color.primaryTextColor);
+                }
+                banda.setBackgroundColor(R.color.primaryLightColor);
                 _rol = RolEnum.BAND;
             }
         });
         patrocinador.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
+                if (_rol == RolEnum.SOLO) {
+                    usuari.setBackgroundColor(R.color.primaryTextColor);
+                }else if (_rol == RolEnum.BAND){
+                    banda.setBackgroundColor(R.color.primaryTextColor);
+                }
+                patrocinador.setBackgroundColor(R.color.primaryLightColor);
                 _rol = RolEnum.SPONSOR;
             }
         });

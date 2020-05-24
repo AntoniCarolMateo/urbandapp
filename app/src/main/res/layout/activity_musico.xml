@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MusicoActivity">
 
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="33dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingBar_exp_musico"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar_exp_musico"
+        app:srcCompat="@drawable/ic_action_music_2" />
+
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
@@ -210,16 +220,6 @@
         app:srcCompat="@drawable/ic_media_pause_dark" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="39dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline22"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_gender_public"
-        app:srcCompat="@drawable/ic_action_music_1" />
-
-    <ImageView
         android:id="@+id/imageView7"
         android:layout_width="33dp"
         android:layout_height="47dp"
@@ -231,20 +231,19 @@
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="36dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="39dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:srcCompat="@drawable/ic_action_music_2" />
+        app:srcCompat="@drawable/ic_action_music_1" />
 
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="33dp"
         android:layout_height="46dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:srcCompat="@drawable/ic_action_music_1" />
@@ -253,7 +252,7 @@
         android:id="@+id/group_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="imageView9,imageView6,imageView11,imageView7" />
+        app:constraint_referenced_ids="imageView11,imageView7" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_etiquetes"

@@ -1,6 +1,7 @@
 package cat.udl.urbandapp.dialogs;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -22,6 +23,8 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +44,13 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
     private TablesViewModel viewModel;
     private SharedPreferences mPreferences;
 
-    private Spinner choice_family;
+    private CardView cuerda;
+    private CardView percusion;
+    private CardView viento;
+    private CardView otros;
+
     private Spinner choice_instrument;
-    private Button addInstrument;
+    private FloatingActionButton addInstrument;
     private RatingBar experienceBar;
 
 
@@ -69,42 +76,41 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
                 .setCancelable(true)
                 .create();
 
-        choice_family.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        cuerda.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                choice_family.setSelection(position);
-                String  str = (String) choice_family.getSelectedItem();
-                switch(str) {
-                    case ("Viento"):
-                        ArrayAdapter<CharSequence> adapter_ins = ArrayAdapter.createFromResource(getContext(),
-                                R.array.spinnerWindInstruments, android.R.layout.simple_spinner_item);
-                        adapter_ins.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        choice_instrument.setAdapter(adapter_ins);
-                        break;
-                    case ("Cuerda"):
-                        ArrayAdapter<CharSequence> adapter_cu = ArrayAdapter.createFromResource(getContext(),
-                                R.array.spinnerStringInstruments, android.R.layout.simple_spinner_item);
-                        adapter_cu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        choice_instrument.setAdapter(adapter_cu);
-                        break;
-                    case ("Percusión"):
-                        ArrayAdapter<CharSequence> adapter_per = ArrayAdapter.createFromResource(getContext(),
-                                R.array.spinnerPercusionInstruments, android.R.layout.simple_spinner_item);
-                        adapter_per.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        choice_instrument.setAdapter(adapter_per);
-                        break;
-                    case ("Otros"):
-                        ArrayAdapter<CharSequence> adapter_oth = ArrayAdapter.createFromResource(getContext(),
-                                R.array.spinnerOthers, android.R.layout.simple_spinner_item);
-                        adapter_oth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        choice_instrument.setAdapter(adapter_oth);
-                        break;
-                }
+            public void onClick(View v) {
+                ArrayAdapter<CharSequence> adapter_cu = ArrayAdapter.createFromResource(getContext(),
+                        R.array.spinnerStringInstruments, android.R.layout.simple_spinner_item);
+                adapter_cu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                choice_instrument.setAdapter(adapter_cu);
             }
-
+        });
+        viento.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onClick(View v) {
+                ArrayAdapter<CharSequence> adapter_ins = ArrayAdapter.createFromResource(getContext(),
+                        R.array.spinnerWindInstruments, android.R.layout.simple_spinner_item);
+                adapter_ins.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                choice_instrument.setAdapter(adapter_ins);
+            }
+        });
+        percusion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayAdapter<CharSequence> adapter_per = ArrayAdapter.createFromResource(getContext(),
+                        R.array.spinnerPercusionInstruments, android.R.layout.simple_spinner_item);
+                adapter_per.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                choice_instrument.setAdapter(adapter_per);
 
+            }
+        });
+        otros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayAdapter<CharSequence> adapter_oth = ArrayAdapter.createFromResource(getContext(),
+                        R.array.spinnerOthers, android.R.layout.simple_spinner_item);
+                adapter_oth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                choice_instrument.setAdapter(adapter_oth);
             }
         });
 
@@ -141,11 +147,10 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
         rootView = LayoutInflater.from
                 (getContext()).inflate(R.layout.dialog_add_instrument, null, false);
 
-        choice_family = rootView.findViewById(R.id.spinner_instruments_families);
-        ArrayAdapter<CharSequence> adapter_fam = ArrayAdapter.createFromResource(getContext(),
-                R.array.spinnerFamilies, android.R.layout.simple_spinner_item);
-        adapter_fam.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        choice_family.setAdapter(adapter_fam);
+        cuerda = rootView.findViewById(R.id.family_cuerda);
+        viento = rootView.findViewById(R.id.family_viento);
+        percusion = rootView.findViewById(R.id.family_percusion);
+        otros = rootView.findViewById(R.id.family_otros);
 
         choice_instrument = rootView.findViewById(R.id.spinner_instruments);
 

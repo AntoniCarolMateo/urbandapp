@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
-import android.media.Rating;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import cat.udl.urbandapp.dialogs.DialogAddGenere;
 import cat.udl.urbandapp.dialogs.DialogAddInstrument;
-import cat.udl.urbandapp.dialogs.DialogSetProfileStep1;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.RolEnum;
@@ -151,7 +149,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        username = findViewById(R.id.textView_username);
+        username = findViewById(R.id.textView_username_default);
         name = findViewById(R.id.textView_name);
         surname = findViewById(R.id.textView_surname);
         birthday = findViewById(R.id.textView_date);

@@ -37,7 +37,8 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
     public View rootView;
     public Activity activity;
     private ListView listView;
-    private String lv_items[] = { "Rock", "Pop","Country"};
+    private String lv_items[] = { "Rock", "Pop","Country", "Jazz", "Flamenco", "Metal", "Música Clássica",
+    "Eléctronica", "Hip Hop", "Trap", "Rap"};
     private List<MusicalGenere> my_sel_items = new ArrayList<MusicalGenere>();
 
     private SharedPreferences mPreferences;

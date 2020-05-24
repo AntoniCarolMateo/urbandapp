@@ -2,6 +2,7 @@ package cat.udl.urbandapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 
 import android.annotation.SuppressLint;
@@ -16,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,6 +45,8 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
     private UserViewModel userViewModel;
+    private CardView user;
+    private TextView username;
 
     private GoogleMap googleMap;
     private BottomNavigationView navigation;
@@ -127,9 +129,18 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
             public void onChanged(User s) {
                 //mPreferences.edit().putString("token",s).apply();
                 Log.d("DefaultActivity","Tenim user " + s.toString());
+                username.setText(s.getUsername());
                // Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
                 //startActivity(da);
                 //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
+                startActivity(profile);
             }
         });
 
@@ -165,6 +176,8 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         this.mPreferences = PreferencesProvider.providePreferences();
         userViewModel = new UserViewModel(getApplication());
         navigation = findViewById(R.id.naviation_default);
+        user = findViewById(R.id.user_card);
+        username = findViewById(R.id.textView_username_default);
 
     }
 

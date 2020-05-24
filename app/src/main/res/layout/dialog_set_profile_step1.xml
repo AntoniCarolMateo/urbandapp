@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="26dp"
+        android:layout_height="36dp"
         android:orientation="horizontal">
 
         <Space
@@ -23,15 +23,15 @@
 
         <ImageView
             android:id="@+id/imageView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="59dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_action_music_1" />
 
         <TextView
             android:id="@+id/textView34"
-            android:layout_width="278dp"
-            android:layout_height="33dp"
+            android:layout_width="269dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/nova_square"
             android:text="Introduce tu nombre y primer apellido"

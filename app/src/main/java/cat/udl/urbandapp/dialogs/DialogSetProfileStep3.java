@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,7 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
         public View rootView;
         private FragmentActivity activity;
-        private ImageView add_generes;
+        private FloatingActionButton add_generes;
         private RecyclerView recyclerView_generes;
         private TablesViewModel tablesViewModel;
         private UserViewModel userViewModel;
