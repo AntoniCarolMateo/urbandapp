@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/profile_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
         android:fontFamily="@font/nova_square"
-        android:text="Nombre usuario"
+        android:text="@string/nombre_de_usuario"
         android:textColor="@color/primaryDarkColor"
         app:layout_constraintEnd_toEndOf="@+id/imageView_match_"
         app:layout_constraintStart_toStartOf="@+id/imageView_match_"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/nova_square"
-        android:text=" ¡ Felicidades !"
+        android:text="@string/felicidades"
         android:textColor="@color/secondaryTextColor"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,21 +58,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/nova_square"
-        android:text="Has hecho match con este usuario"
+        android:text="@string/has_hecho_match_con_este_usuario"
         android:textColor="@color/secondaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-    <ImageView
-        android:id="@+id/imageView_rol"
-        android:layout_width="32dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="160dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline23"
-        app:srcCompat="@drawable/ic_action_trash" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline23"
@@ -87,7 +77,7 @@
         android:layout_height="18dp"
         android:layout_marginTop="44dp"
         android:fontFamily="@font/nova_square"
-        android:text="Su experiéncia"
+        android:text="@string/su_experi_ncia"
         android:textAlignment="center"
         android:textColor="@color/secondaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +91,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="12dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23"
         app:srcCompat="@drawable/ic_action_music_1" />
@@ -111,6 +102,7 @@
         android:layout_height="38dp"
         android:layout_marginTop="84dp"
         android:layout_marginEnd="24dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23"
         app:srcCompat="@drawable/ic_action_music_2" />
@@ -120,6 +112,7 @@
         android:layout_width="27dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintBottom_toBottomOf="@+id/textView31"
         app:layout_constraintStart_toEndOf="@+id/textView31"
         app:layout_constraintTop_toTopOf="@+id/textView31"
@@ -132,6 +125,7 @@
         android:layout_height="29dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="80dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_action_music_2" />
@@ -142,6 +136,7 @@
         android:layout_height="37dp"
         android:layout_marginTop="120dp"
         android:layout_marginEnd="68dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23"
         app:srcCompat="@drawable/ic_action_music_1" />
@@ -152,6 +147,7 @@
         android:layout_height="31dp"
         android:layout_marginStart="92dp"
         android:layout_marginTop="156dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline23"
         app:srcCompat="@drawable/ic_action_music_2" />

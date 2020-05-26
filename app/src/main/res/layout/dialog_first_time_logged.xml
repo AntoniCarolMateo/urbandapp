@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,6 +10,7 @@
         android:id="@+id/imageButton"
         android:layout_width="match_parent"
         android:layout_height="77dp"
+        android:contentDescription="@string/logo_app"
         android:src="@drawable/logo_urband" />
 
     <Space
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="61dp"
         android:fontFamily="@font/nova_square"
-        android:text="Veo que es la primera vez que entras en Urband."
+        android:text="@string/veo_que_es_la_primera_vez_que_entras_en_urband"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="18sp" />
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:fontFamily="@font/nova_square"
-        android:text="Configura tu perfil para que otros usuarios puedan conocerte!"
+        android:text="@string/configura_tu_perfil_para_que_otros_usuarios_puedan_conocerte"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="14sp" />
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nova_square"
-        android:text="En primer lugar, escoge un nombre para poder ser identificado más facilmente"
+        android:text="@string/en_primer_lugar_escoge_un_nombre_para_poder_ser_identificado_m_s_facilmente"
         android:textAlignment="center"
         android:textColor="@color/secondaryTextColor" />
 
@@ -56,9 +56,11 @@
         android:ems="10"
         android:fontFamily="@font/nova_square"
         android:inputType="textPersonName"
-        android:text="musico455"
+        android:text="@string/username_dialog"
         android:textAlignment="center"
-        android:textColor="@color/primaryDarkColor" />
+        android:textColor="@color/primaryDarkColor"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <Space
         android:layout_width="match_parent"

@@ -13,7 +13,7 @@
         android:layout_marginTop="116dp"
         android:background="@color/design_default_color_primary_dark"
         android:fontFamily="@font/nova_cut"
-        android:text="@string/login"
+        android:text="@string/iniciar_sesi_n"
         android:textColor="@color/design_default_color_background"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         android:layout_marginTop="440dp"
         android:background="@color/design_default_color_primary_dark"
         android:fontFamily="@font/nova_cut"
-        android:text="@string/register"
+        android:text="@string/registrarse"
         android:textColor="@color/design_default_color_background"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,10 +77,4 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="653dp" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="247dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

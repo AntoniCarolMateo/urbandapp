@@ -48,7 +48,7 @@
         android:id="@+id/urband_logo"
         android:layout_width="201dp"
         android:layout_height="135dp"
-        android:contentDescription="logo_app"
+        android:contentDescription="@string/logo_app"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.503"
@@ -91,23 +91,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
 
-    <TextView
-        android:id="@+id/tes_view_rol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:fontFamily="@font/nova_oval"
-        android:text="@string/rol"
-        android:textColor="@color/design_default_color_primary_dark"
-        android:textColorHighlight="@color/design_default_color_primary_variant"
-        android:textColorHint="@color/design_default_color_secondary"
-        android:textColorLink="@color/design_default_color_secondary"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
-
     <EditText
         android:id="@+id/loginUsername"
         android:layout_width="258dp"
@@ -118,7 +101,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.252"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_pho" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_pho"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/loginPassword"
@@ -126,11 +111,13 @@
         android:layout_height="46dp"
         android:ems="10"
         android:fontFamily="@font/nova_script"
-        android:inputType="textPersonName"
+        android:inputType="textVisiblePassword|textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/tes_view_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/tes_view_pass"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/LoginButton"
@@ -138,7 +125,7 @@
         android:layout_height="51dp"
         android:background="@color/design_default_color_primary_dark"
         android:fontFamily="@font/nova_cut"
-        android:text="Login"
+        android:text="@string/iniciar_sesi_n"
         android:textColor="@color/design_default_color_background"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

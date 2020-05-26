@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nova_square"
-        android:text="Indicanos tus talentos en el mundo de la musica"
+        android:text="@string/ind_canos_tus_talentos_en_el_mundo_de_la_musica"
         android:textAlignment="center"
         android:textColor="@color/primaryDarkColor" />
 
@@ -50,13 +50,15 @@
             android:src="@drawable/ic_action_add"
             app:backgroundTint="@color/primaryDarkColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusable="true" />
 
         <ImageView
             android:id="@+id/imageView16"
             android:layout_width="59dp"
             android:layout_height="52dp"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/musicalnote"
             android:rotation="30"
             android:src="@drawable/ic_action_music_2"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +70,7 @@
             android:layout_height="55dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="@string/musicalnote"
             android:rotation="30"
             android:src="@drawable/ic_action_music_2"
             app:layout_constraintBottom_toBottomOf="parent"

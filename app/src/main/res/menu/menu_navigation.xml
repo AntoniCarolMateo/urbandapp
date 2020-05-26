@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/match_navigation"
         android:title="@string/match"
         android:icon="@drawable/icon_match_nav"/>
 
 
     <item android:id="@+id/profile_navigation"
-        android:title= "PROFILE"
+        android:title= "@string/profile"
         android:icon="@drawable/musician"
-        android:iconTint="@color/primaryTextColor"
         />
 
 
     <item android:id="@+id/find_users"
         android:icon="@drawable/icon_filter_users"
-        android:iconTint="@color/primaryTextColor"
         android:title="@string/find_users"/>
 
 

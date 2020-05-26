@@ -12,6 +12,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="28dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar_exp_musico"
         app:layout_constraintStart_toEndOf="@+id/ratingBar_exp_musico"
         app:srcCompat="@drawable/ic_action_music_2" />
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Descripción"
+        android:text="@string/desc_user"
         app:layout_constraintEnd_toEndOf="@+id/textView_descr_musico"
         app:layout_constraintStart_toStartOf="@+id/textView_descr_musico"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginBottom="108dp"
-        android:text="Desubscribirse"
+        android:text="@string/desuscribirse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline18" />
@@ -42,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="68dp"
-        android:text="Subscribirse"
+        android:text="@string/subscribirse"
         app:layout_constraintBottom_toBottomOf="@+id/botonDesub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/botonDesub"
@@ -64,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:contentDescription="@string/profile_picture"
         app:layout_constraintEnd_toEndOf="@+id/view3"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="@+id/view3"
@@ -87,7 +89,7 @@
         android:layout_width="105dp"
         android:layout_height="31dp"
         android:fontFamily="@font/nova_square"
-        android:text="Experiènica "
+        android:text="@string/experi_ncia"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/ratingBar_exp_musico"
@@ -111,7 +113,7 @@
         android:layout_width="302dp"
         android:layout_height="85dp"
         android:layout_marginTop="36dp"
-        android:text="TextView"
+        android:text="@string/desc_from_api"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintHorizontal_bias="0.486"
@@ -170,6 +172,7 @@
         android:id="@+id/group2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/profile_picture"
         app:constraint_referenced_ids="view3,imageView_photo_musico, textView_username_musico"
         app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
@@ -206,6 +209,7 @@
         android:layout_width="71dp"
         android:layout_height="63dp"
         android:layout_marginStart="92dp"
+        android:contentDescription="@string/rol_usuario_perfil"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:srcCompat="@drawable/musician" />
@@ -215,6 +219,7 @@
         android:layout_width="69dp"
         android:layout_height="65dp"
         android:layout_marginEnd="84dp"
+        android:contentDescription="@string/icono_sexo_per_fil"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:srcCompat="@drawable/ic_media_pause_dark" />
@@ -225,6 +230,7 @@
         android:layout_height="47dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar_exp_musico"
         app:layout_constraintEnd_toStartOf="@+id/ratingBar_exp_musico"
         app:srcCompat="@drawable/ic_action_music_2" />
@@ -234,6 +240,7 @@
         android:layout_width="39dp"
         android:layout_height="44dp"
         android:layout_marginEnd="28dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:srcCompat="@drawable/ic_action_music_1" />
@@ -244,6 +251,7 @@
         android:layout_height="46dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="@string/musicalnote"
         app:layout_constraintStart_toStartOf="@+id/guideline21"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
         app:srcCompat="@drawable/ic_action_music_1" />

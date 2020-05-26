@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_gravity="center_horizontal|top"
+            android:contentDescription="@string/rol_de_usuario_defaultactivity"
             app:srcCompat="@drawable/musician" />
 
         <TextView
@@ -59,8 +60,8 @@
             android:layout_gravity="bottom|center_horizontal"
             android:fontFamily="@font/nova_square"
             android:gravity="bottom"
-            android:text="usrname"
-            android:textColor="@color/primaryTextColor" />
+            android:text="@string/usrname_defaultAct"
+            android:textColor="@color/secondaryTextColor" />
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline

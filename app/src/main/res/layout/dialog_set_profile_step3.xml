@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:layout_weight="1"
-            android:text="Indícanos tus preferéncias y tus gustos músicales"
+            android:text="@string/ind_canos_tus_prefer_ncias_y_tus_gustos_m_sicales"
             android:textAlignment="center"
             android:textColor="@color/primaryDarkColor" />
 
@@ -41,6 +41,7 @@
             android:layout_width="64dp"
             android:layout_height="55dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/musicalnote"
             android:rotation="30"
             android:src="@drawable/ic_action_music_2"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,6 +53,7 @@
             android:layout_height="52dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/musicalnote"
             android:rotation="30"
             android:src="@drawable/ic_action_music_2"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,24 +80,13 @@
             android:src="@drawable/ic_action_playback_forw"
             app:backgroundTint="@color/primaryDarkColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:focusable="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="19dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-    </LinearLayout>
 
 </LinearLayout>

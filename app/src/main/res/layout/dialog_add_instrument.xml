@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:fontFamily="@font/nova_square"
-        android:text="Selecciona la familia a la cual pertence el instrumento que quieres añadir"
+        android:text="@string/textView_add_ins_1"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_secondary" />
 
@@ -35,6 +35,7 @@
                 android:id="@+id/imageView18"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
+                android:contentDescription="@string/familia_de_cuerda"
                 android:src="@drawable/family_corda" />
 
             <TextView
@@ -43,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:fontFamily="@font/nova_square"
-                android:text="Cuerda"
+                android:text="@string/cuerda"
                 android:textAlignment="center"
                 android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
@@ -57,6 +58,7 @@
                 android:id="@+id/imageView19"
                 android:layout_width="wrap_content"
                 android:layout_height="62dp"
+                android:contentDescription="@string/familia_de_percussion"
                 android:src="@drawable/family_percussion" />
 
             <TextView
@@ -65,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:fontFamily="@font/nova_square"
-                android:text="Percussión"
+                android:text="@string/percusi_n"
                 android:textAlignment="center"
                 android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
@@ -78,7 +80,8 @@
             <ImageView
                 android:id="@+id/imageView20"
                 android:layout_width="wrap_content"
-                android:layout_height="62dp"
+                android:layout_height="54dp"
+                android:contentDescription="@string/familia_de_vento"
                 android:src="@drawable/family_viento" />
 
             <TextView
@@ -87,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:fontFamily="@font/nova_square"
-                android:text="Viento"
+                android:text="@string/viento"
                 android:textAlignment="center"
                 android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
@@ -101,6 +104,7 @@
                 android:id="@+id/imageView21"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
+                android:contentDescription="@string/familia_otros_instruments"
                 android:src="@drawable/family_others" />
 
             <TextView
@@ -109,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:fontFamily="@font/nova_square"
-                android:text="Otros"
+                android:text="@string/otros_ins"
                 android:textAlignment="center"
                 android:textColor="@color/secondaryTextColor" />
         </androidx.cardview.widget.CardView>
@@ -141,15 +145,15 @@
                 android:layout_height="wrap_content"
                 android:background="@color/design_default_color_primary_dark"
                 android:fontFamily="@font/nova_square"
-                android:text="Instrumento"
+                android:text="@string/instrumento"
                 android:textAlignment="center"
                 android:textColor="@color/design_default_color_on_primary" />
 
             <Spinner
                 android:id="@+id/spinner_instruments"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="0dp"
+                android:layout_weight="0" />
 
         </LinearLayout>
 
@@ -165,7 +169,7 @@
         android:layout_width="297dp"
         android:layout_height="36dp"
         android:fontFamily="@font/nova_square"
-        android:text="Indica tu experiéncia con el instrumento"
+        android:text="@string/indica_tu_experi_ncia_con_el_instrumento"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_on_secondary" />
 
@@ -189,6 +193,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/ic_action_add"
             app:backgroundTint="@color/primaryDarkColor"
             app:layout_constraintBottom_toBottomOf="@+id/ratingBar_exp"

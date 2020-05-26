@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Selecciona los filtros que consideres necesarios." />
+        android:text="@string/selecciona_los_filtros_que_consideres_necesarios" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,11 +22,13 @@
             android:id="@+id/editText_ins_filter"
             android:layout_width="176dp"
             android:layout_height="51dp"
+            android:autofillHints=""
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Instrumento"
+            android:text="@string/instrumento"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="LabelFor" />
 
         <EditText
             android:id="@+id/editText_genre_filter"
@@ -34,10 +36,12 @@
             android:layout_height="51dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Género Musical"
+            android:text="@string/g_nero_musical"
             app:layout_constraintEnd_toEndOf="@+id/editText_ins_filter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_ins_filter" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_ins_filter"
+            android:autofillHints=""
+            tools:ignore="LabelFor" />
 
         <ImageView
             android:id="@+id/button_aply"
@@ -46,6 +50,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="68dp"
             android:background="@color/secondaryDarkColor"
+            android:contentDescription="@string/filter_action"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icon_filter_users" />
@@ -55,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:text="Filtrar"
+            android:text="@string/filtrar"
             app:layout_constraintEnd_toEndOf="@+id/button_aply"
             app:layout_constraintStart_toStartOf="@+id/button_aply"
             app:layout_constraintTop_toBottomOf="@+id/button_aply" />

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -23,6 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/rol_user"
                 app:srcCompat="@drawable/musician" />
 
             <ImageView
@@ -30,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/rol_vand"
                 app:srcCompat="@drawable/band" />
 
             <ImageView
@@ -37,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="@string/rol_sponsor"
                 app:srcCompat="@drawable/sponsor" />
         </LinearLayout>
 
@@ -46,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/nova_square"
-            android:text="Selecciona tu rol "
+            android:text="@string/selecciona_tu_rol"
             android:textColor="@color/secondaryTextColor"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/nova_square"
-            android:text="Músico"
+            android:text="@string/m_sico"
             android:textColor="@color/primaryDarkColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -75,7 +77,7 @@
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/nova_square"
-            android:text="Banda"
+            android:text="@string/banda"
             android:textColor="@color/primaryDarkColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -88,7 +90,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/nova_square"
-            android:text="Patrocinador"
+            android:text="@string/patrocinador"
             android:textColor="@color/primaryDarkColor"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -112,6 +114,7 @@
             android:layout_width="53dp"
             android:layout_height="63dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/musicalnote"
             app:layout_constraintBottom_toBottomOf="@+id/textView18"
             app:layout_constraintEnd_toStartOf="@+id/textView18"
             app:layout_constraintTop_toTopOf="parent"
@@ -122,6 +125,7 @@
             android:layout_width="53dp"
             android:layout_height="63dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/musicalnote"
             app:layout_constraintBottom_toBottomOf="@+id/textView18"
             app:layout_constraintStart_toEndOf="@+id/textView18"
             app:layout_constraintTop_toTopOf="parent"
