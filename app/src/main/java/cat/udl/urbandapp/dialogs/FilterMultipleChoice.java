@@ -3,7 +3,6 @@ package cat.udl.urbandapp.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.hardware.usb.UsbRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -25,8 +24,8 @@ import java.util.List;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.models.MusicalGenere;
-import cat.udl.urbandapp.preferences.PreferencesProvider;
-import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.InstrumentsViewModel;
+import cat.udl.urbandapp.viewmodel.MusicalGenreViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class FilterMultipleChoice extends DialogFragment implements LifecycleOwner {
@@ -36,18 +35,18 @@ public class FilterMultipleChoice extends DialogFragment implements LifecycleOwn
     public FragmentActivity activity;
     private ListView listView;
     private UserViewModel userViewModel;
-    private TablesViewModel tablesViewModel;
+
     private Button button_done;
     private String lv_instruments[] = { "Guitarra","Trompeta", "Piano", "Maracas"};
     private String lv_genres[] = {"Pop","Rock","Country","Metal"};
     private List<Instrument> my_sel_items_ins = new ArrayList<>();
     private List<MusicalGenere> my_sel_items_gen = new ArrayList<>();
 
-    public static FilterMultipleChoice newInstance(FragmentActivity activity, UserViewModel userViewModel, TablesViewModel tablesViewModel, String t) {
+    public static FilterMultipleChoice newInstance(FragmentActivity activity, UserViewModel userViewModel, String t) {
+
         FilterMultipleChoice dialog = new FilterMultipleChoice();
         dialog.userViewModel = userViewModel;
         dialog.type = t;
-        dialog.tablesViewModel = tablesViewModel;
         dialog.activity = activity;
         return dialog;
     }

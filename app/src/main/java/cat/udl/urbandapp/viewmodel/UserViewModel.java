@@ -14,13 +14,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import cat.udl.urbandapp.models.Instrument;
@@ -28,12 +23,11 @@ import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
-import cat.udl.urbandapp.services.UserServiceI;
 import cat.udl.urbandapp.services.UserServiceImpl;
 import cat.udl.urbandapp.utils.Utils;
 
 public class UserViewModel extends AndroidViewModel {
-    private UserServiceI repository;
+    private UserServiceImpl repository;
     private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<User> responseLiveUser;
     private MutableLiveData<Boolean> responseLiveRegister;
@@ -96,6 +90,7 @@ public class UserViewModel extends AndroidViewModel {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void  createTokenUser(String user, String password){
         String header = "34" + user + ":" + password;
         byte[] data = header.getBytes(StandardCharsets.UTF_8);

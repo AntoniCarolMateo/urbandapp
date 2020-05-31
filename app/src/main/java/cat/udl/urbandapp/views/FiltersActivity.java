@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +20,8 @@ import cat.udl.urbandapp.dialogs.FilterMultipleChoice;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.recyclerview.UserDiffCallback;
 import cat.udl.urbandapp.recyclerview.UsersAdapter;
-import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.InstrumentsViewModel;
+import cat.udl.urbandapp.viewmodel.MusicalGenreViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 
@@ -30,7 +30,8 @@ public class FiltersActivity extends CustomActivity  {
     private final String TAG = getClass().getSimpleName();
 
     private UserViewModel userViewModel;
-    private TablesViewModel tablesViewModel;
+    private InstrumentsViewModel instrumentsViewModel;
+    private MusicalGenreViewModel musicalGenreViewModel;
     private ImageView aply;
     private EditText editText_instruments;
     private EditText editText_genres;
@@ -44,7 +45,8 @@ public class FiltersActivity extends CustomActivity  {
         setContentView(R.layout.activity_filters);
 
         userViewModel = new UserViewModel(getApplication());
-        tablesViewModel = new TablesViewModel(getApplication());
+        instrumentsViewModel = new InstrumentsViewModel(getApplication());
+        musicalGenreViewModel = new MusicalGenreViewModel(getApplication());
 
         initView();
     }
@@ -67,7 +69,7 @@ public class FiltersActivity extends CustomActivity  {
         editText_instruments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FilterMultipleChoice dialog = FilterMultipleChoice.newInstance(FiltersActivity.this, userViewModel, tablesViewModel, "INSTRUMENTS");
+                FilterMultipleChoice dialog = FilterMultipleChoice.newInstance(FiltersActivity.this, userViewModel,"INSTRUMENTS");
                 dialog.show(getSupportFragmentManager(), "INSTRUMENTS");
             }
         });
@@ -75,7 +77,7 @@ public class FiltersActivity extends CustomActivity  {
         editText_genres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FilterMultipleChoice dialog = FilterMultipleChoice.newInstance(FiltersActivity.this, userViewModel, tablesViewModel, "GENRES");
+                FilterMultipleChoice dialog = FilterMultipleChoice.newInstance(FiltersActivity.this, userViewModel, "GENRES");
                 dialog.show(getSupportFragmentManager(), "GENRES");
 
             }

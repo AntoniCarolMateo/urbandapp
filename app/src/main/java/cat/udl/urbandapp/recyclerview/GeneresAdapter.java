@@ -1,6 +1,5 @@
 package cat.udl.urbandapp.recyclerview;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.MusicalGenere;
-import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.MusicalGenreViewModel;
 
 public class GeneresAdapter extends ListAdapter<MusicalGenere, GeneresAdapter.GenereHolder> {
 
     private AdapterView.OnItemClickListener InstrumentListener;
     private FragmentActivity activity;
     private final static String TAG ="GenereAdapter";
-    private TablesViewModel tablesViewModel;
+    private MusicalGenreViewModel tablesViewModel;
 
-    public GeneresAdapter(@NonNull DiffUtil.ItemCallback<MusicalGenere> diffCallback, TablesViewModel viewModel, FragmentActivity activity) {
+    public GeneresAdapter(@NonNull DiffUtil.ItemCallback<MusicalGenere> diffCallback, MusicalGenreViewModel viewModel, FragmentActivity activity) {
         super(diffCallback);
         this.tablesViewModel = viewModel;
         this.activity = activity;

@@ -28,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class UserServiceImpl implements UserServiceI {
+public class UserServiceImpl{
 
     private IUserDAO userDAO = new UserDAOImpl();
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
@@ -87,28 +87,27 @@ public class UserServiceImpl implements UserServiceI {
         return mAllUsers;
     }
 
-    @Override
+
     public MutableLiveData<Boolean> getLiveDataRegister() {
         return mRegister;
     }
 
-    @Override
+
     public MutableLiveData<Boolean> getLiveDataProfileStep1() {
         return mSetProfileStep1;
     }
 
-    @Override
+
     public MutableLiveData<Boolean> getLiveDataFirstTime() {
         return mFirstTime;
     }
 
-    @Override
+
     public MutableLiveData<User> getLiveDataMatch() {
         Log.d("DefaultActivity", "userServiceImpls match");
         return mMatch;
     }
 
-    @Override
     public void getProfileUser(final String Auth) {
 
         userDAO.getProfileUser(Auth).enqueue(new Callback<ResponseBody>() {
@@ -150,7 +149,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void getMatch(final String Auth) {
 
         userDAO.getMatch(Auth).enqueue(new Callback<User>() {
@@ -178,7 +176,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void firstTimeProfileSetUp(String header) {
         userDAO.firstTimeProfileSetUp(header).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -200,7 +197,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void getFirstTimeBoolean(String auth) {
         userDAO.getFirstTimeBoolean(auth).enqueue(new Callback<Boolean>() {
             @Override
@@ -220,7 +216,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void showPrivateProfile(String auth) {
         userDAO.showPrivateProfile(auth).enqueue(new Callback<User>() {
             @Override
@@ -239,7 +234,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void setUsername(String auth, String username) {
         userDAO.setUsername(auth, username).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -254,7 +248,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void getFilteredUsers(String header, List<String> instruments, List<String> gen) {
         Log.d("KELOKE", instruments.toString() + " and " + gen.toString());
         userDAO.getFilteredUsers(header, instruments, gen).enqueue(new Callback<List<User>>() {
@@ -279,7 +272,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void setUserRol(String auth, RolEnum rol) {
         userDAO.setUserRol(auth, rol).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -299,8 +291,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-
-    @Override
     public void getAllUsers(String auth) {
 
         userDAO.getAllUsers(auth).enqueue(new Callback<ResponseBody>() {
@@ -346,8 +336,8 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    // String mResponse = RetrofitClientInstance.getRetrofitInstance().create(UserServiceI.class).createTokenUser();
-    @Override
+
+
     public void registerUser(JsonObject userJson) {
 
         //userDAO.registerUser(userJson);
@@ -376,7 +366,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void createTokenUser(String Auth) {
 
         userDAO.createTokenUser(Auth).enqueue(new Callback<ResponseBody>() {
@@ -413,7 +402,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void setProfileInfo(String header, JsonObject json) {
         userDAO.setProfileInfo(header, json).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -438,7 +426,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void getInfoSubscribed(String Auth, String username) {
         userDAO.getInfoSubscribed(Auth, username).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -488,9 +475,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-
-
-    @Override
     public void userSubscribe(String Auth, String username) {
         userDAO.userSubscribe(Auth,username).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -533,7 +517,6 @@ public class UserServiceImpl implements UserServiceI {
         });
     }
 
-    @Override
     public void userDeleteSubscribe(String Auth, String username) {
         userDAO.userDeleteSubscribe(Auth, username).enqueue(new Callback<ResponseBody>() {
             @Override

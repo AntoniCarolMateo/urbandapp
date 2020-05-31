@@ -1,13 +1,9 @@
 package cat.udl.urbandapp.dialogs;
 
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,32 +12,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cat.udl.urbandapp.R;
-import cat.udl.urbandapp.models.Instrument;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
-
-import cat.udl.urbandapp.recyclerview.InstrumentAdapter;
-import cat.udl.urbandapp.recyclerview.InstrumentDiffCallback;
-import cat.udl.urbandapp.viewmodel.TablesViewModel;
-import cat.udl.urbandapp.viewmodel.UserViewModel;
+import cat.udl.urbandapp.viewmodel.InstrumentsViewModel;
 
 public class DialogAddInstrument extends DialogFragment implements LifecycleOwner {
 
     public View rootView;
     private FragmentActivity activity;
-    private TablesViewModel viewModel;
+    private InstrumentsViewModel viewModel;
     private SharedPreferences mPreferences;
 
     private CardView cuerda;
@@ -54,7 +39,7 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
     private RatingBar experienceBar;
 
 
-    public static DialogAddInstrument newInstance(FragmentActivity activity, TablesViewModel tablesViewModel) {
+    public static DialogAddInstrument newInstance(FragmentActivity activity, InstrumentsViewModel tablesViewModel) {
         DialogAddInstrument dialog = new DialogAddInstrument();
         dialog.activity = activity;
         dialog.viewModel = tablesViewModel;

@@ -15,12 +15,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 
 import java.util.ArrayList;
@@ -29,7 +26,7 @@ import java.util.List;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.MusicalGenere;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
-import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.MusicalGenreViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
@@ -42,13 +39,13 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
     private List<MusicalGenere> my_sel_items = new ArrayList<MusicalGenere>();
 
     private SharedPreferences mPreferences;
-    private TablesViewModel viewModel;
+    private MusicalGenreViewModel viewModel;
     private UserViewModel userViewModel;
     private Button button_add_genere;
 
 
 
-    public static DialogAddGenere newInstance(Activity activity, TablesViewModel viewModel) {
+    public static DialogAddGenere newInstance(Activity activity, MusicalGenreViewModel viewModel) {
         DialogAddGenere dialog = new DialogAddGenere();
         dialog.userViewModel = new UserViewModel(activity.getApplication());
         dialog.activity = activity;

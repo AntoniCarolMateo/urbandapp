@@ -1,17 +1,12 @@
 package cat.udl.urbandapp.recyclerview;
 
-import android.app.AlertDialog;
-import android.app.Application;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -20,19 +15,17 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import cat.udl.urbandapp.R;
-import cat.udl.urbandapp.dialogs.DialogSetProfileStep1;
-import cat.udl.urbandapp.dialogs.DialogSetProfileStep2;
 import cat.udl.urbandapp.models.Instrument;
-import cat.udl.urbandapp.viewmodel.TablesViewModel;
+import cat.udl.urbandapp.viewmodel.InstrumentsViewModel;
 
 public class InstrumentAdapter extends ListAdapter<Instrument, InstrumentAdapter.InstrumentHolder> {
 
     private AdapterView.OnItemClickListener InstrumentListener;
     private FragmentActivity activity;
     private final static String TAG ="InstrumentAdapter";
-    private TablesViewModel tablesViewModel;
+    private InstrumentsViewModel tablesViewModel;
 
-    public InstrumentAdapter(@NonNull DiffUtil.ItemCallback<Instrument> diffCallback, TablesViewModel tablesViewModel,
+    public InstrumentAdapter(@NonNull DiffUtil.ItemCallback<Instrument> diffCallback, InstrumentsViewModel tablesViewModel,
                              FragmentActivity activity) {
         super(diffCallback);
         this.tablesViewModel = tablesViewModel;
