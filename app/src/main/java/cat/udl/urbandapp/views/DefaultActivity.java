@@ -1,4 +1,4 @@
-package cat.udl.urbandapp;
+package cat.udl.urbandapp.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
+import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.dialogs.DialogFirstTimeLogged;
 import cat.udl.urbandapp.dialogs.DialogMatchUser;
 import cat.udl.urbandapp.models.User;
@@ -39,11 +40,11 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 // que solo vuestra app pueda utilizar esta key de google maps!
 
 
-public class DefaultActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class DefaultActivity extends CustomActivity implements OnMapReadyCallback{
 
-    private Button logout;
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
+
     private UserViewModel userViewModel;
     private CardView user;
     private TextView username;
@@ -51,7 +52,73 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
     private GoogleMap googleMap;
     private BottomNavigationView navigation;
 
-    private Button buttonMatch;
+    @SuppressLint("SourceLockedOrientationActivity")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_default);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        this.mPreferences = PreferencesProvider.providePreferences();
+        userViewModel = new UserViewModel(getApplication());
+        initView();
+    }
+
+    private void initView() {
+        navigation = findViewById(R.id.naviation_default);
+        user = findViewById(R.id.user_card);
+        username = findViewById(R.id.textView_username_default);
+
+        userViewModel.getFirstTime();
+
+        userViewModel.getResponseIsFirstTime().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean firstTime) {
+                if (firstTime){
+                    DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
+                    first.show(getSupportFragmentManager(), "first set up profile");
+                }
+            }
+        });
+        userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User s) {
+                Log.d("DefaultActivity","Tenim user " + s.toString());
+                username.setText(s.getUsername());
+            }
+        });
+
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goTo(UserProfileActivity.class);
+            }
+        });
+
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.match_navigation:
+                        DialogMatchUser match_dialog = DialogMatchUser.newInstance(DefaultActivity.this,userViewModel);
+                        match_dialog.show(getSupportFragmentManager(), "Match");
+                        return true;
+                    case R.id.profile_navigation:
+                        goTo(UserProfileActivity.class);
+                        return true;
+                    case R.id.find_users:
+                        goTo(FiltersActivity.class);
+                        return true;
+                }
+                return false;
+            }
+        });
+        userViewModel.getProfileUser();
+
+    }
+
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         // Add a marker in Barcelona
@@ -90,97 +157,6 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         userViewModel.getAllUsers();
 
     }
-    /*
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        Toast.makeText(DefaultActivity.this, "marker clicado!", Toast.LENGTH_SHORT).show();
-
-        return true;
-    }
-    */
-
-    @SuppressLint("SourceLockedOrientationActivity")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_default);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        initView();
-
-
-        userViewModel.getFirstTime();
-
-        userViewModel.getResponseIsFirstTime().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean firstTime) {
-                if (firstTime){
-                    DialogFirstTimeLogged first = DialogFirstTimeLogged.newInstance(DefaultActivity.this);
-                    first.show(getSupportFragmentManager(), "first set up profile");
-                }
-            }
-        });
-        userViewModel.getResponseLiveDataUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User s) {
-                //mPreferences.edit().putString("token",s).apply();
-                Log.d("DefaultActivity","Tenim user " + s.toString());
-                username.setText(s.getUsername());
-               // Intent da = new Intent(LoginActivity.this,DefaultActivity.class);
-                //startActivity(da);
-                //Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class);
-                startActivity(profile);
-            }
-        });
-
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.match_navigation:
-                        DialogMatchUser match_dialog = DialogMatchUser.newInstance(DefaultActivity.this,userViewModel);
-                        match_dialog.show(getSupportFragmentManager(), "Match");
-                        return true;
-                    case R.id.profile_navigation:
-                        Intent profile = new Intent(DefaultActivity.this, UserProfileActivity.class );
-                        startActivity(profile);
-                    case R.id.find_users:
-                        Intent filtersActivity = new Intent(DefaultActivity.this, FiltersActivity.class);
-                        startActivity(filtersActivity);
-                        return true;
-                }
-                return false;
-            }
-        });
-
-
-       // userViewModel = new UserViewModel(getApplication());
-
-
-
-        userViewModel.getProfileUser();
-
-    }
-
-    private void initView() {
-        this.mPreferences = PreferencesProvider.providePreferences();
-        userViewModel = new UserViewModel(getApplication());
-        navigation = findViewById(R.id.naviation_default);
-        user = findViewById(R.id.user_card);
-        username = findViewById(R.id.textView_username_default);
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -195,13 +171,17 @@ public class DefaultActivity extends AppCompatActivity implements OnMapReadyCall
         switch (item.getItemId()) {
             case R.id.logout:
                 this.mPreferences.edit().remove("token").commit();
-                Intent intent = new Intent(DefaultActivity.this, ChooserActivity.class);
-                startActivity(intent);
+                goTo(ChooserActivity.class);
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
     }
 
 

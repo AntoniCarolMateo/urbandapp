@@ -1,4 +1,4 @@
-package cat.udl.urbandapp;
+package cat.udl.urbandapp.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
@@ -13,11 +13,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cat.udl.urbandapp.models.RolEnum;
+import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
-public class MusicoActivity extends AppCompatActivity {
+public class MusicoActivity extends CustomActivity {
 
     private Button subscribe;
     private Button desubscribe;
@@ -36,29 +36,23 @@ public class MusicoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musico);
-        initView();
-        Bundle extras = getIntent().getExtras();
         userViewModel = new UserViewModel(getApplication());
+        initView();
+    }
 
-
+    private void checkSuscription(Bundle extras) {
         if (extras != null) {
             final String extra_username = extras.getString("username");
-            Log.d("MusicoActivity","tenemos el username: " + extra_username);
+
             username.setText(extra_username);
             userViewModel.getUsersSubscribed(extra_username);
             userViewModel.getResponseUserSubscription().observe(this, new Observer<User>() {
                 @Override
                 public void onChanged(final User s) {
-                    Log.d("MusicoActivity","Tenim  user  por retrofit" + s.getUsername() + " sub: " + s.isHasSubscribed());
-                    //Toast.makeText(MusicoActivity.this, "eci", Toast.LENGTH_LONG).show();
-                    ;
                     if(s.isHasSubscribed()){
-                        //Es un musico al que el usuario actual esta subscrito, enseñar mas informacio, y dar la opcion de desubscribise
-                        //subscribe.setVisibility(View.GONE);
-                        Log.d("MusicoActivity","OKEY");
                         subscribe.setEnabled(false);
                         int _rol = 0;
-                        Log.d("MusicoActivity", "User :  " + s.getUsername()+ " gen " + s.getGenere() + " exp" + s.getGen_exp());
+
                         if (s.getGenere() == "FEMALE") {
                             genere.setImageResource(R.drawable.femaleicon);
                         }else{
@@ -111,31 +105,26 @@ public class MusicoActivity extends AppCompatActivity {
                 public void onChanged(Boolean s) {
                     Log.d("MusicoActivity","Tenim  subscripcion  por retrofit: "  + s);
                     if(s){
-                        Toast.makeText(MusicoActivity.this, "Subscrito con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MusicoActivity.this, "Suscrito con exito", Toast.LENGTH_LONG).show();
                         userViewModel.getUsersSubscribed(extra_username);
 
                     }
 
                     else{
-                        Toast.makeText(MusicoActivity.this, "Error en la subscripcion", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MusicoActivity.this, "Error añadiendo suscripción.", Toast.LENGTH_LONG).show();
 
                     }
                 }
             });
-
             userViewModel.getResponseLiveDataDeleteSubscription().observe(this, new Observer<Boolean>() {
                 @Override
                 public void onChanged(Boolean s) {
-                    Log.d("MusicoActivity","Tenemso delete de  subscripcion  por retrofit: "  + s);
                     if(s){
-                        Toast.makeText(MusicoActivity.this, "Desubscrito con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MusicoActivity.this, "Ya no estas suscrito a este usuario.", Toast.LENGTH_LONG).show();
                         userViewModel.getUsersSubscribed(extra_username);
-
                     }
-
                     else{
-                        Toast.makeText(MusicoActivity.this, "Error en la desubscripcion", Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(MusicoActivity.this, "Error eliminando suscripción.", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -145,7 +134,6 @@ public class MusicoActivity extends AppCompatActivity {
             super.onBackPressed();
 
         }
-
     }
 
     private void emptyProfile() {
@@ -153,9 +141,7 @@ public class MusicoActivity extends AppCompatActivity {
         description.setVisibility(View.INVISIBLE);
         role.setVisibility(View.INVISIBLE);
         expirience.setVisibility(View.INVISIBLE);
-
         icon_role.setVisibility(View.INVISIBLE);
-
         notes_design.setVisibility(View.INVISIBLE);
         etiquetes_design.setVisibility(View.INVISIBLE);
     }
@@ -171,5 +157,9 @@ public class MusicoActivity extends AppCompatActivity {
         icon_role = findViewById(R.id.imageView_rol_public);
         notes_design = findViewById(R.id.group_notes);
         etiquetes_design = findViewById(R.id.group_etiquetes);
+
+        Bundle extras = getIntent().getExtras();
+        checkSuscription(extras);
+
     }
 }

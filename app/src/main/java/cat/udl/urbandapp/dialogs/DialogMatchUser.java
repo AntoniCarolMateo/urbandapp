@@ -1,6 +1,5 @@
 package cat.udl.urbandapp.dialogs;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -16,12 +15,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
-import cat.udl.urbandapp.DefaultActivity;
-import cat.udl.urbandapp.MusicoActivity;
+import cat.udl.urbandapp.views.DefaultActivity;
+import cat.udl.urbandapp.views.MusicoActivity;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.viewmodel.UserViewModel;

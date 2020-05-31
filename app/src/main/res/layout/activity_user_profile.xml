@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:minHeight="1300dp"
-        tools:context=".UserProfileActivity">
+        tools:context=".views.UserProfileActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_instruments"

@@ -1,5 +1,6 @@
-package cat.udl.urbandapp.viewmodel;
+package cat.udl.urbandapp.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 
@@ -14,14 +15,14 @@ public class CustomActivity extends AppCompatActivity {
 
     protected String TAG = this.getClass().getSimpleName();
 
-    private BottomNavigationView inferior_menú;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
     }
 
-    public void goTo(){
-
+    public void goTo(Class _class){
+        Intent intent = new Intent(this, _class);
+        startActivity(intent);
     }
 }

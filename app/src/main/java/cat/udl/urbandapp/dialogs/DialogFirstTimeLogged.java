@@ -7,15 +7,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import cat.udl.urbandapp.DefaultActivity;
+import cat.udl.urbandapp.views.DefaultActivity;
 import cat.udl.urbandapp.R;
-import cat.udl.urbandapp.UserProfileActivity;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogFirstTimeLogged extends DialogFragment {

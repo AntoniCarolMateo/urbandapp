@@ -1,24 +1,19 @@
 package cat.udl.urbandapp.dialogs;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
-import cat.udl.urbandapp.DefaultActivity;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
