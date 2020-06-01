@@ -16,13 +16,14 @@ import androidx.fragment.app.FragmentActivity;
 
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.RolEnum;
+import cat.udl.urbandapp.viewmodel.ProfileSetUpViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class DialogRolChooser extends DialogFragment {
 
     public View rootView;
     private FragmentActivity activity;
-    private UserViewModel userViewModel;
+    private ProfileSetUpViewModel profileSetUpViewModel;
     private ImageView usuari;
     private ImageView banda;
     private ImageView patrocinador;
@@ -38,7 +39,7 @@ public class DialogRolChooser extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        userViewModel = new UserViewModel(getActivity().getApplication());
+        profileSetUpViewModel = new ProfileSetUpViewModel(getActivity().getApplication());
         initView();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         _rol = RolEnum.SOLO;
@@ -90,7 +91,7 @@ public class DialogRolChooser extends DialogFragment {
                 if (_rol == null){
                     Toast.makeText(getContext(),"Selecciona un rol de usuario!", Toast.LENGTH_SHORT).show();
                 }
-                userViewModel.setUserRol(_rol);
+                profileSetUpViewModel.setUserRol(_rol);
             }
         });
         AlertDialog alertDialog = builder.setView(rootView)

@@ -28,10 +28,7 @@ import cat.udl.urbandapp.utils.Utils;
 
 public class UserViewModel extends AndroidViewModel {
     private UserServiceImpl repository;
-    private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<User> responseLiveUser;
-    private MutableLiveData<Boolean> responseLiveRegister;
-    private MutableLiveData<Boolean> responseLiveStep1;
     private MutableLiveData<List<User>> responseAllUsers;
     private MutableLiveData<Boolean> responseIsFirstTime;
 
@@ -53,11 +50,8 @@ public class UserViewModel extends AndroidViewModel {
         super(application);
         repository = new UserServiceImpl();
 
-        responseLiveDataToken = repository.getLiveDataToken();
         responseLiveUser = repository.getLiveDataUser();
         responseAllUsers = repository.getLiveDataAllUsers();
-        responseLiveRegister = repository.getLiveDataRegister();
-        responseLiveStep1 = repository.getLiveDataProfileStep1();
         responseIsFirstTime = repository.getLiveDataFirstTime();
         responseUserSubscription = repository.getLiveDataUserSubscription();
         responseSubscription = repository.getLiveDataSubscription();
@@ -68,36 +62,6 @@ public class UserViewModel extends AndroidViewModel {
         mFilterGenres = new MutableLiveData<>();
 
         this.mPreferences = PreferencesProvider.providePreferences();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void registerUser(String username, String password,String gps){
-        JsonObject user = new JsonObject();
-
-        Log.d("UserViewModel", "user:" + username + " pass:"+ password);
-        user.addProperty("username", "+34" + username);
-        //tenemos que encriptar el password en sha-256 antes de enviarlo
-
-        /* @Jordi: estos valores también se pueden definir en el build.gradle i leerlos
-         * (salt and itereations)
-         */
-        String salt = "16";
-        String encode_hash = Utils.encode(password,salt,29000);
-        user.addProperty("password",   encode_hash);
-        user.addProperty("gps",gps);
-        Log.d("UserRegister", "viewmodel");
-        this.repository.registerUser(user);
-
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void  createTokenUser(String user, String password){
-        String header = "34" + user + ":" + password;
-        byte[] data = header.getBytes(StandardCharsets.UTF_8);
-        header = Base64.encodeToString(data, Base64.DEFAULT);
-        header = ("Authentication " + header).trim();
-        repository.createTokenUser(header);
-
     }
 
     public void getProfileUser(){
@@ -161,18 +125,7 @@ public class UserViewModel extends AndroidViewModel {
 
     };
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setProfileInfo(String name, String surname, float exp, String birth, String gender, String desc) {
-        String header = this.mPreferences.getString("token","");
-        JsonObject json = new JsonObject();
-        json.addProperty("name", name);
-        json.addProperty("surname", surname);
-        json.addProperty("expirience", exp);
-        json.addProperty("birthdate", birth);
-        json.addProperty("gender", gender);
-        json.addProperty("description", desc);
-        this.repository.setProfileInfo(header, json);
-    }
+
     public void getFirstTime() {
         String header = this.mPreferences.getString("token","");
         this.repository.getFirstTimeBoolean(header);
@@ -193,32 +146,13 @@ public class UserViewModel extends AndroidViewModel {
         repository.showPrivateProfile(token);
     }
 
-    public void setUsername(String username) {
-        String token = mPreferences.getString("token", "");
-        repository.setUsername(token,username);
-    }
-    public void setUserRol(RolEnum rol) {
-        String token = mPreferences.getString("token", "");
- ;      repository.setUserRol(token,rol);
-    }
-
-
-
-    public LiveData<String> getResponseLiveDataToken() {
-        return this.responseLiveDataToken;
-    }
     public LiveData<User> getResponseLiveDataUser() {
         return this.responseLiveUser;
     }
     public LiveData<List<User>> getResponseLiveDataAllUsers() {
         return this.responseAllUsers;
     }
-    public LiveData<Boolean> getResponseLiveDataRegister() {
-        return this.responseLiveRegister;
-    }
-    public LiveData<Boolean> getResponseLiveDataProfileStep1() {
-        return this.responseLiveStep1;
-    }
+
     public LiveData<Boolean> getResponseIsFirstTime(){ return this.responseIsFirstTime;}
 
 

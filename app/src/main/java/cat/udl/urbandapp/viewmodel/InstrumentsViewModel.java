@@ -39,7 +39,6 @@ public class InstrumentsViewModel extends AndroidViewModel {
     }
 
     public void addInstrument(String nameInstrument, float exp){
-
         Instrument ins = new Instrument(nameInstrument, exp);
         this.instruments.add(ins);
     }
@@ -62,6 +61,11 @@ public class InstrumentsViewModel extends AndroidViewModel {
         Toast.makeText(getApplication(), nameInstrument + " Removed ", Toast.LENGTH_SHORT).show();
     }
 
+    public void getListInstruments() {
+        String header = this.mPreferences.getString("token","");
+        instrumentsRepo.getTableUserInstrument(header);
+    }
+
 
     public LiveData<List<Instrument>> getInstruments(){
         return mInstruments;
@@ -69,9 +73,5 @@ public class InstrumentsViewModel extends AndroidViewModel {
 
     public MutableLiveData<Boolean> getResponseChangedList() { return responseChangedList;}
 
-    public void getListInstruments() {
-        String header = this.mPreferences.getString("token","");
-        instrumentsRepo.getTableUserInstrument(header);
-    }
 
 }

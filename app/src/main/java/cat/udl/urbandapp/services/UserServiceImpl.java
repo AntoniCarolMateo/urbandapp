@@ -32,11 +32,8 @@ public class UserServiceImpl{
 
     private IUserDAO userDAO = new UserDAOImpl();
     Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
-    public final MutableLiveData<String> mResponseToken;
     public final MutableLiveData<User> mUser;
     public final MutableLiveData<List<User>> mAllUsers;
-    public final MutableLiveData<Boolean> mRegister;
-    public final MutableLiveData<Boolean> mSetProfileStep1;
     public final MutableLiveData<User> mUserSubscribed;
     public final MutableLiveData<Boolean> mSubscription;
     public final MutableLiveData<Boolean> mDeleteSubscription;
@@ -46,21 +43,14 @@ public class UserServiceImpl{
 
     public UserServiceImpl() {
         userDAO = new UserDAOImpl();
-        mResponseToken = new MutableLiveData<>();
         mUser = new MutableLiveData<>();
         mAllUsers = new MutableLiveData<>();
-        mRegister = new MutableLiveData<>();
-        mSetProfileStep1 = new MutableLiveData<>();
         mFirstTime = new MutableLiveData<>();
         mUserSubscribed = new MutableLiveData<>();
         mSubscription = new MutableLiveData<>();
         mDeleteSubscription = new MutableLiveData<>();
         mMatch = new MutableLiveData<>();
 
-    }
-
-    public MutableLiveData<String> getLiveDataToken() {
-        return mResponseToken;
     }
 
     public MutableLiveData<User> getLiveDataUser() {
@@ -87,15 +77,6 @@ public class UserServiceImpl{
         return mAllUsers;
     }
 
-
-    public MutableLiveData<Boolean> getLiveDataRegister() {
-        return mRegister;
-    }
-
-
-    public MutableLiveData<Boolean> getLiveDataProfileStep1() {
-        return mSetProfileStep1;
-    }
 
 
     public MutableLiveData<Boolean> getLiveDataFirstTime() {
@@ -234,19 +215,6 @@ public class UserServiceImpl{
         });
     }
 
-    public void setUsername(String auth, String username) {
-        userDAO.setUsername(auth, username).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
 
     public void getFilteredUsers(String header, List<String> instruments, List<String> gen) {
         Log.d("KELOKE", instruments.toString() + " and " + gen.toString());
@@ -271,26 +239,6 @@ public class UserServiceImpl{
             }
         });
     }
-
-    public void setUserRol(String auth, RolEnum rol) {
-        userDAO.setUserRol(auth, rol).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-
-                } else {
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-    }
-
     public void getAllUsers(String auth) {
 
         userDAO.getAllUsers(auth).enqueue(new Callback<ResponseBody>() {
@@ -332,96 +280,6 @@ public class UserServiceImpl{
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("getAllUser", t.getMessage().toString());
-            }
-        });
-    }
-
-
-
-    public void registerUser(JsonObject userJson) {
-
-        //userDAO.registerUser(userJson);
-        userDAO.registerUser(userJson).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-
-                    mRegister.setValue(true);
-                    Log.d("Register", "ok");
-                    //mResponseToken.setValue(authToken);
-
-                } else {
-                    Log.d("Register", "error else");
-                    mRegister.setValue(false);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                Log.d("Register", t.toString());
-                mRegister.setValue(false);
-            }
-
-        });
-    }
-
-    public void createTokenUser(String Auth) {
-
-        userDAO.createTokenUser(Auth).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-                    try {
-                        String authToken = response.body().string().split(":")[1];
-                        authToken = authToken.substring(2, authToken.length() - 2);
-
-                        Log.d("UserService", authToken);
-                        mResponseToken.setValue(authToken);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    String aux = null;
-                    try {
-                        String r = response.errorBody().string();
-                        Log.d("UserService", r);
-                        mResponseToken.setValue(r);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("UserService", t.getMessage().toString());
-                mResponseToken.setValue(t.getMessage().toString());
-            }
-        });
-    }
-
-    public void setProfileInfo(String header, JsonObject json) {
-        userDAO.setProfileInfo(header, json).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 200) {
-
-                    mSetProfileStep1.setValue(true);
-                    Log.d("SetProfileStep1", "ok");
-                    Log.d("SetProfileStep1", "Tenim boolean " + mSetProfileStep1.getValue());
-
-                } else {
-                    Log.d("SetProfileStep1", "error else");
-                    mSetProfileStep1.setValue(false);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("SetProfileStep1", t.toString());
-                mSetProfileStep1.setValue(false);
             }
         });
     }

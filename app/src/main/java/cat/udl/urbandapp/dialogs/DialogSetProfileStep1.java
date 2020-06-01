@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cat.udl.urbandapp.viewmodel.ProfileSetUpViewModel;
 import cat.udl.urbandapp.views.DefaultActivity;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -43,7 +44,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     Context setProfileStep1;
 
     private Activity activity;
-    private UserViewModel viewModel;
+    private ProfileSetUpViewModel profileSetUpViewModel;
     private EditText name;
     private EditText calendar;
     private EditText surname;
@@ -68,7 +69,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initView();
-        viewModel = new UserViewModel(getActivity().getApplication());
+        profileSetUpViewModel = new ProfileSetUpViewModel(getActivity().getApplication());
         setProfileStep1 = this.getContext();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -88,7 +89,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
                     _gender = "MALE";
                 }
 
-                viewModel.setProfileInfo(_name, _surname, _exp, _birth, _gender, _description);
+                profileSetUpViewModel.setProfileInfo(_name, _surname, _exp, _birth, _gender, _description);
                 DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
                 step2.show(getParentFragmentManager(), "step 2");
             }

@@ -17,13 +17,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import cat.udl.urbandapp.R;
+import cat.udl.urbandapp.viewmodel.LoginViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class RegisterActivity extends CustomActivity {
 
     private final String TAG = getClass().getSimpleName();
 
-    private UserViewModel userViewModel;
+    private LoginViewModel loginViewModel;
     Button registerButton;
     EditText username;
     EditText password;
@@ -46,7 +47,7 @@ public class RegisterActivity extends CustomActivity {
         username = findViewById(R.id.usertel);
         password = findViewById(R.id.userpassword);
 
-        userViewModel = new UserViewModel(this.getApplication());
+        loginViewModel = new LoginViewModel(this.getApplication());
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,7 +68,7 @@ public class RegisterActivity extends CustomActivity {
 
             String gps = latitude + "," + longitude;
 
-            userViewModel.registerUser(_username,_password,gps);
+            loginViewModel.registerUser(_username,_password,gps);
 
         }
         else{
@@ -75,7 +76,7 @@ public class RegisterActivity extends CustomActivity {
 
         }
 
-        userViewModel.getResponseLiveDataRegister().observe(this, new Observer<Boolean>() {
+        loginViewModel.getResponseLiveDataRegister().observe(this, new Observer<Boolean>() {
 
             @Override
             public void onChanged(Boolean aBoolean) {

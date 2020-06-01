@@ -61,8 +61,6 @@ public class MusicalGenreViewModel extends AndroidViewModel {
         musicalGenresRepo.getTableUserGenere(header);
     }
 
-
-
     public MutableLiveData<Boolean> getResponseChangedList() { return responseChangedList;}
 
 
