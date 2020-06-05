@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -32,6 +33,8 @@ import cat.udl.urbandapp.viewmodel.MusicalGenreViewModel;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class UserProfileActivity extends CustomActivity {
+
+    private final String TAG = getClass().getSimpleName();
 
     private TextView username;
     private TextView name;
@@ -90,6 +93,7 @@ public class UserProfileActivity extends CustomActivity {
 
     private void updateData(User user) {
         RolEnum _rol = user.getRol();
+        Log.d(TAG,"ROL" + _rol);
         username.setText(user.getUsername());
         name.setText(user.getName());
         surname.setText(user.getSurname());

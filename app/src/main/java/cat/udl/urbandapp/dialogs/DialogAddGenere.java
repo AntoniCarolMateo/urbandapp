@@ -73,6 +73,20 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
                 .setCancelable(true)
                 .create();
 
+        alertDialog.setCanceledOnTouchOutside(false);
+        return alertDialog;
+
+    }
+
+    private void initView() {
+        rootView = LayoutInflater.from
+                (getContext()).inflate(R.layout.dialog_add_genere, null, false);
+        listView = rootView.findViewById(R.id.listView_generes);
+        listView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice, lv_items));
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        button_add_genere = rootView.findViewById(R.id.button);
+
         button_add_genere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,19 +114,6 @@ public class DialogAddGenere extends DialogFragment implements LifecycleOwner {
 
         });
 
-        alertDialog.setCanceledOnTouchOutside(false);
-        return alertDialog;
-
-    }
-
-    private void initView() {
-        rootView = LayoutInflater.from
-                (getContext()).inflate(R.layout.dialog_add_genere, null, false);
-        listView = rootView.findViewById(R.id.listView_generes);
-        listView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice, lv_items));
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        button_add_genere = rootView.findViewById(R.id.button);
 
 
     }

@@ -19,8 +19,9 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class MusicoActivity extends CustomActivity {
 
-    private Button subscribe;
-    private Button desubscribe;
+    private ImageView subscribe_icom;
+    private TextView subscribe_text;
+
     private TextView username;
     private ImageView genere;
     private TextView description;
@@ -50,7 +51,8 @@ public class MusicoActivity extends CustomActivity {
                 @Override
                 public void onChanged(final User s) {
                     if(s.isHasSubscribed()){
-                        subscribe.setEnabled(false);
+                        subscribe_icom.setImageResource(R.drawable.suscr);
+                        subscribe_text.setText("YOU ARE SUBSCRIBED");
                         int _rol = 0;
 
                         if (s.getGenere() == "FEMALE") {
@@ -73,8 +75,8 @@ public class MusicoActivity extends CustomActivity {
                         etiquetes_design.setVisibility(View.VISIBLE);
 
                         Log.d("MusicoActivity", " estamos subscritos el boton subscribe se oculta");
-                        desubscribe.setEnabled(true);
-                        desubscribe.setOnClickListener(new View.OnClickListener() {
+
+                        subscribe_icom.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
@@ -87,9 +89,9 @@ public class MusicoActivity extends CustomActivity {
                         emptyProfile();
                         Log.d("MusicoActivity", "no estamos subscritos el boton desubscribe se oculta");
                         //desubscribe.setVisibility(View.GONE);
-                        desubscribe.setEnabled(false);
-                        subscribe.setEnabled(true);
-                        subscribe.setOnClickListener(new View.OnClickListener() {
+                        subscribe_icom.setImageResource(R.drawable.unsuscr);
+                        subscribe_text.setText("SUBSCRIBE TO THE USER");
+                        subscribe_icom.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
 
@@ -147,8 +149,8 @@ public class MusicoActivity extends CustomActivity {
     }
 
     private void initView() {
-        subscribe = findViewById(R.id.botonSubscribirse);
-        desubscribe = findViewById(R.id.botonDesub);
+        subscribe_icom = findViewById(R.id.imageView_susc);
+        subscribe_text = findViewById(R.id.textView_susc);
         username = findViewById(R.id.textView_username_musico);
         description = findViewById(R.id.textView_descr_musico);
         expirience = findViewById(R.id.ratingBar_exp_musico);

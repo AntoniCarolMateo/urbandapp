@@ -61,6 +61,25 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
                 .setCancelable(true)
                 .create();
 
+        alertDialog.setCanceledOnTouchOutside(false);
+        return alertDialog;
+
+    }
+
+    private void initView() {
+        rootView = LayoutInflater.from
+                (getContext()).inflate(R.layout.dialog_add_instrument, null, false);
+
+        cuerda = rootView.findViewById(R.id.family_cuerda);
+        viento = rootView.findViewById(R.id.family_viento);
+        percusion = rootView.findViewById(R.id.family_percusion);
+        otros = rootView.findViewById(R.id.family_otros);
+
+        choice_instrument = rootView.findViewById(R.id.spinner_instruments);
+
+        experienceBar = rootView.findViewById(R.id.ratingBar_exp);
+        addInstrument = rootView.findViewById(R.id.button_add_instrument);
+
         cuerda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +118,6 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
             }
         });
 
-        //TODO: ICONO ELIMINR FALTA IMPLEMENTAR VISUALMENTE
 
         addInstrument.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,38 +127,6 @@ public class DialogAddInstrument extends DialogFragment implements LifecycleOwne
                 viewModel.addInstrument(_instrument, _expirience);
             }
         });
-
-       /* viewModel.getResponseAddedInstrument().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean){
-                    Toast.makeText(getContext(), "Instrumento añadido correctamente", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Error añadiendo el isntrumento", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
-
-
-        alertDialog.setCanceledOnTouchOutside(false);
-        return alertDialog;
-
-
-    }
-
-    private void initView() {
-        rootView = LayoutInflater.from
-                (getContext()).inflate(R.layout.dialog_add_instrument, null, false);
-
-        cuerda = rootView.findViewById(R.id.family_cuerda);
-        viento = rootView.findViewById(R.id.family_viento);
-        percusion = rootView.findViewById(R.id.family_percusion);
-        otros = rootView.findViewById(R.id.family_otros);
-
-        choice_instrument = rootView.findViewById(R.id.spinner_instruments);
-
-        experienceBar = rootView.findViewById(R.id.ratingBar_exp);
-        addInstrument = rootView.findViewById(R.id.button_add_instrument);
 
     }
 

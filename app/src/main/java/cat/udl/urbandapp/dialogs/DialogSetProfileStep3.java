@@ -62,25 +62,10 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
             });
             // Set other dialog properties
 
-            AlertDialog alertDialog = builder.setView(rootView)
-                    .setCancelable(true)
-                    .create();
-
-            recyclerView_generes.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView_generes.setHasFixedSize(true);
             final GeneresAdapter genereAdapter = new GeneresAdapter(new GenereDiffCallback(), musicalGenreViewModel, this.getActivity());
             recyclerView_generes.setAdapter(genereAdapter);
 
             musicalGenreViewModel.getListGeneres();
-
-
-            add_generes.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DialogAddGenere dialogAddGenere = DialogAddGenere.newInstance(getActivity(), musicalGenreViewModel);
-                    dialogAddGenere.show(getParentFragmentManager(), "probando");
-                }
-            });
 
             musicalGenreViewModel.getGeneres().observe(this, new Observer<List<MusicalGenere>>() {
                 @Override
@@ -99,6 +84,10 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
                 }
             });
 
+            AlertDialog alertDialog = builder.setView(rootView)
+                    .setCancelable(true)
+                    .create();
+
             alertDialog.setCanceledOnTouchOutside(false);
             return alertDialog;
         }
@@ -109,5 +98,18 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
                     (getContext()).inflate(R.layout.dialog_set_profile_step3, null, false);
             recyclerView_generes = rootView.findViewById(R.id.recyclerView_generes);
             add_generes = rootView.findViewById(R.id.imageView_addGenere);
+
+            recyclerView_generes.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView_generes.setHasFixedSize(true);
+
+
+
+            add_generes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogAddGenere dialogAddGenere = DialogAddGenere.newInstance(getActivity(), musicalGenreViewModel);
+                    dialogAddGenere.show(getParentFragmentManager(), "probando");
+                }
+            });
         }
 }

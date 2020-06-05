@@ -44,11 +44,10 @@ public class DialogFirstTimeLogged extends DialogFragment implements LifecycleOw
                 profileSetUpViewModel.setUsername(username);
                 DialogRolChooser dialogRol = new DialogRolChooser().newInstance(getActivity());
                 dialogRol.show(getActivity().getSupportFragmentManager(),"Rol");
-                //cridarem dialog rol
+
             }
         });
 
-        // Set other dialog properties
 
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)

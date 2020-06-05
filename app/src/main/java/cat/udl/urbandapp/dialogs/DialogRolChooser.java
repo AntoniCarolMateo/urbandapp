@@ -40,8 +40,37 @@ public class DialogRolChooser extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         profileSetUpViewModel = new ProfileSetUpViewModel(getActivity().getApplication());
+
         initView();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setPositiveButton(" Configura tu perfil por primera vez!", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                DialogSetProfileStep1 dialogstep1 = new DialogSetProfileStep1().newInstance(getActivity());
+                dialogstep1.show(getActivity().getSupportFragmentManager(), "STEP 1");
+                //cridarem dialog rol
+                if (_rol == null){
+                    Toast.makeText(getContext(),"Selecciona un rol de usuario!", Toast.LENGTH_SHORT).show();
+                }
+                profileSetUpViewModel.setUserRol(_rol);
+            }
+        });
+        AlertDialog alertDialog = builder.setView(rootView)
+                .setCancelable(true)
+                .create();
+
+
+        alertDialog.setCanceledOnTouchOutside(false);
+        return alertDialog;
+    }
+
+    private void initView() {
+        rootView = LayoutInflater.from
+                (getContext()).inflate(R.layout.dialog_rol_chooser, null, false);
+        usuari = rootView.findViewById(R.id.button_user);
+        banda = rootView.findViewById(R.id.button_band);
+        patrocinador = rootView.findViewById(R.id.button_sponsor);
+
         _rol = RolEnum.SOLO;
         usuari.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -82,33 +111,6 @@ public class DialogRolChooser extends DialogFragment {
                 _rol = RolEnum.SPONSOR;
             }
         });
-
-        builder.setPositiveButton(" Configura tu perfil por primera vez!", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                DialogSetProfileStep1 dialogstep1 = new DialogSetProfileStep1().newInstance(getActivity());
-                dialogstep1.show(getActivity().getSupportFragmentManager(), "STEP 1");
-                //cridarem dialog rol
-                if (_rol == null){
-                    Toast.makeText(getContext(),"Selecciona un rol de usuario!", Toast.LENGTH_SHORT).show();
-                }
-                profileSetUpViewModel.setUserRol(_rol);
-            }
-        });
-        AlertDialog alertDialog = builder.setView(rootView)
-                .setCancelable(true)
-                .create();
-
-
-        alertDialog.setCanceledOnTouchOutside(false);
-        return alertDialog;
-    }
-
-    private void initView() {
-        rootView = LayoutInflater.from
-                (getContext()).inflate(R.layout.dialog_rol_chooser, null, false);
-        usuari = rootView.findViewById(R.id.button_user);
-        banda = rootView.findViewById(R.id.button_band);
-        patrocinador = rootView.findViewById(R.id.button_sponsor);
 
 
     }

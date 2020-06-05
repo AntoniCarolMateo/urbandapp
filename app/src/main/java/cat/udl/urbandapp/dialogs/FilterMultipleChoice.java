@@ -67,17 +67,36 @@ public class FilterMultipleChoice extends DialogFragment implements LifecycleOwn
                 .setCancelable(true)
                 .create();
 
+        alertDialog.setCanceledOnTouchOutside(false);
+        return alertDialog;
+
+
+    }
+
+    private void initView() {
+        rootView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_filter_multiple, null, false);
+        listView = rootView.findViewById(R.id.list_view_filters);
+        if (this.type == "INSTRUMENTS") {
+            listView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice, lv_instruments));
+        }
+        if (this.type == "GENRES") {
+            listView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice, lv_genres));
+        }
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        button_done = rootView.findViewById(R.id.button_done);
+
         button_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if (type == "INSTRUMENTS") {
-                        Log.d("KELOKE", my_sel_items_ins.toString());
-                        userViewModel.filterInstruments(my_sel_items_ins);
-                    }
-                    if (type == "GENRES") {
-                        userViewModel.filterGenres(my_sel_items_gen);
-                    }
+                if (type == "INSTRUMENTS") {
+                    Log.d("KELOKE", my_sel_items_ins.toString());
+                    userViewModel.filterInstruments(my_sel_items_ins);
                 }
+                if (type == "GENRES") {
+                    userViewModel.filterGenres(my_sel_items_gen);
+                }
+            }
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -112,30 +131,11 @@ public class FilterMultipleChoice extends DialogFragment implements LifecycleOwn
                             my_sel_items_gen.remove(i);
                         }
 
-                }
+                    }
                     Log.d("values", my_sel_items_gen.toString());
                 }
             }
         });
-
-        alertDialog.setCanceledOnTouchOutside(false);
-        return alertDialog;
-
-
-    }
-
-    private void initView() {
-        rootView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_filter_multiple, null, false);
-        listView = rootView.findViewById(R.id.list_view_filters);
-        if (this.type == "INSTRUMENTS") {
-            listView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice, lv_instruments));
-        }
-        if (this.type == "GENRES") {
-            listView.setAdapter(new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_multiple_choice, lv_genres));
-        }
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        button_done = rootView.findViewById(R.id.button_done);
 
     }
 

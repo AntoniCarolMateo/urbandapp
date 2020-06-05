@@ -64,26 +64,13 @@ public class DialogSetProfileStep2 extends DialogFragment {
             }
         });
         initView();
-        // Set other dialog properties
 
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)
                 .create();
 
-        recyclerInstruments.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerInstruments.setHasFixedSize(true);
         final InstrumentAdapter instrumentAdapter = new InstrumentAdapter(new InstrumentDiffCallback(), instrumentsViewModel, this.getActivity());
         recyclerInstruments.setAdapter(instrumentAdapter);
-
-        instrumentsViewModel.getListInstruments();
-
-        addInstrument.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity(), instrumentsViewModel);
-                dialogAddInstrument.show(getParentFragmentManager(), "probando");
-            }
-        });
 
         instrumentsViewModel.getInstruments().observe(this, new Observer<List<Instrument>>() {
             @Override
@@ -95,10 +82,17 @@ public class DialogSetProfileStep2 extends DialogFragment {
         instrumentsViewModel.getResponseChangedList().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean added) {
-                Log.d(TAG, "New instrument added: " + added);
                 if (added) {
                     instrumentsViewModel.getListInstruments();
                 }
+            }
+        });
+
+        addInstrument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogAddInstrument dialogAddInstrument = DialogAddInstrument.newInstance(getActivity(), instrumentsViewModel);
+                dialogAddInstrument.show(getParentFragmentManager(), "probando");
             }
         });
 
@@ -106,17 +100,15 @@ public class DialogSetProfileStep2 extends DialogFragment {
         return alertDialog;
     }
 
-    //inicialtizar la vista del dialog
     private void initView() {
         rootView = LayoutInflater.from
                 (getContext()).inflate(R.layout.dialog_set_profile_step2, null, false);
         addInstrument = rootView.findViewById(R.id.addInstrument);
         recyclerInstruments = rootView.findViewById(R.id.recyclerView_instruments);
+
+        recyclerInstruments.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerInstruments.setHasFixedSize(true);
+
     }
 
-
-
-
-
 }
-

@@ -14,12 +14,12 @@ import retrofit2.http.Path;
 
 public interface InstrumentsDAOI {
     //----------------------------------------------------------INSTRUMENTS
-    @POST("/users/profile/instruments/add")
+    @POST("users/profile/instruments/add")
     Call<ResponseBody> addInstrument(@Header("Authorization") String auth, @Body List<Instrument> instruments);
 
-    @GET("/users/profile/instruments/list")
+    @GET("users/profile/instruments/list")
     Call<List<Instrument>> getTableUserInstrument(@Header("Authorization") String auth);
 
-    @DELETE("/users/profile/instruments/delete/{name}")
+    @DELETE("users/profile/instruments/delete/{name}")
     Call<ResponseBody> removeInstrument(@Header("Authorization") String auth, @Path("name") String nameInstrument);
 }

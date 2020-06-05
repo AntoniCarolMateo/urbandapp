@@ -14,12 +14,12 @@ import retrofit2.http.Path;
 
 public interface IMusicalGenresDAO {
     //----------------------------------------------------------GENERES
-    @POST("/users/profile/musical_genres/add")
+    @POST("users/profile/musical_genres/add")
     Call<ResponseBody> addGenere (@Header("Authorization") String auth, @Body List<MusicalGenere> list_generes);
 
-    @DELETE("/users/profile/musical_genres/delete/{name}")
+    @DELETE("users/profile/musical_genres/delete/{name}")
     Call<ResponseBody> removeGenere(@Header("Authorization") String auth, @Path("name") String nameGenere);
 
-    @GET("/users/profile/musical_genres/list")
+    @GET("users/profile/musical_genres/list")
     Call<List<MusicalGenere>> getTableUserGenere(@Header("Authorization") String auth);
 }
