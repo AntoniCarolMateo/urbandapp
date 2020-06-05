@@ -3,6 +3,7 @@ package cat.udl.urbandapp.recyclerview;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
 
 public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserHolder> {
 
+    private OnItemClickListener itemClickListener;
     private UserViewModel userViewModel;
 
     public UsersAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback, UserViewModel userViewModel) {
@@ -34,6 +36,7 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserHolder> {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_users_filtered,parent, false);
         return new UserHolder(itemView);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
@@ -54,7 +57,25 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserHolder> {
             username = itemView.findViewById(R.id.textView_username_filter);
             general_exp = itemView.findViewById(R.id.ratingBar_exp_filter);
             profile_photo = itemView.findViewById(R.id.imageView_photo_filter);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (itemClickListener != null && position != RecyclerView.NO_POSITION){
+                        itemClickListener.onItemClick(getItem(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(User usr);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.itemClickListener = listener;
     }
 
 }

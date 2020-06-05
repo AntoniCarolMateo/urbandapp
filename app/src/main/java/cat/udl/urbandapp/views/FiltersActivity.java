@@ -3,6 +3,7 @@ package cat.udl.urbandapp.views;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -105,6 +106,15 @@ public class FiltersActivity extends CustomActivity  {
         recyclerView_users.setHasFixedSize(true);
         final UsersAdapter usersAdapter = new UsersAdapter(new UserDiffCallback(), userViewModel);
         recyclerView_users.setAdapter(usersAdapter);
+
+        usersAdapter.setOnItemClickListener(new UsersAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User usr) {
+                Intent theIntent = new Intent(FiltersActivity.this, MusicoActivity.class);
+                theIntent.putExtra("username", usr.getUsername());
+                startActivity(theIntent);
+            }
+        });
 
         userViewModel.getResponseLiveDataAllUsers().observe(this, new Observer<List<User>>() {
             @Override

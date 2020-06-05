@@ -1,5 +1,6 @@
 package cat.udl.urbandapp.recyclerview;
 
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
@@ -39,14 +41,32 @@ public class GeneresAdapter extends ListAdapter<MusicalGenere, GeneresAdapter.Ge
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GenereHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final GenereHolder holder, int position) {
             final MusicalGenere current_genere = getItem(position);
             holder.name_genere.setText(current_genere.getName());
 
             holder.button_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    tablesViewModel.removeGenere(current_genere);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(holder.itemView.getContext());
+                    dialog.setMessage("¿Seguro que quere eliminar el instrumento : " + current_genere.getName() + "?");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            tablesViewModel.removeGenere(current_genere);
+                        }
+                    });
+                    dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    AlertDialog _dialog = dialog.create();
+                    _dialog.show();
+
                 }
             });
     }
