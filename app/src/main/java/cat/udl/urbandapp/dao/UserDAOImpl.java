@@ -26,7 +26,7 @@ public class UserDAOImpl implements IUserDAO {
 
 
     @Override
-    public Call<ResponseBody> getProfileUser(String auth){
+    public Call<User> getProfileUser(String auth){
 
         return  retrofit.create(IUserDAO.class).getProfileUser(auth);
 

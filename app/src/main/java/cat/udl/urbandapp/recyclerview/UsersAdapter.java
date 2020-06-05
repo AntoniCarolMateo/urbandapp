@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.models.Instrument;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
@@ -39,6 +40,9 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserHolder> {
         final User current_user = (User) getItem(position);
         holder.username.setText(current_user.getUsername());
         holder.general_exp.setRating(current_user.getGen_exp());
+        if (current_user.getRol() != null) {
+            holder.profile_photo.setImageResource(RolEnum.getImageResource(current_user.getRol()));
+        }
     }
 
     class UserHolder extends RecyclerView.ViewHolder {

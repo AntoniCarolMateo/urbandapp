@@ -1,11 +1,10 @@
 package cat.udl.urbandapp.models;
 
-import android.widget.Switch;
 
 import cat.udl.urbandapp.R;
 
 public enum RolEnum {
-    SOLO("user","user"),BAND("band","band"),SPONSOR("sponsor","sponsor");
+    user("user","user"),band("band","band"),sponsor("sponsor","sponsor");
 
     String id;
     String name;
@@ -15,6 +14,19 @@ public enum RolEnum {
         name = _name;
     }
 
+    public static RolEnum getRolByName(String rol) {
+        switch (rol) {
+            case "user":
+                return RolEnum.user;
+            case "band":
+                return RolEnum.band;
+            case "sponsor":
+                return RolEnum.sponsor;
+            default:
+                return null;
+        }
+    }
+
     public String getName(){
         return name;
     }
@@ -22,11 +34,11 @@ public enum RolEnum {
     public static int getImageResource(RolEnum e){
 
         switch (e){
-            case SOLO:
+            case user:
                 return R.drawable.musician;
-            case BAND:
+            case band:
                 return R.drawable.band;
-            case SPONSOR:
+            case sponsor:
                 return R.drawable.sponsor;
             default:
                 return -1;

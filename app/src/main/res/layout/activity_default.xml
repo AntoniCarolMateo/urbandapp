@@ -39,14 +39,14 @@
         android:layout_width="108dp"
         android:layout_height="94dp"
         android:textAlignment="center"
-        app:cardBackgroundColor="#05132D6E"
+        app:cardBackgroundColor="#8F2635AB"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
         app:layout_constraintEnd_toStartOf="@+id/guideline25"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toTopOf="@+id/map">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView_rol_def"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_gravity="center_horizontal|top"

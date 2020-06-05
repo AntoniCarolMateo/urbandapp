@@ -71,44 +71,44 @@ public class DialogRolChooser extends DialogFragment {
         banda = rootView.findViewById(R.id.button_band);
         patrocinador = rootView.findViewById(R.id.button_sponsor);
 
-        _rol = RolEnum.SOLO;
+        _rol = RolEnum.user;
         usuari.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                if (_rol.equals(RolEnum.SPONSOR)) {
+                if (_rol.equals(RolEnum.sponsor)) {
                     patrocinador.setBackgroundColor(R.color.primaryTextColor);
-                }else if (_rol.equals(RolEnum.BAND)){
+                }else if (_rol.equals(RolEnum.band)){
                     banda.setBackgroundColor(R.color.primaryTextColor);
                 }
                 usuari.setBackgroundColor(R.color.primaryLightColor);
-                _rol = RolEnum.SOLO;
+                _rol = RolEnum.user;
             }
         });
         banda.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                if (_rol.equals(RolEnum.SPONSOR))  {
+                if (_rol.equals(RolEnum.sponsor))  {
                     patrocinador.setBackgroundColor(R.color.primaryTextColor);
-                }else if (_rol == RolEnum.SOLO){
+                }else if (_rol == RolEnum.user){
                     usuari.setBackgroundColor(R.color.primaryTextColor);
                 }
                 banda.setBackgroundColor(R.color.primaryLightColor);
-                _rol = RolEnum.BAND;
+                    _rol = RolEnum.band;
             }
         });
         patrocinador.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View v) {
-                if (_rol == RolEnum.SOLO) {
+                if (_rol == RolEnum.user) {
                     usuari.setBackgroundColor(R.color.primaryTextColor);
-                }else if (_rol == RolEnum.BAND){
+                }else if (_rol == RolEnum.band){
                     banda.setBackgroundColor(R.color.primaryTextColor);
                 }
                 patrocinador.setBackgroundColor(R.color.primaryLightColor);
-                _rol = RolEnum.SPONSOR;
+                _rol = RolEnum.sponsor;
             }
         });
 

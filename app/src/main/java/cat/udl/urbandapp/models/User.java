@@ -48,6 +48,7 @@ public class User {
     @SerializedName("gen_exp")
     private float gen_exp;
 
+    @SerializedName("")
     private boolean hasSubscribed;
 
     List<Instrument> userInstruments;

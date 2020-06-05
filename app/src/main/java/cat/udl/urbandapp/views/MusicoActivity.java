@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cat.udl.urbandapp.R;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
 
@@ -53,7 +54,7 @@ public class MusicoActivity extends CustomActivity {
                     if(s.isHasSubscribed()){
                         subscribe_icom.setImageResource(R.drawable.suscr);
                         subscribe_text.setText("YOU ARE SUBSCRIBED");
-                        int _rol = 0;
+
 
                         if (s.getGenere() == "FEMALE") {
                             genere.setImageResource(R.drawable.femaleicon);
@@ -62,8 +63,10 @@ public class MusicoActivity extends CustomActivity {
                         }
                         expirience.setRating(s.getGen_exp());
                         description.setText(s.getDescription());
-                        //role.setText(s.getRol().getName());
-                        //icon_role.setImageAlpha(s.getRol().getImageResource(s.getRol()));
+                        if (s.getRol() != null) {
+                            role.setText(s.getRol().getName());
+                            icon_role.setImageResource(RolEnum.getImageResource(s.getRol()));
+                        }
 
                         icon_role.setVisibility(View.VISIBLE);
                         username.setVisibility(View.VISIBLE);

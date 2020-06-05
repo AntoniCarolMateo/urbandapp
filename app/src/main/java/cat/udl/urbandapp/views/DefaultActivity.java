@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,6 +33,7 @@ import java.util.List;
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.dialogs.DialogFirstTimeLogged;
 import cat.udl.urbandapp.dialogs.DialogMatchUser;
+import cat.udl.urbandapp.models.RolEnum;
 import cat.udl.urbandapp.models.User;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.viewmodel.UserViewModel;
@@ -47,6 +49,7 @@ public class DefaultActivity extends CustomActivity implements OnMapReadyCallbac
 
     private UserViewModel userViewModel;
     private CardView user;
+    private ImageView rol_icon;
     private TextView username;
 
     private GoogleMap googleMap;
@@ -70,6 +73,7 @@ public class DefaultActivity extends CustomActivity implements OnMapReadyCallbac
         navigation = findViewById(R.id.naviation_default);
         user = findViewById(R.id.user_card);
         username = findViewById(R.id.textView_username_default);
+        rol_icon = findViewById(R.id.imageView_rol_def);
 
         userViewModel.getFirstTime();
 
@@ -87,6 +91,11 @@ public class DefaultActivity extends CustomActivity implements OnMapReadyCallbac
             public void onChanged(User s) {
                 Log.d("DefaultActivity","Tenim user " + s.toString());
                 username.setText(s.getUsername());
+                if (s.getRol() != null) {
+                    Log.d(TAG, "ROL " + s.getRol().getName());
+                    rol_icon.setImageResource(RolEnum.getImageResource(s.getRol()));
+                }
+
             }
         });
 

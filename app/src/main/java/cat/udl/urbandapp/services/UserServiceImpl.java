@@ -91,30 +91,15 @@ public class UserServiceImpl{
 
     public void getProfileUser(final String Auth) {
 
-        userDAO.getProfileUser(Auth).enqueue(new Callback<ResponseBody>() {
+        userDAO.getProfileUser(Auth).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
-                    try {
 
-                        String respuestaBody = response.body().string();
-                        Log.d("getUser", "Ok getUser");
-                        Log.d("getUser", respuestaBody);
-                        JSONObject mUserjson = new JSONObject(respuestaBody);
-                        Log.d("getUser", "El JSONObject es: " + mUserjson.toString());
-                        User u = new User();
+                        User usr = response.body();
 
-                        u.setUsername(mUserjson.getString("username"));
-                        u.setCreated_at(mUserjson.getString("created_at"));
+                        mUser.setValue(usr);
 
-                        Log.d("getUser", u.getUsername());
-                        Log.d("getUser", u.getCreated_at());
-
-                        mUser.setValue(u);
-
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
                 } else {
                     mUser.setValue(new User());
                     Log.d("getUser", "Error en la call a la API llamada retornada con codigo" + response.code() + " message:" + response.message());
@@ -123,7 +108,7 @@ public class UserServiceImpl{
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.d("getUser", t.getMessage().toString());
                 mUser.setValue(new User());
             }
@@ -203,6 +188,7 @@ public class UserServiceImpl{
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
                     User usr = response.body();
+                    Log.d("KELOKE", "ROL " +usr.getRol());
                     mUser.setValue(usr);
                 }
             }
@@ -217,7 +203,6 @@ public class UserServiceImpl{
 
 
     public void getFilteredUsers(String header, List<String> instruments, List<String> gen) {
-        Log.d("KELOKE", instruments.toString() + " and " + gen.toString());
         userDAO.getFilteredUsers(header, instruments, gen).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -225,10 +210,10 @@ public class UserServiceImpl{
                 if (response.code() == 200) {
                     List<User> mlist = response.body();
                     mAllUsers.setValue(mlist);
-                    Log.d("Keloke", mAllUsers.getValue().toString());
+
                 } else {
                     mAllUsers.setValue(new ArrayList<User>());
-                    Log.d("values", "kepasoooo");
+
                 }
             }
 
@@ -294,18 +279,20 @@ public class UserServiceImpl{
                     try {
                         respuestaBody = response.body().string();
                         Log.d("getInfoSubscribed ", "respuesta: " + respuestaBody);
-
                         JSONArray respuesta = new JSONArray(respuestaBody);
                         JSONObject mUserjson = respuesta.getJSONObject(0);
                         User u = new User();
                         u.setUsername(mUserjson.getString("username"));
                         u.setGenere(mUserjson.getString("genere"));
                         u.setDescription(mUserjson.getString("description"));
-                        //u.setRol((RolEnum)  mUserjson.get("rol"));
                         u.setGen_exp((float)mUserjson.getInt("gen_exp"));
                         JSONObject subscription = respuesta.getJSONObject(1);
                         Boolean sub = subscription.getBoolean("subscribed");
+
+                        RolEnum rol = RolEnum.getRolByName(mUserjson.getString("rol"));
                         u.setHasSubscribed(sub);
+                        u.setRol(rol);
+
                         Log.d("getInfoSubscribed ", "user: " + u.getUsername() + " Genere " +u.getGenere() + " Descripc :" + u.getDescription());
                         mUserSubscribed.setValue(u);
 

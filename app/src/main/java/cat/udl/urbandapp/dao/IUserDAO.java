@@ -27,7 +27,7 @@ import retrofit2.http.Query;
 public interface IUserDAO {
 
     @GET("account/profile")
-    Call<ResponseBody> getProfileUser(@Header("Authorization") String auth);
+    Call<User> getProfileUser(@Header("Authorization") String auth);
 
     @GET("users/all")
     Call<ResponseBody> getAllUsers(@Header("Authorization") String auth);

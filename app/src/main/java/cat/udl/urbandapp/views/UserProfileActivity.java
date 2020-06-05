@@ -43,6 +43,7 @@ public class UserProfileActivity extends CustomActivity {
     private ImageView genre_icon;
     private RatingBar gen_expirience;
     private TextView description;
+    private ImageView rol_icon;
     private RecyclerView list_instruments;
     private RecyclerView list_genres;
     private FloatingActionButton addInstrument;
@@ -77,6 +78,7 @@ public class UserProfileActivity extends CustomActivity {
         addGenre = findViewById(R.id.floating_add_genre);
         addInstrument = findViewById(R.id.floating_add_instrument);
         genre_icon = findViewById(R.id.icon_genre);
+        rol_icon = findViewById(R.id.imageView_rol_priv);
 
         userViewModel.showPrivateProfile();
 
@@ -93,7 +95,6 @@ public class UserProfileActivity extends CustomActivity {
 
     private void updateData(User user) {
         RolEnum _rol = user.getRol();
-        Log.d(TAG,"ROL" + _rol);
         username.setText(user.getUsername());
         name.setText(user.getName());
         surname.setText(user.getSurname());
@@ -105,6 +106,7 @@ public class UserProfileActivity extends CustomActivity {
         }else{
             genre_icon.setImageResource(R.drawable.maleicon);
         }
+        rol_icon.setImageResource(RolEnum.getImageResource(_rol));
     }
 
     private void initInstrumentsView() {

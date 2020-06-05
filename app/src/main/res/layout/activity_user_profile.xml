@@ -287,7 +287,7 @@
             app:srcCompat="@drawable/ic_audiotrack_light" />
 
         <ImageView
-            android:id="@+id/imageView26"
+            android:id="@+id/imageView_rol_priv"
             android:layout_width="77dp"
             android:layout_height="96dp"
             android:layout_marginTop="12dp"
