@@ -53,21 +53,17 @@ public class MusicoActivity extends CustomActivity {
                 public void onChanged(final User s) {
                     if(s.isHasSubscribed()){
                         showInfo(s, extra_username);
-
                         subscribe_icom.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
                                 userViewModel.removeSubscription(extra_username);
                             }
                         });
                     }
                     else{
-                        //enseñar menos info, y dar la opcion de subscribirse
                         emptyProfile();
-                        //desubscribe.setVisibility(View.GONE);
                         subscribe_icom.setImageResource(R.drawable.unsuscr);
-                        subscribe_text.setText("SUBSCRIBE TO THE USER");
+                        subscribe_text.setVisibility(View.INVISIBLE);
                         subscribe_icom.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -86,12 +82,9 @@ public class MusicoActivity extends CustomActivity {
                     if(s){
                         Toast.makeText(MusicoActivity.this, "Suscrito con exito", Toast.LENGTH_LONG).show();
                         userViewModel.getUsersSubscribed(extra_username);
-
                     }
-
                     else{
                         Toast.makeText(MusicoActivity.this, "Error añadiendo suscripción.", Toast.LENGTH_LONG).show();
-
                     }
                 }
             });
@@ -117,8 +110,8 @@ public class MusicoActivity extends CustomActivity {
 
     private void showInfo(User s, final String extra_username) {
         subscribe_icom.setImageResource(R.drawable.suscr);
-        subscribe_text.setText("YOU ARE SUBSCRIBED");
-
+        subscribe_text.setVisibility(View.VISIBLE);
+        subscribe_text.setText("subscribed");
 
         if (s.getGenere() == "FEMALE") {
             genere.setImageResource(R.drawable.femaleicon);

@@ -49,7 +49,6 @@ public class DialogMatchUser extends DialogFragment implements LifecycleOwner {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initView();
-        userMatch = new User();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton("Ver Perfil!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -63,20 +62,10 @@ public class DialogMatchUser extends DialogFragment implements LifecycleOwner {
         builder.setNegativeButton("Ver má tarde", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                dialog.cancel();
             }
         });
 
-        userViewModel.getMatch();
-        userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                Toast.makeText(getContext(), "username :" + user.getUsername() +" gen_exp :" + user.getGen_exp(),Toast.LENGTH_SHORT).show();
-                userMatch = user;
-                username_match.setText(user.getUsername());
-                exp_match.setRating(user.getGen_exp());
-            }
-        });
 
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)
@@ -92,6 +81,18 @@ public class DialogMatchUser extends DialogFragment implements LifecycleOwner {
         profile_photo_match = rootView.findViewById(R.id.imageView_match_);
         username_match = rootView.findViewById(R.id.textView_match_username);
         exp_match = rootView.findViewById(R.id.ratingBar_match_exp);
+
+        userMatch = new User();
+        userViewModel.getMatch();
+        userViewModel.getResponseLiveDataMatch().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                Toast.makeText(getContext(), "username :" + user.getUsername() +" gen_exp :" + user.getGen_exp(),Toast.LENGTH_SHORT).show();
+                userMatch = user;
+                username_match.setText(user.getUsername());
+                exp_match.setRating(user.getGen_exp());
+            }
+        });
     }
 }
 

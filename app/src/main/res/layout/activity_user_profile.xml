@@ -8,18 +8,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="1300dp"
+        android:minHeight="1000dp"
         tools:context=".views.UserProfileActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_instruments"
             android:layout_width="291dp"
             android:layout_height="152dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/border_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.566"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_desc" />
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -30,14 +31,14 @@
 
         <TextView
             android:id="@+id/textView_desc"
-            android:layout_width="261dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="215dp"
+            android:layout_height="81dp"
             android:fontFamily="@font/nova_square"
             android:text="@string/desc_user"
             android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/guideline24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
         <TextView
@@ -96,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="167dp" />
+            app:layout_constraintGuide_begin="151dp" />
 
         <ImageView
             android:id="@+id/profile_photo"
@@ -114,8 +115,10 @@
             android:id="@+id/recyclerView_generes_profile"
             android:layout_width="291dp"
             android:layout_height="158dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/border_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.566"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
@@ -131,25 +134,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerView_instruments"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView_instruments"
-            app:srcCompat="@drawable/ic_action_add"
-            android:focusable="true" />
+            app:srcCompat="@drawable/ic_action_add" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_add_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerView_generes_profile"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView_generes_profile"
-            app:srcCompat="@android:drawable/ic_input_add"
-            android:focusable="true" />
+            app:srcCompat="@android:drawable/ic_input_add" />
 
         <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/nova_square"
             android:text="@string/experi_ncia"
             app:layout_constraintEnd_toEndOf="@+id/ratingBar_general_exp"
@@ -183,6 +187,7 @@
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:autofillHints=""
+            android:editable="false"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/usrname_defaultAct"
@@ -196,6 +201,7 @@
             android:layout_height="41dp"
             android:layout_marginTop="12dp"
             android:autofillHints=""
+            android:editable="false"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/usrname_defaultAct"
@@ -208,6 +214,8 @@
             android:id="@+id/textView_date"
             android:layout_width="150dp"
             android:layout_height="44dp"
+            android:autofillHints=""
+            android:editable="false"
             android:ems="10"
             android:inputType="date"
             app:layout_constraintBottom_toBottomOf="@+id/textView_name"
@@ -216,7 +224,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/textView26"
             app:layout_constraintVertical_bias="1.0"
-            android:autofillHints=""
             tools:ignore="LabelFor" />
 
         <TextView
@@ -226,21 +233,21 @@
             android:fontFamily="@font/nova_square"
             android:text="@string/descripci_n"
             app:layout_constraintEnd_toEndOf="@+id/textView_desc"
-            app:layout_constraintHorizontal_bias="0.443"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="@+id/textView_desc"
-            app:layout_constraintTop_toTopOf="@+id/guideline8" />
+            app:layout_constraintTop_toTopOf="@+id/guideline25" />
 
         <TextView
             android:id="@+id/textView24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/nova_square"
             android:text="@string/instrumentos_que_s_tocar"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView_instruments"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView_instruments"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="@+id/recyclerView_instruments" />
+            app:layout_constraintHorizontal_bias="0.433"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView_instruments"
+            app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
         <TextView
             android:id="@+id/textView25"
@@ -277,13 +284,11 @@
             android:id="@+id/icon_genre"
             android:layout_width="50dp"
             android:layout_height="37dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="44dp"
             android:contentDescription="@string/icono_sexo_per_fil"
-            app:layout_constraintBottom_toTopOf="@+id/guideline24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="@+id/guideline25"
+            app:layout_constraintStart_toStartOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view"
             app:srcCompat="@drawable/ic_audiotrack_light" />
 
         <ImageView
@@ -295,6 +300,26 @@
             app:layout_constraintEnd_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view"
             app:srcCompat="@drawable/musician" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/border_recycler_view"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/border_recycler_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline8" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 

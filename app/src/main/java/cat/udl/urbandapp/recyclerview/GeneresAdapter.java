@@ -49,7 +49,7 @@ public class GeneresAdapter extends ListAdapter<MusicalGenere, GeneresAdapter.Ge
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(holder.itemView.getContext());
-                    dialog.setMessage("¿Seguro que quere eliminar el instrumento : " + current_genere.getName() + "?");
+                    dialog.setMessage("¿Seguro que quere eliminar el género musical : " + current_genere.getName() + "?");
                     dialog.setCancelable(true);
                     dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                         @Override

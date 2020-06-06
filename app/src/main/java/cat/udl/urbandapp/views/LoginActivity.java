@@ -56,7 +56,7 @@ public class LoginActivity extends CustomActivity {
             @Override
             public void onChanged(String s) {
                 mPreferences.edit().putString("token", s).apply();
-                Toast.makeText(LoginActivity.this, "Se ha iniciado sesión , token creado!", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "¡Bienvenido a URBAND!", Toast.LENGTH_LONG).show();
                 goTo(DefaultActivity.class);
             }
         });
@@ -67,7 +67,12 @@ public class LoginActivity extends CustomActivity {
             public void onClick(View v) {
                 String _username = username.getText().toString();
                 String _password = password.getText().toString();
-                loginViewModel.createTokenUser(_username, _password);
+                if (_username.equals("") || _password.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
+                }else{
+                    loginViewModel.createTokenUser(_username, _password);
+                }
+
             }
         });
     }

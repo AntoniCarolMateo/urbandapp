@@ -47,8 +47,6 @@ public class DialogFirstTimeLogged extends DialogFragment implements LifecycleOw
 
             }
         });
-
-
         AlertDialog alertDialog = builder.setView(rootView)
                 .setCancelable(true)
                 .create();

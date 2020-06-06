@@ -77,7 +77,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
         builder.setPositiveButton("Next Step", new DialogInterface.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             public void onClick(DialogInterface dialog, int id) {
-                setProfileAttr();
+                setProfile();
                 DialogSetProfileStep2 step2 = new DialogSetProfileStep2();
                 step2.show(getParentFragmentManager(), "step 2");
             }
@@ -95,7 +95,7 @@ public class DialogSetProfileStep1 extends DialogFragment implements View.OnClic
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void setProfileAttr() {
+    private void setProfile() {
         String _name = name.getText().toString();
         String _surname = surname.getText().toString();
         float _exp = generalExp.getRating();
