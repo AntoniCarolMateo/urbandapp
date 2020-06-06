@@ -1,6 +1,7 @@
 package cat.udl.urbandapp.viewmodel;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -15,12 +16,14 @@ import com.google.gson.JsonObject;
 
 import java.nio.charset.StandardCharsets;
 
+import cat.udl.urbandapp.preferences.PreferencesProvider;
 import cat.udl.urbandapp.services.LoginServiceImpl;
 import cat.udl.urbandapp.utils.Utils;
 
 public class LoginViewModel extends AndroidViewModel {
 
     private LoginServiceImpl repository;
+    private SharedPreferences mPreferences;
 
     private MutableLiveData<String> responseLiveDataToken;
     private MutableLiveData<Boolean> responseLiveRegister;
@@ -28,6 +31,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
+        mPreferences = PreferencesProvider.providePreferences();
         repository = new LoginServiceImpl();
         responseLiveDataToken = repository.getLiveDataToken();
         responseLiveRegister = repository.getLiveDataRegister();
@@ -63,5 +67,13 @@ public class LoginViewModel extends AndroidViewModel {
     }
     public LiveData<Boolean> getResponseLiveDataRegister() {
         return this.responseLiveRegister;
+    }
+
+    public boolean checkToken() {
+        String token = this.mPreferences.getString("token","");
+        if(!token.equals("")) {
+            return true;
+        }
+        return false;
     }
 }

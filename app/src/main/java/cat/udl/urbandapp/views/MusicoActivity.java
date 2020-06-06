@@ -52,32 +52,7 @@ public class MusicoActivity extends CustomActivity {
                 @Override
                 public void onChanged(final User s) {
                     if(s.isHasSubscribed()){
-                        subscribe_icom.setImageResource(R.drawable.suscr);
-                        subscribe_text.setText("YOU ARE SUBSCRIBED");
-
-
-                        if (s.getGenere() == "FEMALE") {
-                            genere.setImageResource(R.drawable.femaleicon);
-                        }else{
-                            genere.setImageResource(R.drawable.maleicon);
-                        }
-                        expirience.setRating(s.getGen_exp());
-                        description.setText(s.getDescription());
-                        if (s.getRol() != null) {
-                            role.setText(s.getRol().getName());
-                            icon_role.setImageResource(RolEnum.getImageResource(s.getRol()));
-                        }
-
-                        icon_role.setVisibility(View.VISIBLE);
-                        username.setVisibility(View.VISIBLE);
-                        genere.setVisibility(View.VISIBLE);
-                        expirience.setVisibility(View.VISIBLE);
-                        description.setVisibility(View.VISIBLE);
-
-                        notes_design.setVisibility(View.VISIBLE);
-                        etiquetes_design.setVisibility(View.VISIBLE);
-
-                        Log.d("MusicoActivity", " estamos subscritos el boton subscribe se oculta");
+                        showInfo(s, extra_username);
 
                         subscribe_icom.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -90,7 +65,6 @@ public class MusicoActivity extends CustomActivity {
                     else{
                         //enseñar menos info, y dar la opcion de subscribirse
                         emptyProfile();
-                        Log.d("MusicoActivity", "no estamos subscritos el boton desubscribe se oculta");
                         //desubscribe.setVisibility(View.GONE);
                         subscribe_icom.setImageResource(R.drawable.unsuscr);
                         subscribe_text.setText("SUBSCRIBE TO THE USER");
@@ -141,6 +115,35 @@ public class MusicoActivity extends CustomActivity {
         }
     }
 
+    private void showInfo(User s, final String extra_username) {
+        subscribe_icom.setImageResource(R.drawable.suscr);
+        subscribe_text.setText("YOU ARE SUBSCRIBED");
+
+
+        if (s.getGenere() == "FEMALE") {
+            genere.setImageResource(R.drawable.femaleicon);
+        }else{
+            genere.setImageResource(R.drawable.maleicon);
+        }
+        expirience.setRating(s.getGen_exp());
+        description.setText(s.getDescription());
+        if (s.getRol() != null) {
+            role.setText(s.getRol().getName());
+            icon_role.setImageResource(RolEnum.getImageResource(s.getRol()));
+        }
+
+        icon_role.setVisibility(View.VISIBLE);
+        username.setVisibility(View.VISIBLE);
+        genere.setVisibility(View.VISIBLE);
+        expirience.setVisibility(View.VISIBLE);
+        description.setVisibility(View.VISIBLE);
+
+        notes_design.setVisibility(View.VISIBLE);
+        etiquetes_design.setVisibility(View.VISIBLE);
+
+        Log.d("MusicoActivity", " estamos subscritos el boton subscribe se oculta");
+    }
+
     private void emptyProfile() {
         genere.setVisibility(View.INVISIBLE);
         description.setVisibility(View.INVISIBLE);
@@ -166,5 +169,9 @@ public class MusicoActivity extends CustomActivity {
         Bundle extras = getIntent().getExtras();
         checkSuscription(extras);
 
+    }
+    @Override
+    public void onBackPressed(){
+        goTo(DefaultActivity.class);
     }
 }

@@ -60,7 +60,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <EditText
             android:id="@+id/editText_name"
@@ -90,7 +91,12 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:layout_gravity="fill_vertical"
+            android:layout_weight="4"
+            android:background="@color/primaryDarkColor"
+            android:drawingCacheQuality="auto"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="match_parent"

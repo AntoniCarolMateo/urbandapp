@@ -26,15 +26,19 @@
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:layout_weight="1"
+            android:background="@color/primaryDarkColor"
+            android:fontFamily="@font/nova_square"
             android:text="@string/ind_canos_tus_prefer_ncias_y_tus_gustos_m_sicales"
             android:textAlignment="center"
-            android:textColor="@color/primaryDarkColor" />
+            android:textColor="@color/primaryTextColor"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="299dp">
+        android:layout_height="359dp"
+        android:background="@drawable/border_recycler_view">
 
         <ImageView
             android:id="@+id/imageView25"
@@ -61,27 +65,49 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_generes"
-            android:layout_width="274dp"
-            android:layout_height="212dp"
-            android:layout_marginTop="32dp"
+            android:layout_width="359dp"
+            android:layout_height="215dp"
+            android:layout_marginBottom="76dp"
             android:background="@drawable/border_recycler_view"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/imageView_addGenere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
             android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/ic_action_playback_forw"
             app:backgroundTint="@color/primaryDarkColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:focusable="true" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="130dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/family_others"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView25"
+            app:layout_constraintHorizontal_bias="0.375"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView_generes" />
+
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="90dp"
+            android:layout_height="67dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/musician"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView_generes"
+            app:layout_constraintHorizontal_bias="0.592"
+            app:layout_constraintStart_toEndOf="@+id/imageView24"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

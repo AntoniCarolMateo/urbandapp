@@ -125,6 +125,11 @@ public class FiltersActivity extends CustomActivity  {
 
     }
 
+    @Override
+    public void onBackPressed(){
+        goTo(DefaultActivity.class);
+    }
+
 
 }
 

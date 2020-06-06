@@ -46,13 +46,16 @@ public class DialogRolChooser extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setPositiveButton(" Configura tu perfil por primera vez!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                DialogSetProfileStep1 dialogstep1 = new DialogSetProfileStep1().newInstance(getActivity());
-                dialogstep1.show(getActivity().getSupportFragmentManager(), "STEP 1");
                 //cridarem dialog rol
                 if (_rol == null){
                     Toast.makeText(getContext(),"Selecciona un rol de usuario!", Toast.LENGTH_SHORT).show();
                 }
                 profileSetUpViewModel.setUserRol(_rol);
+
+                DialogSetProfileStep1 dialogstep1 = new DialogSetProfileStep1().newInstance(getActivity());
+                dialogstep1.show(getActivity().getSupportFragmentManager(), "STEP 1");
+
+
             }
         });
         AlertDialog alertDialog = builder.setView(rootView)
@@ -73,46 +76,51 @@ public class DialogRolChooser extends DialogFragment {
 
         _rol = RolEnum.user;
         usuari.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
+
             @Override
             public void onClick(View v) {
-                if (_rol.equals(RolEnum.sponsor)) {
-                    patrocinador.setBackgroundColor(R.color.primaryTextColor);
-                }else if (_rol.equals(RolEnum.band)){
-                    banda.setBackgroundColor(R.color.primaryTextColor);
-                }
-                usuari.setBackgroundColor(R.color.primaryLightColor);
-                _rol = RolEnum.user;
+                rolSelected(RolEnum.user);
             }
         });
         banda.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
+
             @Override
             public void onClick(View v) {
-                if (_rol.equals(RolEnum.sponsor))  {
-                    patrocinador.setBackgroundColor(R.color.primaryTextColor);
-                }else if (_rol == RolEnum.user){
-                    usuari.setBackgroundColor(R.color.primaryTextColor);
-                }
-                banda.setBackgroundColor(R.color.primaryLightColor);
-                    _rol = RolEnum.band;
+                rolSelected(RolEnum.band);
             }
         });
         patrocinador.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
+
             @Override
             public void onClick(View v) {
-                if (_rol == RolEnum.user) {
-                    usuari.setBackgroundColor(R.color.primaryTextColor);
-                }else if (_rol == RolEnum.band){
-                    banda.setBackgroundColor(R.color.primaryTextColor);
-                }
-                patrocinador.setBackgroundColor(R.color.primaryLightColor);
-                _rol = RolEnum.sponsor;
+                rolSelected(RolEnum.sponsor);
             }
         });
 
 
+    }
+
+    private void rolSelected(RolEnum rol) {
+        switch (rol){
+            case user:
+                patrocinador.setBackgroundResource(R.color.primaryTextColor);
+                banda.setBackgroundResource(R.color.primaryTextColor);
+                usuari.setBackgroundResource(R.color.primaryLightColor);
+                _rol = RolEnum.user;
+                break;
+            case band:
+                patrocinador.setBackgroundResource(R.color.primaryTextColor);
+                usuari.setBackgroundResource(R.color.primaryTextColor);
+                banda.setBackgroundResource(R.color.primaryLightColor);
+                _rol = RolEnum.band;
+                break;
+            case sponsor:
+                usuari.setBackgroundResource(R.color.primaryTextColor);
+                banda.setBackgroundResource(R.color.primaryTextColor);
+                patrocinador.setBackgroundResource(R.color.primaryLightColor);
+                _rol = RolEnum.sponsor;
+                break;
+        }
     }
 }
 

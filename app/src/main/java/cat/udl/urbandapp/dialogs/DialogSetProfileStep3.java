@@ -102,8 +102,6 @@ import cat.udl.urbandapp.viewmodel.UserViewModel;
             recyclerView_generes.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView_generes.setHasFixedSize(true);
 
-
-
             add_generes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

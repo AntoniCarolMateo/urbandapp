@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="314dp">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -19,24 +19,34 @@
 
             <ImageView
                 android:id="@+id/button_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/rol_user"
                 app:srcCompat="@drawable/musician" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_weight="1" />
+
             <ImageView
                 android:id="@+id/button_band"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/rol_vand"
                 app:srcCompat="@drawable/band" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="79dp"
+                android:layout_weight="1" />
+
             <ImageView
                 android:id="@+id/button_sponsor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:contentDescription="@string/rol_sponsor"
                 app:srcCompat="@drawable/sponsor" />
@@ -102,12 +112,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="150dp" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="left" />
 
         <ImageView
             android:id="@+id/imageView6"

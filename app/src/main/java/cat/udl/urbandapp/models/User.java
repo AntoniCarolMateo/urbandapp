@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+
     @SerializedName("created_at")
     private String created_at;
     @SerializedName("username")

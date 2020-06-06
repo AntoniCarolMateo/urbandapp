@@ -1,11 +1,13 @@
 package cat.udl.urbandapp.views;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -66,7 +68,9 @@ public class DefaultActivity extends CustomActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         this.mPreferences = PreferencesProvider.providePreferences();
         userViewModel = new UserViewModel(getApplication());
+
         initView();
+
     }
 
     private void initView() {
@@ -188,11 +192,32 @@ public class DefaultActivity extends CustomActivity implements OnMapReadyCallbac
         }
     }
 
-    @Override
-    public void onBackPressed(){
-        finishAffinity();
+    private void closeAppDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("¿Quieres cerrar la aplicación?");
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finishAffinity();
+            }
+        });
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog _dialog = dialog.create();
+        _dialog.show();
     }
 
+
+    @Override
+    public void onBackPressed(){
+        closeAppDialog();
+    }
 
 
 }

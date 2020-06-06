@@ -27,9 +27,10 @@ public class LoginServiceImpl {
         mRegister = new MutableLiveData<>();
     }
 
+    /** registerUser(JsonObject userJson)
+     * @param userJson : Json que representa usuario: username y pasword
+     */
     public void registerUser(JsonObject userJson) {
-
-        //userDAO.registerUser(userJson);
         loginDAO.registerUser(userJson).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -55,6 +56,9 @@ public class LoginServiceImpl {
         });
     }
 
+    /** createTokenUser(String Auth)
+     * @param Auth : authorización del usuario logeado
+     */
     public void createTokenUser(String Auth) {
 
         loginDAO.createTokenUser(Auth).enqueue(new Callback<ResponseBody>() {

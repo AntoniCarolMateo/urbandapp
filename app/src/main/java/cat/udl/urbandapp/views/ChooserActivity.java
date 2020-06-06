@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import cat.udl.urbandapp.R;
 import cat.udl.urbandapp.preferences.PreferencesProvider;
+import cat.udl.urbandapp.viewmodel.LoginViewModel;
 
 public class ChooserActivity extends CustomActivity {
 
@@ -16,6 +17,7 @@ public class ChooserActivity extends CustomActivity {
     private Button registerButton;
     private SharedPreferences mPreferences;
     private String TAG = this.getClass().getSimpleName();
+    private LoginViewModel viewModel;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
@@ -24,13 +26,16 @@ public class ChooserActivity extends CustomActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooser);
         this.mPreferences = PreferencesProvider.providePreferences();
-        initView();
+        viewModel = new LoginViewModel(getApplication());
 
+        initView();
     }
 
     private void initView() {
 
-        comprovarToken();
+        if (viewModel.checkToken()){
+            goTo(DefaultActivity.class);
+        }
         registerButton = findViewById(R.id.ButtonRegister);
         loginButton = findViewById(R.id.buttonLogin);
 
@@ -51,15 +56,8 @@ public class ChooserActivity extends CustomActivity {
             }
         });
     }
-
-
-
-    //TODO: Esta función la deberia realizar el viewModel
-    // y notificar a la vista de si hay token o no! Es una parida, no tiene más importancia
-    protected void comprovarToken(){
-        String token = this.mPreferences.getString("token","");
-        if(token != null && !token.equals("")){
-            goTo(DefaultActivity.class);
-        }
+    @Override
+    public void onBackPressed(){
+        finishAffinity();
     }
 }
