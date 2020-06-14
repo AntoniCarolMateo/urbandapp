@@ -6,4 +6,4 @@ It basically implements a simple match functionality, where the system finds the
 
 ## HOW ITS DONE ##
 
-Android Studio ![alt text]
+Android Studio ![alt text] ![alt text](https://github.com/AntoniCarolMateo/urbandapp/)
