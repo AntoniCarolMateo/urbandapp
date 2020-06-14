@@ -15,4 +15,7 @@ It basically implements a simple match functionality, where the system finds the
 
 ### *MVVM* : https://www.wintellect.com/model-view-viewmodel-mvvm-explained/
 
+[alt text](https://github.com/AntoniCarolMateo/urbandapp/blob/master/DOCUMENTATION/img/MVVM.png)
+
+
 
