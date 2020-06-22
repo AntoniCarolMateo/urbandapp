@@ -7,7 +7,7 @@ It basically implements a simple match functionality, where the system finds the
 # TOOLS USED #
 ANDROID STUDIO|SQLALCHEMY|FALCON API PYTHON
 ----|------|-------
-![alt text](https://github.com/AntoniCarolMateo/urbandapp/blob/master/DOCUMENTATION/img/android-studio-logo.jpg)|![alt text](https://github.com/AntoniCarolMateo/urbandapp/blob/master/DOCUMENTATION/img/sqla.png)|---
+![alt text](https://github.com/AntoniCarolMateo/urbandapp/blob/master/DOCUMENTATION/img/android-studio-logo.jpg)|![alt text](https://github.com/AntoniCarolMateo/urbandapp/blob/master/DOCUMENTATION/img/sqla.png)| ![alt text](https://github.com/AntoniCarolMateo/urbandapp/blob/master/DOCUMENTATION/img/falcon.png)
 Retrofit Api - MVVM, LifeCycle- Account Management|Basic Database creation, management and connection|Backend developening
 
 -MySQL and Python 
